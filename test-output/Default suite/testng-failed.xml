@@ -3,13 +3,16 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="modules.TestNG">
+      <class name="modules.SearchTest">
         <methods>
-          <include name="a"/>
-          <include name="f"/>
-          <include name="c"/>
+          <include name="takeScreenShotIfFailure"/>
+          <include name="search"/>
+          <include name="init"/>
+          <include name="setUp"/>
+          <include name="getWeb"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- modules.TestNG -->
+      </class> <!-- modules.SearchTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

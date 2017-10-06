@@ -1,25 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="7253" started-at="2017-10-04T09:43:43Z" finished-at="2017-10-04T09:43:51Z">
+  <suite name="Suite" duration-ms="13281" started-at="2017-10-06T10:08:57Z" finished-at="2017-10-06T10:09:10Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="7253" started-at="2017-10-04T09:43:43Z" finished-at="2017-10-04T09:43:51Z">
-      <class name="modules.TestNG">
-        <test-method status="PASS" signature="a()[pri:0, instance:modules.TestNG@402f32ff]" name="a" is-config="true" duration-ms="6928" started-at="2017-10-04T16:43:43Z" finished-at="2017-10-04T16:43:50Z">
+    <test name="Test" duration-ms="13281" started-at="2017-10-06T10:08:57Z" finished-at="2017-10-06T10:09:10Z">
+      <class name="modules.SearchTest">
+        <test-method status="PASS" signature="init(java.lang.String)[pri:0, instance:modules.SearchTest@6d00a15d]" name="init" is-config="true" duration-ms="4148" started-at="2017-10-06T17:08:57Z" finished-at="2017-10-06T17:09:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- a -->
-        <test-method status="PASS" signature="f()[pri:0, instance:modules.TestNG@402f32ff]" name="f" duration-ms="303" started-at="2017-10-04T16:43:50Z" finished-at="2017-10-04T16:43:51Z">
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="setUp(java.lang.String)[pri:0, instance:modules.SearchTest@6d00a15d]" name="setUp" is-config="true" duration-ms="3680" started-at="2017-10-06T17:09:01Z" finished-at="2017-10-06T17:09:04Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[http://sandbox.deliverynow.vn:8081]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- f -->
-        <test-method status="PASS" signature="c()[pri:0, instance:modules.TestNG@402f32ff]" name="c" is-config="true" duration-ms="1" started-at="2017-10-04T16:43:51Z" finished-at="2017-10-04T16:43:51Z">
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="getWeb()[pri:0, instance:modules.SearchTest@6d00a15d]" name="getWeb" duration-ms="1108" started-at="2017-10-06T17:09:04Z" finished-at="2017-10-06T17:09:06Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- c -->
-      </class> <!-- modules.TestNG -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- getWeb -->
+        <test-method status="PASS" signature="takeScreenShotIfFailure(org.testng.ITestResult)[pri:0, instance:modules.SearchTest@6d00a15d]" name="takeScreenShotIfFailure" is-config="true" duration-ms="8" started-at="2017-10-06T17:09:06Z" finished-at="2017-10-06T17:09:06Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=getWeb status=SUCCESS method=SearchTest.getWeb()[pri:0, instance:modules.SearchTest@6d00a15d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenShotIfFailure -->
+        <test-method status="PASS" signature="search()[pri:0, instance:modules.SearchTest@6d00a15d]" name="search" duration-ms="3606" started-at="2017-10-06T17:09:06Z" finished-at="2017-10-06T17:09:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- search -->
+        <test-method status="PASS" signature="takeScreenShotIfFailure(org.testng.ITestResult)[pri:0, instance:modules.SearchTest@6d00a15d]" name="takeScreenShotIfFailure" is-config="true" duration-ms="0" started-at="2017-10-06T17:09:09Z" finished-at="2017-10-06T17:09:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=search status=SUCCESS method=SearchTest.search()[pri:0, instance:modules.SearchTest@6d00a15d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- takeScreenShotIfFailure -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:modules.SearchTest@6d00a15d]" name="tearDown" is-config="true" duration-ms="707" started-at="2017-10-06T17:09:09Z" finished-at="2017-10-06T17:09:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- modules.SearchTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>
