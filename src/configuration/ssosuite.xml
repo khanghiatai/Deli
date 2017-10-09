@@ -8,6 +8,7 @@
         <classes>
 			<!-- <class name="modules.SSOTest"/>  -->
             <class name="modules.SearchTest"/> 
+            <class name="modules.OrderTest"/>
             <!-- <class name="modules.OrderGroupTest"/>  -->
         </classes>
     </test> <!-- Test -->

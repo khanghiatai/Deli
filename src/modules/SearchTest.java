@@ -51,6 +51,8 @@ public class SearchTest extends TestBase {
 		CommonFunctions.pause(1);			
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("return document.querySelector('.box-photo-restaurant').click();");
+		// cho vong lap, kiem tra dung ten quan thi click
+		js.executeScript("document.querySelector('.box-photo-restaurant img').click()");		
 	}	
 
 }

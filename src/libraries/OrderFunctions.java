@@ -9,13 +9,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
+
+import configuration.ResourceHasMap;
 import objects.OrderPage;
 import objects.SearchPage;
 import support.CommonFunctions;
 
 public class OrderFunctions extends OrderPage {
 
-	//HashMap mMap = new HashMap();
+	ResourceHasMap resource = new ResourceHasMap();
 	String eCountCart = "cart-qty";
 	String eCountPer = ".cart-stats>span.ng-binding";
 	String ePhan_Nguoi = ".cart-stats>span";
@@ -39,7 +41,7 @@ public class OrderFunctions extends OrderPage {
 	
 	public void InitHasMapResource(){
 		// text
-		//mMap.put("TimeAddressReciver", "Thời gian & Địa chỉ nhận hàng");
+		//mMap.put("TimeAddressReciver", "Thá»�i gian & Ä�á»‹a chá»‰ nháº­n hÃ ng");
 	}
 	
 	public void checkCartInfo(WebDriver driver, String numberOrder, String numberPerson) {
@@ -57,15 +59,15 @@ public class OrderFunctions extends OrderPage {
 				.executeScript("return document.querySelectorAll('" + ePhan_Nguoi + "')[4];");
 
 		// Check Cart Status
-		if (phan.getText().equalsIgnoreCase("phần"))
-			AssertJUnit.assertEquals(phan.getText(), "phần");
+		if (phan.getText().equalsIgnoreCase(resource.getResource("setVi")))
+			AssertJUnit.assertEquals(phan.getText(), resource.getResource("setVi"));
 		else
-			AssertJUnit.assertEquals(phan.getText(), "phần");
+			AssertJUnit.assertEquals(phan.getText(), resource.getResource("setVi"));
 
-		if (nguoi.getText().equalsIgnoreCase("người"))
-			AssertJUnit.assertEquals(nguoi.getText(), "người");
+		if (nguoi.getText().equalsIgnoreCase(resource.getResource("peopleVi")))
+			AssertJUnit.assertEquals(nguoi.getText(), resource.getResource("peopleVi"));
 		else
-			AssertJUnit.assertEquals(nguoi.getText(), "người");
+			AssertJUnit.assertEquals(nguoi.getText(), resource.getResource("peopleVi"));
 		
 		AssertJUnit.assertEquals(countCart.getText(), numberOrder);
 		AssertJUnit.assertEquals(countPer.getText(), numberPerson);
@@ -111,7 +113,7 @@ public class OrderFunctions extends OrderPage {
 		CommonFunctions.pause(1);
 		AssertJUnit.assertEquals(driver.findElement(By.xpath(lbl_PopupTitle)).getText(), title);
 		AssertJUnit.assertEquals(driver.findElement(By.id(lbl_PopupMessage)).getText(), message);
-		AssertJUnit.assertEquals(driver.findElement(By.xpath(btn_Oke)).getText(), nameButton);
+		AssertJUnit.assertEquals(driver.findElement(By.xpath(btn_Oke)).getText(), nameButton.toUpperCase());
 		driver.findElement(By.xpath(btn_Oke)).click();
 	}
 
@@ -210,7 +212,7 @@ public class OrderFunctions extends OrderPage {
 				String sService = (String) ((JavascriptExecutor) driver).executeScript(
 						"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>p>span')[" + i
 								+ "].innerText;");
-				if (sService.equals("PHÍ DỊCH VỤ"))
+				if (sService.equals("PHÃ� Dá»ŠCH Vá»¤"))
 					return true;
 			}
 		} catch (Exception e) {
@@ -249,7 +251,7 @@ public class OrderFunctions extends OrderPage {
 				String sService = (String) ((JavascriptExecutor) driver).executeScript(
 						"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>p>span')[" + i
 								+ "].innerText;");
-				if (sService.equals("PHÍ DỊCH VỤ")) {
+				if (sService.equals("PHÃ� Dá»ŠCH Vá»¤")) {
 					i--;
 					break;
 				}
@@ -258,22 +260,22 @@ public class OrderFunctions extends OrderPage {
 			String feeService = (String) ((JavascriptExecutor) driver).executeScript(
 					"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>span')[" + i
 							+ "].innerText;");
-			feeService = CommonFunctions.chuyenDoiKyTu(feeService, "% phục vụ", "");
+			feeService = CommonFunctions.chuyenDoiKyTu(feeService, "% phá»¥c vá»¥", "");
 			String boxFeeService = (String) ((JavascriptExecutor) driver).executeScript(
 					"return document.querySelectorAll('.container-bill div span span.bold')[0].innerText;");
 			boxFeeService = CommonFunctions.chuyenDoiKyTu(boxFeeService, "%", "");
 			String totalPrice = (String) ((JavascriptExecutor) driver).executeScript(
 					"return document.querySelectorAll('.container-bill div span.bold.pull-right')[0].innerText;");
 			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, ",", "");
-			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, "đ", "");
+			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, "Ä‘", "");
 			String priceService = (String) ((JavascriptExecutor) driver)
 					.executeScript("return document.querySelectorAll('.container-bill span.pull-right')[2].innerText;");
 			priceService = CommonFunctions.chuyenDoiKyTu(priceService, ",", "");
-			priceService = CommonFunctions.chuyenDoiKyTu(priceService, "đ", "");
+			priceService = CommonFunctions.chuyenDoiKyTu(priceService, "Ä‘", "");
 			String tempTotalPrice = (String) ((JavascriptExecutor) driver).executeScript(
 					"return document.querySelectorAll('.container-bill div span.pull-right.txt-blue')[0].innerText;");
 			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, ",", "");
-			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, "đ", "");
+			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, "Ä‘", "");
 			int _priceService = Integer.parseInt(totalPrice) * Integer.parseInt(feeService) / 100;
 			int _tempTotalPrice = _priceService + Integer.parseInt(totalPrice);
 			AssertJUnit.assertEquals(feeService, boxFeeService);
@@ -288,7 +290,7 @@ public class OrderFunctions extends OrderPage {
 				String sService = (String) ((JavascriptExecutor) driver).executeScript(
 						"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>p>span')[" + i
 								+ "].innerText;");
-				if (sService.equals("PHÍ DỊCH VỤ")) {
+				if (sService.equals("PHÃ� Dá»ŠCH Vá»¤")) {
 					i--;
 					break;
 				}
@@ -297,22 +299,22 @@ public class OrderFunctions extends OrderPage {
 			String feeService = (String) ((JavascriptExecutor) driver).executeScript(
 					"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>span')[" + i
 							+ "].innerText;");
-			feeService = CommonFunctions.chuyenDoiKyTu(feeService, "% phục vụ", "");
+			feeService = CommonFunctions.chuyenDoiKyTu(feeService, "% phá»¥c vá»¥", "");
 			String boxFeeService = (String) ((JavascriptExecutor) driver).executeScript(
 					"return document.querySelectorAll('.container-bill div span span.bold')[0].innerText;");
 			boxFeeService = CommonFunctions.chuyenDoiKyTu(boxFeeService, "%", "");
 			String totalPrice = (String) ((JavascriptExecutor) driver).executeScript(
 					"return document.querySelectorAll('.container-bill div span.bold.pull-right')[0].innerText;");
 			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, ",", "");
-			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, "đ", "");
+			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, "Ä‘", "");
 			String priceService = (String) ((JavascriptExecutor) driver)
 					.executeScript("return document.querySelectorAll('.container-bill span.pull-right')[2].innerText;");
 			priceService = CommonFunctions.chuyenDoiKyTu(priceService, ",", "");
-			priceService = CommonFunctions.chuyenDoiKyTu(priceService, "đ", "");
+			priceService = CommonFunctions.chuyenDoiKyTu(priceService, "Ä‘", "");
 			String tempTotalPrice = (String) ((JavascriptExecutor) driver).executeScript(
 					"return document.querySelectorAll('.container-bill div span.pull-right.txt-blue')[0].innerText;");
 			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, ",", "");
-			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, "đ", "");
+			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, "Ä‘", "");
 			int _priceService = Integer.parseInt(totalPrice) * Integer.parseInt(feeService) / 100;
 			int _tempTotalPrice = _priceService + Integer.parseInt(totalPrice);
 			AssertJUnit.assertEquals(feeService, boxFeeService);
@@ -460,15 +462,15 @@ public class OrderFunctions extends OrderPage {
 				.executeScript("return document.querySelector('#alert-modal a.btn-ok').innerText;");
 
 
-		AssertJUnit.assertEquals("DeliveryNow thông báo", titlePopup);
+		AssertJUnit.assertEquals("DeliveryNow thÃ´ng bÃ¡o", titlePopup);
 		AssertJUnit.assertEquals(_getPrice, _getPricePopup);
-		AssertJUnit.assertEquals("100,000 đ", defaultPrice.getText()); // default
+		AssertJUnit.assertEquals("100,000 Ä‘", defaultPrice.getText()); // default
 																		// price
-		AssertJUnit.assertEquals("Tiếp tục chọn thêm món", _option1);
-		AssertJUnit.assertEquals("Chấp nhận phí dịch vụ là " + SearchPage.priceRequire + " đ  và tiến hành thanh toán",
+		AssertJUnit.assertEquals("Tiáº¿p tá»¥c chá»�n thÃªm mÃ³n", _option1);
+		AssertJUnit.assertEquals("Cháº¥p nháº­n phÃ­ dá»‹ch vá»¥ lÃ  " + SearchPage.priceRequire + " Ä‘ Â vÃ  tiáº¿n hÃ nh thanh toÃ¡n",
 				_option2); // input
-		AssertJUnit.assertEquals("HỦY", _cancel.getText());
-		AssertJUnit.assertEquals("ĐỒNG Ý", _submit);
+		AssertJUnit.assertEquals("Há»¦Y", _cancel.getText());
+		AssertJUnit.assertEquals("Ä�á»’NG Ã�", _submit);
 		// check button cancel
 		_cancel.click();
 	}
@@ -529,15 +531,15 @@ public class OrderFunctions extends OrderPage {
 				.executeScript("return document.querySelector('#alert-modal a.btn-ok').innerText;");
 
 		CommonFunctions.pause(2);
-		AssertJUnit.assertEquals("DeliveryNow thông báo", titlePopup);
+		AssertJUnit.assertEquals("DeliveryNow thÃ´ng bÃ¡o", titlePopup);
 		AssertJUnit.assertEquals(_getPrice, _getPricePopup);
-		AssertJUnit.assertEquals("100,000 đ", defaultPrice.getText()); // default
+		AssertJUnit.assertEquals("100,000 Ä‘", defaultPrice.getText()); // default
 																		// price
-		AssertJUnit.assertEquals("Tiếp tục chọn thêm món", _option1);
-		AssertJUnit.assertEquals("Chấp nhận phí dịch vụ là " + SearchPage.priceRequire + " đ  và tiến hành thanh toán",
+		AssertJUnit.assertEquals("Tiáº¿p tá»¥c chá»�n thÃªm mÃ³n", _option1);
+		AssertJUnit.assertEquals("Cháº¥p nháº­n phÃ­ dá»‹ch vá»¥ lÃ  " + SearchPage.priceRequire + " Ä‘ Â vÃ  tiáº¿n hÃ nh thanh toÃ¡n",
 				_option2); // input
-		AssertJUnit.assertEquals("HỦY", _cancel.getText());
-		AssertJUnit.assertEquals("ĐỒNG Ý", _submit);
+		AssertJUnit.assertEquals("Há»¦Y", _cancel.getText());
+		AssertJUnit.assertEquals("Ä�á»’NG Ã�", _submit);
 		// check button cancel
 		_cancel.click();
 	}*/
@@ -640,21 +642,21 @@ public class OrderFunctions extends OrderPage {
 		// check test
 		
 		//Assert.assertEquals(mMap.get("TimeAddressReciver"), _statusOrder_1);
-		Assert.assertEquals("Thông tin đơn hàng", _statusOrder_2);
-		Assert.assertEquals("Hoàn tất", _statusOrder_3);
+		Assert.assertEquals("ThÃ´ng tin Ä‘Æ¡n hÃ ng", _statusOrder_2);
+		Assert.assertEquals("HoÃ n táº¥t", _statusOrder_3);
 		Assert.assertEquals("rgba(204, 0, 0, 1)", redDot.getCssValue("color"));
 		Assert.assertEquals("rgba(0, 128, 0, 1)", GreenDot.getCssValue("color"));
 		Assert.assertEquals(_name, name);
 		Assert.assertEquals(addRess, _addRess + ", Viet Nam");
-		Assert.assertEquals("Địa Điểm Nhận Hàng", lbl_Adress);
-		Assert.assertEquals("Chọn Hình Thức Giao Hàng", lbl_Option);
-		Assert.assertEquals("Thời Gian Nhận Hàng", lbl_Time);
-		Assert.assertEquals("Ghi chú cho đơn hàng", lbl_Note);
-		Assert.assertEquals("Họ tên", txt_FullName.getAttribute("placeholder"));
-		Assert.assertEquals("Số điện thoại", txt_Phone.getAttribute("placeholder"));
-		Assert.assertEquals("Vd: số 10, Ngõ 20, Ngách 30, Hẻm 40, Phường 15, Đường Cống Quỳnh",
+		Assert.assertEquals("Ä�á»‹a Ä�iá»ƒm Nháº­n HÃ ng", lbl_Adress);
+		Assert.assertEquals("Chá»�n HÃ¬nh Thá»©c Giao HÃ ng", lbl_Option);
+		Assert.assertEquals("Thá»�i Gian Nháº­n HÃ ng", lbl_Time);
+		Assert.assertEquals("Ghi chÃº cho Ä‘Æ¡n hÃ ng", lbl_Note);
+		Assert.assertEquals("Há»� tÃªn", txt_FullName.getAttribute("placeholder"));
+		Assert.assertEquals("Sá»‘ Ä‘iá»‡n thoáº¡i", txt_Phone.getAttribute("placeholder"));
+		Assert.assertEquals("Vd: sá»‘ 10, NgÃµ 20, NgÃ¡ch 30, Háº»m 40, PhÆ°á»�ng 15, Ä�Æ°á»�ng Cá»‘ng Quá»³nh",
 				txt_Address.getAttribute("placeholder"));
-		Assert.assertEquals("Ví dụ: Tòa nhà ABC, lầu 8, cho thêm 2 ly nhựa....", txt_Note.getAttribute("placeholder"));
+		Assert.assertEquals("VÃ­ dá»¥: TÃ²a nhÃ  ABC, láº§u 8, cho thÃªm 2 ly nhá»±a....", txt_Note.getAttribute("placeholder"));
 		// check control
 		Assert.assertEquals(true,
 				checkCombobox(driver, "return document.querySelectorAll('.browser-default.ng-pristine')[0];"));
@@ -681,16 +683,16 @@ public class OrderFunctions extends OrderPage {
 				.executeScript("return document.querySelector('#confirminfo .modal-footer a.modal-action');");
 		// input data
 		txt_FullName.clear();
-		txt_FullName.sendKeys("Kha Nghĩa Tài");
+		txt_FullName.sendKeys("Kha NghÄ©a TÃ i");
 		
 		txt_Phone.clear();
 		txt_Phone.sendKeys("0909959982");
 		
 		txt_Address.clear();
-		txt_Address.sendKeys("244 Cống Quỳnh P. Phạm Ngũ Lão, Q. 1");
+		txt_Address.sendKeys("244 Cá»‘ng Quá»³nh P. Pháº¡m NgÅ© LÃ£o, Q. 1");
 		
 		txt_Note.clear();
-		txt_Note.sendKeys("Đến nơi thì gọi, giao hàng đúng giờ");
+		txt_Note.sendKeys("Ä�áº¿n nÆ¡i thÃ¬ gá»�i, giao hÃ ng Ä‘Ãºng giá»�");
 		
 		btn_Continue.click();
 		// 

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 //import org.sikuli.script.Screen;
 
+import configuration.ResourceHasMap;
 import configuration.TestBase;
 import libraries.OrderFunctions;
 import libraries.SSOFunctions;
@@ -16,11 +17,9 @@ import objects.SearchPage;
 import support.CommonFunctions;
 
 public class OrderTest {
+	ResourceHasMap resource = new ResourceHasMap();
 	static OrderFunctions order = new OrderFunctions(TestBase.driver);		
 	SSOFunctions sso = new SSOFunctions(TestBase.driver);
-	String titleMesg = "DeliveryNow thÃ´ng bÃ¡o";
-	String contentMesg =  "Báº¡n vui lÃ²ng chá»�n mÃ³n Äƒn sáº½ gá»�i.";
-	String buttonName = "Ä�á»’NG Ã�";
 
 	@Test
 	public void order001_CheckCartInfoNoLogin(){
@@ -35,14 +34,14 @@ public class OrderTest {
 	@Test
 	public void order002_OrderNoLogin(){
 		order.clickButtonOrderFirst(TestBase.driver);		
-		order.checkPopup(TestBase.driver, titleMesg, contentMesg, buttonName); 
+		order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName")); 
 	}
 	
 	@Test 
 	public void order003_AddMenuNoLogin(){		
 		order.addMenuNoLogin(TestBase.driver);
 	}
-	
+
 	@SuppressWarnings("static-access")
 	@Test
 	public void order004_OrderNoMenu(){		
@@ -50,7 +49,7 @@ public class OrderTest {
 			if (order.isLoginPage(TestBase.driver) == true){			
 				sso = new SSOFunctions(TestBase.driver);
 				sso.loginSSO(sso.USERNAME, sso.PASSWORD);			
-				sso.getUserName(TestBase.driver); 								
+				//sso.getUserName(TestBase.driver); 								
 			} 
 			 
 		} catch (Exception e) {
@@ -63,9 +62,10 @@ public class OrderTest {
 				sso.getUserName(TestBase.driver); 								
 			} 
 			order.clickButtonOrderFirst(TestBase.driver);	
-			order.checkPopup(TestBase.driver, titleMesg, contentMesg, buttonName);
+			order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName"));
 		}		
 	}
+	
 
 	@Test
 	public void order005_AddMenuAfterLogin(){	
@@ -78,16 +78,18 @@ public class OrderTest {
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
 	}	
 	
+
 	@Test
 	public void order006_CheckFullName(){	
 		order.checkUserName(TestBase.driver, "javarscript", "#login-status .name-user");
 	}
-	
+
 	@Test
 	public void order007_CheckNote(){
-		order.checkNote(TestBase.driver, "Giao hÃ ng Ä‘Ãºng giá»�");
+		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 	}		
-
+	
+	/*
 	@Test
 	public void order008_AddCart(){
 		order.addCart(TestBase.driver);		
@@ -188,7 +190,7 @@ public class OrderTest {
 		
 		order.checkTotalPrice(TestBase.driver, order.isService(TestBase.driver), order.isDelivery(TestBase.driver));
 		order.resetOrder(TestBase.driver); 
-	}	
+	}	*/
 	
 //	@Test 
 //	public void order018_OrderNoDeli(){		
