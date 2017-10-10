@@ -24,7 +24,7 @@ public class OrderTest {
 	@Test
 	public void order001_CheckCartInfoNoLogin(){
 		// Select tab browser present
-		CommonFunctions.switchToTab(TestBase.driver, 1);
+		//CommonFunctions.switchToTab(TestBase.driver, 1);
 
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "0";
@@ -72,13 +72,13 @@ public class OrderTest {
 		// add food		
 		order.addMenu(TestBase.driver);
 		// check price		
-		order.checkPrice(TestBase.driver);
-		String countOrder = order.countNumberOrder(TestBase.driver);
-		String countPerson = "1";
-		order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
+//		order.checkPrice(TestBase.driver);
+//		String countOrder = order.countNumberOrder(TestBase.driver);
+//		String countPerson = "1";
+//		order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
 	}	
 	
-
+	/*
 	@Test
 	public void order006_CheckFullName(){	
 		order.checkUserName(TestBase.driver, "javarscript", "#login-status .name-user");
@@ -89,7 +89,7 @@ public class OrderTest {
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 	}		
 	
-	/*
+
 	@Test
 	public void order008_AddCart(){
 		order.addCart(TestBase.driver);		

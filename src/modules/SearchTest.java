@@ -35,11 +35,11 @@ public class SearchTest extends TestBase {
 	@Test
 	public void getWeb() {
 		CommonFunctions.pause(1);
-		WebElement link_OK = (WebElement) ((JavascriptExecutor) driver)
+		/*WebElement link_OK = (WebElement) ((JavascriptExecutor) driver)
 				.executeScript("return document.querySelector('.modal-action');");
-		link_OK.click();
+		link_OK.click();*/
 	}
-
+	/*
 	@Test
 	public void search(){
 		try {
@@ -53,6 +53,6 @@ public class SearchTest extends TestBase {
 		js.executeScript("return document.querySelector('.box-photo-restaurant').click();");
 		// cho vong lap, kiem tra dung ten quan thi click
 		js.executeScript("document.querySelector('.box-photo-restaurant img').click()");		
-	}	
+	}	*/
 
 }

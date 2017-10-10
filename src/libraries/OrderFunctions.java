@@ -6,7 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 
@@ -124,46 +126,29 @@ public class OrderFunctions extends OrderPage {
 			return true;
 		return false;
 	}
-
-	@SuppressWarnings("unchecked")
-	public void addMenu(WebDriver driver) {
+	
+	public void addMenu(WebDriver driver) {		
+		int i = 0;
 		CommonFunctions.pause(2);
-		// get number items
-		List<WebElement> boxMenu = (List<WebElement>) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('" + box_Menu + "');");
+		List<WebElement> listFoods = driver.findElements(By.xpath(".//*[@class='scrollspy']//a[@class='title-name-food']"));
 
-		for (int i = 0; i < boxMenu.size(); i++) {
-			// .scrollspy .btn-adding
-			WebElement eAddButton = (WebElement) ((JavascriptExecutor) driver)
-					.executeScript("return document.querySelectorAll('.scrollspy .btn-adding')[" + i + "];");
-			eAddButton.click();
-			CommonFunctions.pause(2);
-			// .scrollspy div.box-menu-detail h3
-			String eNameFood = (String) ((JavascriptExecutor) driver)
-					.executeScript("return document.querySelectorAll('.title-name-food h3')[" + i + "].innerText;");
-			// .product-price>a span.txt-blue
-			String ePrice = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.product-price>a span.txt-blue')[" + i + "].innerText;");
-			// .add-minus-food > span // price
-			String eChildPrice = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.product-price>a span.txt-blue')[" + i + "].innerText;");
-
-			String _childNameFood = "";
-			CommonFunctions.pause(2);
-			// .row-bill span.bold.font13 // name of food
-			List<WebElement> eChildNameFood = (List<WebElement>) ((JavascriptExecutor) driver)
-					.executeScript("return document.querySelectorAll('.row-bill span.bold.font13.ng-binding');");
-			for (int j = 0; j < eChildNameFood.size(); j++) {
-				String e = (String) ((JavascriptExecutor) driver)
-						.executeScript("return document.querySelectorAll('.row-bill span.bold.font13.ng-binding')[" + j
-								+ "].innerText;");
-				if (eNameFood.equals(e)) {
-					_childNameFood = e;
-					break;
-				}
-			}
-			AssertJUnit.assertEquals(eNameFood, _childNameFood);
-			AssertJUnit.assertEquals(ePrice, eChildPrice);
+		for (WebElement webElement : listFoods) {
+			String foodName = webElement.getText();
+			List<WebElement> listMenuPrice = driver.findElements(By.xpath(".//div[@class='product-price']/a/p"));
+			String foodPrice = listMenuPrice.get(i).getText().replace(" ", "");
+			
+			webElement.click();	
+			CommonFunctions.pause(2);	
+			List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
+			List<WebElement> listPrice = driver.findElements(By.xpath(".//input[@ng-model='item.Note']/following-sibling::span"));
+			
+			String name = listOrder.get(i).getText();
+			String price = listPrice.get(i).getText();
+			if(name.equalsIgnoreCase(foodName)) {
+				Assert.assertEquals(name, foodName); 		
+				Assert.assertEquals(price, foodPrice); 		
+			}	
+			i++;
 		}
 	}
 
