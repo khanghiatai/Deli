@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/0/2</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/2/0</td>
 </tr><tr>
-<td>Started on:</td><td>Fri Oct 06 17:08:51 ICT 2017</td>
+<td>Started on:</td><td>Mon Oct 09 10:45:44 ICT 2017</td>
 </tr>
-<tr><td>Total time:</td><td>0 seconds (67 ms)</td>
+<tr><td>Total time:</td><td>2 seconds (2051 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,18 +75,21 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='modules.SearchTest.init()'><b>init</b><br>Test class: modules.SearchTest</td>
-<td><div><pre>org.testng.TestNGException: 
-Parameter &apos;browserName&apos; is required by BeforeTest on method init but has not been marked @Optional or defined
-in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuite.xml
-	at org.testng.internal.Parameters.createParams(Parameters.java:248)
-	at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:286)
-	at org.testng.internal.Parameters.createParameters(Parameters.java:547)
-	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:150)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:206)
+<td title='modules.OrderTest.tearDown()'><b>tearDown</b><br>Test class: modules.OrderTest</td>
+<td><div><pre>java.lang.NullPointerException
+	at modules.OrderTest.tearDown(OrderTest.java:244)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:523)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:224)
 	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
-	at org.testng.TestRunner.beforeRun(TestRunner.java:658)
-	at org.testng.TestRunner.run(TestRunner.java:626)
+	at org.testng.internal.TestMethodWorker.invokeAfterClassMethods(TestMethodWorker.java:211)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:776)
+	at org.testng.TestRunner.run(TestRunner.java:634)
 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
@@ -100,18 +103,21 @@ in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuit
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace542060780", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace542060780'><pre>org.testng.TestNGException: 
-Parameter &apos;browserName&apos; is required by BeforeTest on method init but has not been marked @Optional or defined
-in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuite.xml
-	at org.testng.internal.Parameters.createParams(Parameters.java:248)
-	at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:286)
-	at org.testng.internal.Parameters.createParameters(Parameters.java:547)
-	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:150)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:206)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1766724936", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1766724936'><pre>java.lang.NullPointerException
+	at modules.OrderTest.tearDown(OrderTest.java:244)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:523)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:224)
 	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
-	at org.testng.TestRunner.beforeRun(TestRunner.java:658)
-	at org.testng.TestRunner.run(TestRunner.java:626)
+	at org.testng.internal.TestMethodWorker.invokeAfterClassMethods(TestMethodWorker.java:211)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:776)
+	at org.testng.TestRunner.run(TestRunner.java:634)
 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
@@ -127,56 +133,32 @@ in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuit
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
 <td>0</td>
-<td>modules.SearchTest@2ef5e5e3</td></tr>
+<td>modules.OrderTest@14bf9759</td></tr>
 </table><p>
-<table width='100%' border='1' class='invocation-skipped'>
-<tr><td colspan='4' align='center'><b>SKIPPED CONFIGURATIONS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td width="30%"><b>Exception</b></td>
 <td width="10%"><b>Time (seconds)</b></td>
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='modules.SearchTest.setUp()'><b>setUp</b><br>Test class: modules.SearchTest</td>
-<td></td>
-<td>0</td>
-<td>modules.SearchTest@2ef5e5e3</td></tr>
-<tr>
-<td title='modules.SearchTest.takeScreenShotIfFailure()'><b>takeScreenShotIfFailure</b><br>Test class: modules.SearchTest</td>
-<td></td>
-<td>0</td>
-<td>modules.SearchTest@2ef5e5e3</td></tr>
-<tr>
-<td title='modules.SearchTest.takeScreenShotIfFailure()'><b>takeScreenShotIfFailure</b><br>Test class: modules.SearchTest</td>
-<td></td>
-<td>0</td>
-<td>modules.SearchTest@2ef5e5e3</td></tr>
-<tr>
-<td title='modules.SearchTest.tearDown()'><b>tearDown</b><br>Test class: modules.SearchTest</td>
-<td></td>
-<td>0</td>
-<td>modules.SearchTest@2ef5e5e3</td></tr>
-</table><p>
-<table width='100%' border='1' class='invocation-skipped'>
-<tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
-<tr><td><b>Test method</b></td>
-<td width="30%"><b>Exception</b></td>
-<td width="10%"><b>Time (seconds)</b></td>
-<td><b>Instance</b></td>
-</tr>
-<tr>
-<td title='modules.SearchTest.getWeb()'><b>getWeb</b><br>Test class: modules.SearchTest</td>
-<td><div><pre>org.testng.TestNGException: 
-Parameter &apos;browserName&apos; is required by BeforeTest on method init but has not been marked @Optional or defined
-in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuite.xml
-	at org.testng.internal.Parameters.createParams(Parameters.java:248)
-	at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:286)
-	at org.testng.internal.Parameters.createParameters(Parameters.java:547)
-	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:150)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:206)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
-	at org.testng.TestRunner.beforeRun(TestRunner.java:658)
-	at org.testng.TestRunner.run(TestRunner.java:626)
+<td title='modules.OrderTest.order001_CheckCartInfoNoLogin()'><b>order001_CheckCartInfoNoLogin</b><br>Test class: modules.OrderTest</td>
+<td><div><pre>java.lang.NullPointerException
+	at support.CommonFunctions.switchToTab(CommonFunctions.java:378)
+	at modules.OrderTest.order001_CheckCartInfoNoLogin(OrderTest.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:669)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:877)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1201)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:776)
+	at org.testng.TestRunner.run(TestRunner.java:634)
 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
@@ -190,18 +172,22 @@ in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuit
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1344645519", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1344645519'><pre>org.testng.TestNGException: 
-Parameter &apos;browserName&apos; is required by BeforeTest on method init but has not been marked @Optional or defined
-in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuite.xml
-	at org.testng.internal.Parameters.createParams(Parameters.java:248)
-	at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:286)
-	at org.testng.internal.Parameters.createParameters(Parameters.java:547)
-	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:150)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:206)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
-	at org.testng.TestRunner.beforeRun(TestRunner.java:658)
-	at org.testng.TestRunner.run(TestRunner.java:626)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1568059495", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1568059495'><pre>java.lang.NullPointerException
+	at support.CommonFunctions.switchToTab(CommonFunctions.java:378)
+	at modules.OrderTest.order001_CheckCartInfoNoLogin(OrderTest.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:669)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:877)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1201)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:776)
+	at org.testng.TestRunner.run(TestRunner.java:634)
 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
@@ -217,20 +203,24 @@ in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuit
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
 <td>0</td>
-<td>modules.SearchTest@2ef5e5e3</td></tr>
+<td>modules.OrderTest@14bf9759</td></tr>
 <tr>
-<td title='modules.SearchTest.search()'><b>search</b><br>Test class: modules.SearchTest</td>
-<td><div><pre>org.testng.TestNGException: 
-Parameter &apos;browserName&apos; is required by BeforeTest on method init but has not been marked @Optional or defined
-in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuite.xml
-	at org.testng.internal.Parameters.createParams(Parameters.java:248)
-	at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:286)
-	at org.testng.internal.Parameters.createParameters(Parameters.java:547)
-	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:150)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:206)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
-	at org.testng.TestRunner.beforeRun(TestRunner.java:658)
-	at org.testng.TestRunner.run(TestRunner.java:626)
+<td title='modules.OrderTest.order002_OrderNoLogin()'><b>order002_OrderNoLogin</b><br>Test class: modules.OrderTest</td>
+<td><div><pre>java.lang.NullPointerException
+	at libraries.OrderFunctions.clickButtonOrderFirst(OrderFunctions.java:107)
+	at modules.OrderTest.order002_OrderNoLogin(OrderTest.java:37)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:669)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:877)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1201)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:776)
+	at org.testng.TestRunner.run(TestRunner.java:634)
 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
@@ -244,18 +234,22 @@ in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuit
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1310540333", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1310540333'><pre>org.testng.TestNGException: 
-Parameter &apos;browserName&apos; is required by BeforeTest on method init but has not been marked @Optional or defined
-in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuite.xml
-	at org.testng.internal.Parameters.createParams(Parameters.java:248)
-	at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:286)
-	at org.testng.internal.Parameters.createParameters(Parameters.java:547)
-	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:150)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:206)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
-	at org.testng.TestRunner.beforeRun(TestRunner.java:658)
-	at org.testng.TestRunner.run(TestRunner.java:626)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1987083830", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1987083830'><pre>java.lang.NullPointerException
+	at libraries.OrderFunctions.clickButtonOrderFirst(OrderFunctions.java:107)
+	at modules.OrderTest.order002_OrderNoLogin(OrderTest.java:37)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:669)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:877)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1201)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:776)
+	at org.testng.TestRunner.run(TestRunner.java:634)
 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
@@ -270,8 +264,8 @@ in C:\Users\khang\AppData\Local\Temp\testng-eclipse-1688542046\testng-customsuit
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>0</td>
-<td>modules.SearchTest@2ef5e5e3</td></tr>
+<td>2</td>
+<td>modules.OrderTest@14bf9759</td></tr>
 </table><p>
 </body>
 </html>

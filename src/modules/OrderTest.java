@@ -72,17 +72,16 @@ public class OrderTest {
 		// add food		
 		order.addMenu(TestBase.driver);
 		// check price		
-//		order.checkPrice(TestBase.driver);
-//		String countOrder = order.countNumberOrder(TestBase.driver);
-//		String countPerson = "1";
-//		order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
-	}	
-	
-	/*
-	@Test
+		order.checkPrice(TestBase.driver);
+		//String countOrder = order.countNumberOrder(TestBase.driver);
+		//String countPerson = "1";
+		//order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
+	}		
+
+	/*@Test
 	public void order006_CheckFullName(){	
 		order.checkUserName(TestBase.driver, "javarscript", "#login-status .name-user");
-	}
+	}*/
 
 	@Test
 	public void order007_CheckNote(){
@@ -98,6 +97,7 @@ public class OrderTest {
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
 	}
 	
+	/*
 	@Test
 	public void order009_RemoveCart(){
 		order.removeCart(TestBase.driver);

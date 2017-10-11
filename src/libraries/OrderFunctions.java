@@ -113,9 +113,9 @@ public class OrderFunctions extends OrderPage {
 
 	public void checkPopup(WebDriver driver, String title, String message, String nameButton) {
 		CommonFunctions.pause(1);
-		AssertJUnit.assertEquals(driver.findElement(By.xpath(lbl_PopupTitle)).getText(), title);
-		AssertJUnit.assertEquals(driver.findElement(By.id(lbl_PopupMessage)).getText(), message);
-		AssertJUnit.assertEquals(driver.findElement(By.xpath(btn_Oke)).getText(), nameButton.toUpperCase());
+		Assert.assertEquals(driver.findElement(By.xpath(lbl_PopupTitle)).getText(), title);
+		Assert.assertEquals(driver.findElement(By.id(lbl_PopupMessage)).getText(), message);
+		Assert.assertEquals(driver.findElement(By.xpath(btn_Oke)).getText(), nameButton.toUpperCase());
 		driver.findElement(By.xpath(btn_Oke)).click();
 	}
 
@@ -151,9 +151,22 @@ public class OrderFunctions extends OrderPage {
 			i++;
 		}
 	}
+	
+	public void checkPrice(WebDriver driver) {
+		List<WebElement> listPrice = driver.findElements(By.xpath(".//input[@ng-model='item.Note']/following-sibling::span"));
+		float totalPrice = 0;
+		//float strPrice = 0;
+		for (WebElement webElement : listPrice) {
+			String strPrice = webElement.getText();
+			strPrice = strPrice.substring(0, strPrice.length()-1).replace(",", ""); 
+			totalPrice += Float.parseFloat(strPrice);
+			
+		}
+		System.out.println(totalPrice); 
+	}
 
 	@SuppressWarnings("unchecked")
-	public void checkPrice(WebDriver driver) {
+	public void checkPrice1(WebDriver driver) {
 		CommonFunctions.pause(1);
 		// .add-minus-food span
 		ArrayList<WebElement> priceCart = (ArrayList<WebElement>) ((JavascriptExecutor) driver)

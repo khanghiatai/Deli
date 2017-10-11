@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods,   2 passed</span>
+                    <span class="method-stats">8 methods,   8 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -107,7 +107,37 @@
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="modules.SearchTest" hash-for-method="search">search</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="modules.OrderTest" hash-for-method="order001_CheckCartInfoNoLogin">order001_CheckCartInfoNoLogin</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="modules.OrderTest" hash-for-method="order002_OrderNoLogin">order002_OrderNoLogin</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="modules.OrderTest" hash-for-method="order003_AddMenuNoLogin">order003_AddMenuNoLogin</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="modules.OrderTest" hash-for-method="order004_OrderNoMenu">order004_OrderNoMenu</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="modules.OrderTest" hash-for-method="order005_AddMenuAfterLogin">order005_AddMenuAfterLogin</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="modules.OrderTest" hash-for-method="order007_CheckNote">order007_CheckNote</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="modules.OrderTest" hash-for-method="order008_AddCart">order008_AddCart</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -135,11 +165,61 @@
                   <span class="method-name">getWeb</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Suite-class-passed -->
+          <div class="suite-Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">modules.OrderTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="search">
-                  </a> <!-- search -->
-                  <span class="method-name">search</span>
+                  <a name="order001_CheckCartInfoNoLogin">
+                  </a> <!-- order001_CheckCartInfoNoLogin -->
+                  <span class="method-name">order001_CheckCartInfoNoLogin</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="order002_OrderNoLogin">
+                  </a> <!-- order002_OrderNoLogin -->
+                  <span class="method-name">order002_OrderNoLogin</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="order003_AddMenuNoLogin">
+                  </a> <!-- order003_AddMenuNoLogin -->
+                  <span class="method-name">order003_AddMenuNoLogin</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="order004_OrderNoMenu">
+                  </a> <!-- order004_OrderNoMenu -->
+                  <span class="method-name">order004_OrderNoMenu</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="order005_AddMenuAfterLogin">
+                  </a> <!-- order005_AddMenuAfterLogin -->
+                  <span class="method-name">order005_AddMenuAfterLogin</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="order007_CheckNote">
+                  </a> <!-- order007_CheckNote -->
+                  <span class="method-name">order007_CheckNote</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="order008_AddCart">
+                  </a> <!-- order008_AddCart -->
+                  <span class="method-name">order008_AddCart</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -155,11 +235,12 @@
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Suite&quot;&gt;
   &lt;parameter name=&quot;browserName&quot; value=&quot;chrome&quot;/&gt;
-  &lt;parameter name=&quot;url&quot; value=&quot;http://sandbox.deliverynow.vn:8081&quot;/&gt;
+  &lt;parameter name=&quot;url&quot; value=&quot;http://sandbox.deliverynow.vn:8081/ho-chi-minh/highland-coffee-tran-hung-dao-26728&quot;/&gt;
   &lt;parameter name=&quot;timeout&quot; value=&quot;60&quot;/&gt;
   &lt;test name=&quot;Test&quot;&gt;
     &lt;classes&gt;
       &lt;class name=&quot;modules.SearchTest&quot;/&gt;
+      &lt;class name=&quot;modules.OrderTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Test --&gt;
 &lt;/suite&gt; &lt;!-- Suite --&gt;
@@ -173,7 +254,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Test (1 class)</span>
+                <span class="test-name">Test (2 classes)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -199,20 +280,44 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(8);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'search')
-data.setCell(0, 2, 'modules.SearchTest')
-data.setCell(0, 3, 3606);
+data.setCell(0, 1, 'order005_AddMenuAfterLogin')
+data.setCell(0, 2, 'modules.OrderTest')
+data.setCell(0, 3, 50373);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'getWeb')
-data.setCell(1, 2, 'modules.SearchTest')
-data.setCell(1, 3, 1108);
+data.setCell(1, 1, 'order007_CheckNote')
+data.setCell(1, 2, 'modules.OrderTest')
+data.setCell(1, 3, 19215);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'order008_AddCart')
+data.setCell(2, 2, 'modules.OrderTest')
+data.setCell(2, 3, 10451);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'order004_OrderNoMenu')
+data.setCell(3, 2, 'modules.OrderTest')
+data.setCell(3, 3, 9426);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'order001_CheckCartInfoNoLogin')
+data.setCell(4, 2, 'modules.OrderTest')
+data.setCell(4, 3, 6193);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'order002_OrderNoLogin')
+data.setCell(5, 2, 'modules.OrderTest')
+data.setCell(5, 3, 3411);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'order003_AddMenuNoLogin')
+data.setCell(6, 2, 'modules.OrderTest')
+data.setCell(6, 3, 2763);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'getWeb')
+data.setCell(7, 2, 'modules.SearchTest')
+data.setCell(7, 3, 1013);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 4 seconds</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -244,28 +349,58 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-test before -->
               <div class="configuration-class before">
-                <span class="method-name">setUp(http://sandbox.deliverynow.vn:8081)</span>
-                <span class="method-start">4152 ms</span>
+                <span class="method-name">setUp(http://sandbox.deliverynow.vn:8081/ho-chi-minh/highland-coffee-tran-hung-dao-26728)</span>
+                <span class="method-start">2910 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">getWeb</span>
-                <span class="method-start">7840 ms</span>
+                <span class="method-start">7880 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">takeScreenShotIfFailure([TestResult name=getWeb status=SUCCESS method=SearchTest.getWeb()[pri:0, instance:modules.SearchTest...)</span>
-                <span class="method-start">8949 ms</span>
+                <span class="method-start">8896 ms</span>
               </div> <!-- configuration-method after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">modules.OrderTest</div> <!-- chronological-class-name -->
               <div class="test-method">
-                <span class="method-name">search</span>
-                <span class="method-start">8957 ms</span>
+                <span class="method-name">order001_CheckCartInfoNoLogin</span>
+                <span class="method-start">8909 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-method after">
-                <span class="method-name">takeScreenShotIfFailure([TestResult name=search status=SUCCESS method=SearchTest.search()[pri:0, instance:modules.SearchTest...)</span>
-                <span class="method-start">12564 ms</span>
-              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">order002_OrderNoLogin</span>
+                <span class="method-start">15103 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">order003_AddMenuNoLogin</span>
+                <span class="method-start">18518 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">order004_OrderNoMenu</span>
+                <span class="method-start">21282 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">order005_AddMenuAfterLogin</span>
+                <span class="method-start">30709 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">order007_CheckNote</span>
+                <span class="method-start">81097 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">order008_AddCart</span>
+                <span class="method-start">100321 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">110774 ms</span>
+              </div> <!-- configuration-class after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">modules.SearchTest</div> <!-- chronological-class-name -->
               <div class="configuration-test after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">12566 ms</span>
+                <span class="method-start">111530 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
