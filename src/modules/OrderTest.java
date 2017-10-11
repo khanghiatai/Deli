@@ -3,6 +3,7 @@ package modules;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import org.testng.AssertJUnit;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,6 +27,9 @@ public class OrderTest {
 		// Select tab browser present
 		//CommonFunctions.switchToTab(TestBase.driver, 1);
 
+		// temp & delete it
+		TestBase.driver.findElement(By.xpath("//a[@ng-click='detailCtrl.acceptBusy()']")).click();
+		
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "0";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
@@ -97,7 +101,7 @@ public class OrderTest {
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
 	}
 	
-	/*
+	
 	@Test
 	public void order009_RemoveCart(){
 		order.removeCart(TestBase.driver);
@@ -105,7 +109,7 @@ public class OrderTest {
 		String countPerson = "1";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
 	}
-	
+	/*
 	@Test 
 	public void order010_OrderAfterLogin(){
 		try {

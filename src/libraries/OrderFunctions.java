@@ -155,13 +155,26 @@ public class OrderFunctions extends OrderPage {
 	public void checkPrice(WebDriver driver) {
 		List<WebElement> listPrice = driver.findElements(By.xpath(".//input[@ng-model='item.Note']/following-sibling::span"));
 		float totalPrice = 0;
-		//float strPrice = 0;
+		float tempPrice = 0;
 		for (WebElement webElement : listPrice) {
 			String strPrice = webElement.getText();
 			strPrice = strPrice.substring(0, strPrice.length()-1).replace(",", ""); 
-			totalPrice += Float.parseFloat(strPrice);
-			
+			totalPrice += Float.parseFloat(strPrice);			
 		}
+		String strOrderPrice = driver.findElement(By.xpath("//div[@class='container-bill']/div[4]/span[2]")).getText().replace(",", "");//1
+		strOrderPrice = strOrderPrice.substring(0, strOrderPrice.length() -1);
+		
+		String strFeeShip = driver.findElement(By.xpath("//span[@ng-show='!detailCtrl.hasMilestoneFee']")).getText().replace(",", "");//4
+		strFeeShip = strFeeShip.substring(0, strFeeShip.length() -4);
+		
+		String strTempPrice = driver.findElement(By.xpath("//div[@class='container-bill']/div[10]/span[2]")).getText().replace(",", "");//1
+		strTempPrice = strTempPrice.substring(0, strTempPrice.length() -1);
+		
+		Assert.assertEquals(totalPrice, Float.parseFloat(strOrderPrice));
+		// add fee ship *******************
+		tempPrice = totalPrice + Float.parseFloat(strFeeShip);
+		
+		Assert.assertEquals(tempPrice, Float.parseFloat(strTempPrice)); 
 		System.out.println(totalPrice); 
 	}
 

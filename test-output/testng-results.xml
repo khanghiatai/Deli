@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" ignored="0" total="9" passed="9">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="13281" started-at="2017-10-06T10:08:57Z" finished-at="2017-10-06T10:09:10Z">
+  <suite name="Suite" duration-ms="512375" started-at="2017-10-11T15:58:13Z" finished-at="2017-10-11T16:06:46Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="13281" started-at="2017-10-06T10:08:57Z" finished-at="2017-10-06T10:09:10Z">
+    <test name="Test" duration-ms="512375" started-at="2017-10-11T15:58:13Z" finished-at="2017-10-11T16:06:46Z">
+      <class name="modules.OrderTest">
+        <test-method status="PASS" signature="order001_CheckCartInfoNoLogin()[pri:0, instance:modules.OrderTest@1ab3a8c8]" name="order001_CheckCartInfoNoLogin" duration-ms="6428" started-at="2017-10-11T22:58:28Z" finished-at="2017-10-11T22:58:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- order001_CheckCartInfoNoLogin -->
+        <test-method status="PASS" signature="order002_OrderNoLogin()[pri:0, instance:modules.OrderTest@1ab3a8c8]" name="order002_OrderNoLogin" duration-ms="3626" started-at="2017-10-11T22:58:35Z" finished-at="2017-10-11T22:58:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- order002_OrderNoLogin -->
+        <test-method status="PASS" signature="order003_AddMenuNoLogin()[pri:0, instance:modules.OrderTest@1ab3a8c8]" name="order003_AddMenuNoLogin" duration-ms="2966" started-at="2017-10-11T22:58:38Z" finished-at="2017-10-11T22:58:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- order003_AddMenuNoLogin -->
+        <test-method status="PASS" signature="order004_OrderNoMenu()[pri:0, instance:modules.OrderTest@1ab3a8c8]" name="order004_OrderNoMenu" duration-ms="8764" started-at="2017-10-11T22:58:41Z" finished-at="2017-10-11T22:58:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- order004_OrderNoMenu -->
+        <test-method status="PASS" signature="order005_AddMenuAfterLogin()[pri:0, instance:modules.OrderTest@1ab3a8c8]" name="order005_AddMenuAfterLogin" duration-ms="433229" started-at="2017-10-11T22:58:50Z" finished-at="2017-10-11T23:06:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- order005_AddMenuAfterLogin -->
+        <test-method status="PASS" signature="order007_CheckNote()[pri:0, instance:modules.OrderTest@1ab3a8c8]" name="order007_CheckNote" duration-ms="18641" started-at="2017-10-11T23:06:03Z" finished-at="2017-10-11T23:06:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- order007_CheckNote -->
+        <test-method status="PASS" signature="order008_AddCart()[pri:0, instance:modules.OrderTest@1ab3a8c8]" name="order008_AddCart" duration-ms="10339" started-at="2017-10-11T23:06:22Z" finished-at="2017-10-11T23:06:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- order008_AddCart -->
+        <test-method status="PASS" signature="order009_RemoveCart()[pri:0, instance:modules.OrderTest@1ab3a8c8]" name="order009_RemoveCart" duration-ms="12284" started-at="2017-10-11T23:06:32Z" finished-at="2017-10-11T23:06:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- order009_RemoveCart -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:modules.OrderTest@1ab3a8c8]" name="tearDown" is-config="true" duration-ms="1162" started-at="2017-10-11T23:06:44Z" finished-at="2017-10-11T23:06:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- modules.OrderTest -->
       <class name="modules.SearchTest">
-        <test-method status="PASS" signature="init(java.lang.String)[pri:0, instance:modules.SearchTest@6d00a15d]" name="init" is-config="true" duration-ms="4148" started-at="2017-10-06T17:08:57Z" finished-at="2017-10-06T17:09:01Z">
+        <test-method status="PASS" signature="init(java.lang.String)[pri:0, instance:modules.SearchTest@6973b51b]" name="init" is-config="true" duration-ms="6512" started-at="2017-10-11T22:58:13Z" finished-at="2017-10-11T22:58:20Z">
           <params>
             <param index="0">
               <value>
@@ -18,48 +56,33 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method status="PASS" signature="setUp(java.lang.String)[pri:0, instance:modules.SearchTest@6d00a15d]" name="setUp" is-config="true" duration-ms="3680" started-at="2017-10-06T17:09:01Z" finished-at="2017-10-06T17:09:04Z">
+        <test-method status="PASS" signature="setUp(java.lang.String)[pri:0, instance:modules.SearchTest@6973b51b]" name="setUp" is-config="true" duration-ms="6590" started-at="2017-10-11T22:58:20Z" finished-at="2017-10-11T22:58:26Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[http://sandbox.deliverynow.vn:8081]]>
+                <![CDATA[http://sandbox.deliverynow.vn:8081/ho-chi-minh/highland-coffee-tran-hung-dao-26728]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="getWeb()[pri:0, instance:modules.SearchTest@6d00a15d]" name="getWeb" duration-ms="1108" started-at="2017-10-06T17:09:04Z" finished-at="2017-10-06T17:09:06Z">
+        <test-method status="PASS" signature="getWeb()[pri:0, instance:modules.SearchTest@6973b51b]" name="getWeb" duration-ms="1009" started-at="2017-10-11T22:58:26Z" finished-at="2017-10-11T22:58:27Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getWeb -->
-        <test-method status="PASS" signature="takeScreenShotIfFailure(org.testng.ITestResult)[pri:0, instance:modules.SearchTest@6d00a15d]" name="takeScreenShotIfFailure" is-config="true" duration-ms="8" started-at="2017-10-06T17:09:06Z" finished-at="2017-10-06T17:09:06Z">
+        <test-method status="PASS" signature="takeScreenShotIfFailure(org.testng.ITestResult)[pri:0, instance:modules.SearchTest@6973b51b]" name="takeScreenShotIfFailure" is-config="true" duration-ms="768" started-at="2017-10-11T22:58:27Z" finished-at="2017-10-11T22:58:28Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=getWeb status=SUCCESS method=SearchTest.getWeb()[pri:0, instance:modules.SearchTest@6d00a15d] output={null}]]]>
+                <![CDATA[[TestResult name=getWeb status=SUCCESS method=SearchTest.getWeb()[pri:0, instance:modules.SearchTest@6973b51b] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- takeScreenShotIfFailure -->
-        <test-method status="PASS" signature="search()[pri:0, instance:modules.SearchTest@6d00a15d]" name="search" duration-ms="3606" started-at="2017-10-06T17:09:06Z" finished-at="2017-10-06T17:09:09Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- search -->
-        <test-method status="PASS" signature="takeScreenShotIfFailure(org.testng.ITestResult)[pri:0, instance:modules.SearchTest@6d00a15d]" name="takeScreenShotIfFailure" is-config="true" duration-ms="0" started-at="2017-10-06T17:09:09Z" finished-at="2017-10-06T17:09:09Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=search status=SUCCESS method=SearchTest.search()[pri:0, instance:modules.SearchTest@6d00a15d] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- takeScreenShotIfFailure -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:modules.SearchTest@6d00a15d]" name="tearDown" is-config="true" duration-ms="707" started-at="2017-10-06T17:09:09Z" finished-at="2017-10-06T17:09:10Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:modules.SearchTest@6973b51b]" name="tearDown" is-config="true" duration-ms="1" started-at="2017-10-11T23:06:46Z" finished-at="2017-10-11T23:06:46Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
