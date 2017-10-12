@@ -6,12 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
-
 import configuration.ResourceHasMap;
 import objects.OrderPage;
 import objects.SearchPage;
@@ -37,13 +34,6 @@ public class OrderFunctions extends OrderPage {
 
 	public OrderFunctions(WebDriver driver) {
 		super(driver);
-		//InitHasMapResource();
-	}
-
-	
-	public void InitHasMapResource(){
-		// text
-		//mMap.put("TimeAddressReciver", "Thá»�i gian & Ä�á»‹a chá»‰ nháº­n hÃ ng");
 	}
 	
 	public void checkCartInfo(WebDriver driver, String numberOrder, String numberPerson) {
@@ -60,6 +50,9 @@ public class OrderFunctions extends OrderPage {
 		WebElement nguoi = (WebElement) ((JavascriptExecutor) driver)
 				.executeScript("return document.querySelectorAll('" + ePhan_Nguoi + "')[4];");
 
+		//WebElement countCart = driver.findElement(By.id("cart-qty"));
+		//countCart.click();
+		
 		// Check Cart Status
 		if (phan.getText().equalsIgnoreCase(resource.getResource("setVi")))
 			AssertJUnit.assertEquals(phan.getText(), resource.getResource("setVi"));
@@ -103,11 +96,8 @@ public class OrderFunctions extends OrderPage {
 		}
 	}
 
-	public void clickButtonOrderFirst(WebDriver driver) {
-		CommonFunctions.pause(2);
-		WebElement btn_DatTruoc = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('" + btn_order + "')[1];");
-
+	public void clickButtonOrder(WebDriver driver) {
+		WebElement btn_DatTruoc = driver.findElement(By.xpath(".//a[@ng-click='detailCtrl.checkout();']"));
 		btn_DatTruoc.click();
 	}
 
@@ -171,11 +161,11 @@ public class OrderFunctions extends OrderPage {
 		strTempPrice = strTempPrice.substring(0, strTempPrice.length() -1);
 		
 		Assert.assertEquals(totalPrice, Float.parseFloat(strOrderPrice));
+		
 		// add fee ship *******************
 		tempPrice = totalPrice + Float.parseFloat(strFeeShip);
 		
 		Assert.assertEquals(tempPrice, Float.parseFloat(strTempPrice)); 
-		System.out.println(totalPrice); 
 	}
 
 	@SuppressWarnings("unchecked")
@@ -362,12 +352,10 @@ public class OrderFunctions extends OrderPage {
 		CommonFunctions.pause(1);
 	}
 
-	@SuppressWarnings("unchecked")
 	public void addCart(WebDriver driver) {
 		CommonFunctions.pause(2);
 		// .btn-add-cart
-		List<WebElement> _add = (List<WebElement>) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('" + btnAddCart + "');");
+		List<WebElement> _add = driver.findElements(By.xpath(".//span[@ng-click='detailCtrl.updateQtyExists(item, 1)']"));
 		for (int i = 0; i < _add.size(); i++) {
 			CommonFunctions.pause(1);
 			WebElement add = (WebElement) ((JavascriptExecutor) driver)
@@ -376,12 +364,10 @@ public class OrderFunctions extends OrderPage {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void removeCart(WebDriver driver) {
 		CommonFunctions.pause(2);
 		// .btn-remove-cart
-		List<WebElement> _remove = (List<WebElement>) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('" + btnRemoveCart + "');");
+		List<WebElement> _remove = driver.findElements(By.xpath(".//span[@ng-click='detailCtrl.updateQtyExists(item ,-1)']"));
 		for (int i = 0; i < _remove.size(); i++) {
 			CommonFunctions.pause(1);
 			WebElement remove = (WebElement) ((JavascriptExecutor) driver)

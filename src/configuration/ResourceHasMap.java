@@ -31,7 +31,7 @@ public class ResourceHasMap {
 		hm.put("titleMesg", "DeliveryNow thông báo");
 		hm.put("contentMesg", "Bạn vui lòng chọn món ăn sẽ gọi.");
 		hm.put("buttonName", "Đồng ý");
-		hm.put("buttonName", "Chính xác");
+		//hm.put("buttonName", "Chính xác");
 		hm.put("orderNoted", "Giao hàng đúng giờ!");
 		
 	}

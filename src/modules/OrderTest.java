@@ -2,52 +2,41 @@ package modules;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-//import org.sikuli.script.Screen;
-
 import configuration.ResourceHasMap;
 import configuration.TestBase;
 import libraries.OrderFunctions;
 import libraries.SSOFunctions;
-import libraries.SearchFunctions;
-import objects.SearchPage;
 import support.CommonFunctions;
 
+@Test
 public class OrderTest {
 	ResourceHasMap resource = new ResourceHasMap();
-	static OrderFunctions order = new OrderFunctions(TestBase.driver);		
+	OrderFunctions order = new OrderFunctions(TestBase.driver);		
 	SSOFunctions sso = new SSOFunctions(TestBase.driver);
 
-	@Test
+	//@Test
 	public void order001_CheckCartInfoNoLogin(){
 		// Select tab browser present
 		//CommonFunctions.switchToTab(TestBase.driver, 1);
-
-		// temp & delete it
-		TestBase.driver.findElement(By.xpath("//a[@ng-click='detailCtrl.acceptBusy()']")).click();
 		
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "0";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
 	}
 
-	@Test
-	public void order002_OrderNoLogin(){
-		order.clickButtonOrderFirst(TestBase.driver);		
+	//@Test
+	public void order002_OrderNoLogin(){		
+		order.clickButtonOrder(TestBase.driver);		
 		order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName")); 
 	}
 	
-	@Test 
+	//@Test 
 	public void order003_AddMenuNoLogin(){		
 		order.addMenuNoLogin(TestBase.driver);
 	}
 
 	@SuppressWarnings("static-access")
-	@Test
+	//@Test
 	public void order004_OrderNoMenu(){		
 		try {
 			if (order.isLoginPage(TestBase.driver) == true){			
@@ -65,21 +54,22 @@ public class OrderTest {
 				sso.loginSSO(sso.USERNAME, sso.PASSWORD);			
 				sso.getUserName(TestBase.driver); 								
 			} 
-			order.clickButtonOrderFirst(TestBase.driver);	
+			
+			order.clickButtonOrder(TestBase.driver);	
 			order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName"));
 		}		
 	}
 	
 
-	@Test
+	//@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
 		order.addMenu(TestBase.driver);
 		// check price		
 		order.checkPrice(TestBase.driver);
-		//String countOrder = order.countNumberOrder(TestBase.driver);
-		//String countPerson = "1";
-		//order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
+		String countOrder = order.countNumberOrder(TestBase.driver);
+		String countPerson = "1";
+		order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
 	}		
 
 	/*@Test
@@ -87,13 +77,13 @@ public class OrderTest {
 		order.checkUserName(TestBase.driver, "javarscript", "#login-status .name-user");
 	}*/
 
-	@Test
+	//@Test
 	public void order007_CheckNote(){
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 	}		
 	
 
-	@Test
+	//@Test
 	public void order008_AddCart(){
 		order.addCart(TestBase.driver);		
 		String countOrder = order.countNumberOrder(TestBase.driver);
@@ -102,33 +92,19 @@ public class OrderTest {
 	}
 	
 	
-	@Test
+	//@Test
 	public void order009_RemoveCart(){
 		order.removeCart(TestBase.driver);
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "1";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
-	}
-	/*
-	@Test 
-	public void order010_OrderAfterLogin(){
-		try {
-			order = new OrderFunctions(TestBase.driver);		
-			//search(TestBase.driver, SearchPage.keySearch_CheckOrderPrice, ".box-photo-restaurant", 2); 
-		} catch (Exception e) {
-			TestBase.driver.navigate().refresh();
-			CommonFunctions.pause(2);
-		}
-		// add food
-		order = new OrderFunctions(TestBase.driver);
-		order.addMenu(TestBase.driver);
-		// check price
-		order.checkPrice(TestBase.driver);
 	}	
 	
+
 	@Test
 	public void order011_ResetAndCheckInfo(){
-		order = new OrderFunctions(TestBase.driver);
+		CommonFunctions.pause(3);
+		//order = new OrderFunctions(TestBase.driver);
 		order.resetOrder(TestBase.driver); 
 		
 		String countOrder = order.countNumberOrder(TestBase.driver);
@@ -136,6 +112,7 @@ public class OrderTest {
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
 	}
 	
+	/*
 	@Test 
 	public void order012_CheckOrder(){	
 		//search(TestBase.driver, SearchPage.keySearch_Default, ".box-photo-restaurant", 3); 

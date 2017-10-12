@@ -1,16 +1,20 @@
 package objects;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class OrderPage {
 	
-	WebDriver driver;
+	public WebDriver driver;
 	public OrderPage (WebDriver driver){
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
+		AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 100);
+        PageFactory.initElements(factory,this);
 	}
 	
 	@FindBy(xpath = ".//div[@class='scrollspy']/div[1]/div[2]/a/h3")
@@ -48,4 +52,6 @@ public class OrderPage {
 	@FindBy(xpath = ".//div[contains(@class, 'row-bill-grey')]/span[.='Cộng']")
 	public WebElement lbl_Cong; 
 	
+	@FindBys(@FindBy(xpath = ".//*[@class='scrollspy']//a[@class='title-name-food']"))
+	public List<WebElement> btn_Order;
 }
