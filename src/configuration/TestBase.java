@@ -43,8 +43,7 @@ public class TestBase {
     		new Object[] {"tai","123", "Email hoặc Mật khẩu không chính xác!"},
     		new Object[] {"tai.kha","123123", " "}
     	};
-    }
-    
+    }    
     
     @DataProvider(name = "ssodataxss")
     public Object[][] ssoDataXSS(){
@@ -74,6 +73,7 @@ public class TestBase {
 
     @AfterTest
     public void tearDown(){   
+    	CommonFunctions.pause(2);
         driver.quit();
     }
 }

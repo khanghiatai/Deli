@@ -26,7 +26,7 @@ public class OrderTest_1 {
 	public void order019_OrderFood() {
 		search.autoCompleteSeach(driver, search.keySearch_Service);		
 		CommonFunctions.switchToTab(driver, 1);
-		order.addMenu(driver);
+		order.clickNameFood(driver);
 		order.clickButtonOrder(driver); 
 		String name = order.getRestaurantInfo(driver);
 		if (order.isInsertOrderReceive(driver) == false){

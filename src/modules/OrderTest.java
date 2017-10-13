@@ -64,18 +64,13 @@ public class OrderTest {
 	//@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
-		order.addMenu(TestBase.driver);
+		order.clickNameFood(TestBase.driver);
 		// check price		
 		order.checkPrice(TestBase.driver);
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "1";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
 	}		
-
-	/*@Test
-	public void order006_CheckFullName(){	
-		order.checkUserName(TestBase.driver, "javarscript", "#login-status .name-user");
-	}*/
 
 	//@Test
 	public void order007_CheckNote(){
@@ -101,39 +96,22 @@ public class OrderTest {
 	}	
 	
 
-	@Test
+	//@Test
 	public void order011_ResetAndCheckInfo(){
-		CommonFunctions.pause(3);
-		//order = new OrderFunctions(TestBase.driver);
-		order.resetOrder(TestBase.driver); 
-		
+		order.resetOrder(TestBase.driver); 				
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "0";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
-	}
-	
-	/*
-	@Test 
-	public void order012_CheckOrder(){	
-		//search(TestBase.driver, SearchPage.keySearch_Default, ".box-photo-restaurant", 3); 
-		order = new OrderFunctions(TestBase.driver);
-		String countOrder = order.countNumberOrder(TestBase.driver);
-		String countPerson = "1";
-		order.checkCartInfo(TestBase.driver, countOrder, countPerson);	
-		order.checkOrderAfterAddMenu(TestBase.driver, countOrder);
-		// temp *************************
-		order.resetOrder(TestBase.driver); 
-	}
-	
-	@Test 
-	public void order013_CheckPopupOrderPrice(){
-		//.box-photo-restaurant
-		//search(TestBase.driver, SearchPage.keySearch_CheckOrderPrice, ".box-photo-restaurant", 4); 
-		// add food
-		order = new OrderFunctions(TestBase.driver);
-		order.checkPopupOrderPrice(TestBase.driver); 
+	}	
+
+	//@Test 
+	public void order013_CheckPopupOrderPrice(){		
+		order.clickAddFood(TestBase.driver); 
+		order.checkPrice(TestBase.driver); 
+		order.clickButtonOrder(TestBase.driver); 
 	}	
 	
+	/*
 	@Test 
 	public void order014_ContinueAddMenu(){
 		order.checkButtonPopupOrderPrice(TestBase.driver, "submit", 0); 		

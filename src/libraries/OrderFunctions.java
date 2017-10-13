@@ -117,7 +117,7 @@ public class OrderFunctions extends OrderPage {
 		return false;
 	}
 	
-	public void addMenu(WebDriver driver) {		
+	public void clickNameFood(WebDriver driver) {		
 		int i = 0;
 		CommonFunctions.pause(2);
 		List<WebElement> listFoods = driver.findElements(By.xpath(".//*[@class='scrollspy']//a[@class='title-name-food']"));
@@ -126,7 +126,7 @@ public class OrderFunctions extends OrderPage {
 			String foodName = webElement.getText();
 			List<WebElement> listMenuPrice = driver.findElements(By.xpath(".//div[@class='product-price']/a/p"));
 			String foodPrice = listMenuPrice.get(i).getText().replace(" ", "");
-			
+			CommonFunctions.pause(1);
 			webElement.click();	
 			CommonFunctions.pause(2);	
 			List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
@@ -140,6 +140,32 @@ public class OrderFunctions extends OrderPage {
 			}	
 			i++;
 		}
+	}
+	
+	public void clickAddFood(WebDriver driver) {		
+		CommonFunctions.pause(2);
+		List<WebElement> listFoods = driver
+				.findElements(By.xpath("//div[@class='extra']/div[@class='adding-food-cart']/span[@class='btn-adding']"));		
+		for (int i = 0; i < listFoods.size() ; i++) {
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("return document.querySelectorAll('.more-info .btn-adding')[" + i + "].click();");
+			CommonFunctions.pause(1);
+			String foodName = js.executeScript("return document.querySelectorAll('.title-name-food>h3')[" + i + "].innerText;").toString();
+			List<WebElement> listMenuPrice = driver.findElements(By.xpath(".//div[@class='product-price']/a/p"));
+			String foodPrice = listMenuPrice.get(i).getText().replace(" ", "");
+			CommonFunctions.pause(1);
+			
+			CommonFunctions.pause(2);	
+			List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
+			List<WebElement> listPrice = driver.findElements(By.xpath(".//input[@ng-model='item.Note']/following-sibling::span"));
+			
+			String name = listOrder.get(i).getText();
+			String price = listPrice.get(i).getText();
+			if(name.equalsIgnoreCase(foodName)) {
+				Assert.assertEquals(name, foodName); 		
+				Assert.assertEquals(price, foodPrice); 		
+			}	
+		} 
 	}
 	
 	public void checkPrice(WebDriver driver) {
@@ -345,11 +371,7 @@ public class OrderFunctions extends OrderPage {
 	}
 
 	public void resetOrder(WebDriver driver) {
-		CommonFunctions.pause(2);
-		WebElement reset = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('" + eReset + "');");
-		reset.click();
-		CommonFunctions.pause(1);
+		driver.findElement(By.xpath(".//a[@ng-click='detailCtrl.clearCart();']")).click();
 	}
 
 	public void addCart(WebDriver driver) {
