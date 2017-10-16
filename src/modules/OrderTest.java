@@ -1,5 +1,6 @@
 package modules;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import configuration.ResourceHasMap;
@@ -13,6 +14,7 @@ public class OrderTest {
 	ResourceHasMap resource = new ResourceHasMap();
 	OrderFunctions order = new OrderFunctions(TestBase.driver);		
 	SSOFunctions sso = new SSOFunctions(TestBase.driver);
+	int defaultPrice = 100000;
 
 	//@Test
 	public void order001_CheckCartInfoNoLogin(){
@@ -73,13 +75,13 @@ public class OrderTest {
 	}		
 
 	//@Test
-	public void order007_CheckNote(){
+	public void order006_CheckNote(){
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 	}		
 	
 
 	//@Test
-	public void order008_AddCart(){
+	public void order007_AddCart(){
 		order.addCart(TestBase.driver);		
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "1";
@@ -88,7 +90,7 @@ public class OrderTest {
 	
 	
 	//@Test
-	public void order009_RemoveCart(){
+	public void order008_RemoveCart(){
 		order.removeCart(TestBase.driver);
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "1";
@@ -97,108 +99,35 @@ public class OrderTest {
 	
 
 	//@Test
-	public void order011_ResetAndCheckInfo(){
+	public void order009_ResetAndCheckInfo(){
 		order.resetOrder(TestBase.driver); 				
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "0";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
 	}	
+	
+	//@Test 
+	public void order010_OrderBelowPrice() {
+		// click 1 food, return price of food
+		int ibelowPrice = order.addOneOrderBelowPrice(TestBase.driver, defaultPrice);
+		order.clickButtonOrder(TestBase.driver); 
+		order.checkPopupBelowPrice(TestBase.driver, defaultPrice, ibelowPrice);	
+		
+		TestBase.driver.findElement(By.id("confirm-modal-cancel-btn-1")).click();
+//		order.resetOrder(TestBase.driver); 		
+	}
 
 	//@Test 
-	public void order013_CheckPopupOrderPrice(){		
+	public void order011_AddMenuAfterReset(){		
 		order.clickAddFood(TestBase.driver); 
-		order.checkPrice(TestBase.driver); 
+		order.checkPrice(TestBase.driver);
+		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));		
+	}	
+	
+	//@Test 
+	public void order012_CheckPopupOrderPrice(){				
 		order.clickButtonOrder(TestBase.driver); 
 	}	
-	
-	/*
-	@Test 
-	public void order014_ContinueAddMenu(){
-		order.checkButtonPopupOrderPrice(TestBase.driver, "submit", 0); 		
-		// check order info				
-		AssertJUnit.assertEquals(false, order.checkPopupOrderInfo(TestBase.driver));
-	}	
-	
-	@Test 
-	public void order015_CancelPopupOrder(){		
-		order.checkButtonPopupOrderPrice(TestBase.driver, "cancel", 1); 
-		// check order info				
-		AssertJUnit.assertEquals(false, order.checkPopupOrderInfo(TestBase.driver));
-	}	
-	
-	@Test 
-	public void order016_ContinueOrder(){
-		order.checkButtonPopupOrderPrice(TestBase.driver, "submit", 1); 
-		// check order info		
-		AssertJUnit.assertEquals(true, order.checkPopupOrderInfo(TestBase.driver));
-		// close popup
-		WebElement _closePopup = (WebElement)((JavascriptExecutor)TestBase.driver)
-				.executeScript("return document.querySelector('#confirminfo .btn-close-modal');");
-		_closePopup.click();
-		// reset order
-		order.resetOrder(TestBase.driver); 
-	}	
-	
-	@Test 
-	public void order017_OrderHasFeeService(){	
-		// .box-photo-restaurant
-		//search(TestBase.driver, SearchPage.keySearch_Service, ".box-photo-restaurant", 5); 
-		// add food
-		order = new OrderFunctions(TestBase.driver);
-		order.addMenu(TestBase.driver);
-		
-		order.checkTotalPrice(TestBase.driver, order.isService(TestBase.driver), order.isDelivery(TestBase.driver));
-		order.resetOrder(TestBase.driver); 
-	}	*/
-	
-//	@Test 
-//	public void order018_OrderNoDeli(){		
-//
-//		//'.info-list-restaurant a');
-//		search(TestBase.driver, SearchPage.keySeach_NoDeli,".info-list-restaurant a", 6); 
-//		order = new OrderFunctions(TestBase.driver);
-//		order.addMenu(TestBase.driver);
-//		
-//		order.checkTotalPrice(TestBase.driver, order.isService(TestBase.driver), order.isDelivery(TestBase.driver));
-//		
-//		order.checkPopupOrderNotDeli(TestBase.driver); 
-//		order.resetOrder(TestBase.driver); 
-//	}	
-		
-	/*private void search(WebDriver driver ,String keySearch,String className, int numTab){
-		try {
-			order.img_Logo.click();	
-		} catch (Exception e) {
-			driver.navigate().refresh();
-		} finally {
-			CommonFunctions.pause(1);
-			SearchFunctions search = new SearchFunctions(driver);
-			search.search(keySearch);
-			CommonFunctions.pause(1);
-			try {
-				WebElement img_Result = (WebElement)((JavascriptExecutor)driver)
-						.executeScript("return document.querySelector('"+ className +"');");
-				img_Result.click();
-				
-				Screen g = new Screen();
-				try {			
-					g.click("D:\\click.png");	
-				} catch (Exception e) {
-					System.out.println("Khong tim thay hinh");
-				}		
-				try {
-					Thread.sleep(3000);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				
-			} catch (Exception e2) {
-				driver.navigate().refresh();
-			}			
-			CommonFunctions.pause(1);
-			CommonFunctions.switchToTab(driver, numTab);
-		}	
-	}	*/
 	
 	@AfterClass
 	public void tearDown(){

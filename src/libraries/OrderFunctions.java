@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 import configuration.ResourceHasMap;
+import configuration.TestBase;
 import objects.OrderPage;
 import objects.SearchPage;
 import support.CommonFunctions;
@@ -97,6 +98,7 @@ public class OrderFunctions extends OrderPage {
 	}
 
 	public void clickButtonOrder(WebDriver driver) {
+		CommonFunctions.pause(1);
 		WebElement btn_DatTruoc = driver.findElement(By.xpath(".//a[@ng-click='detailCtrl.checkout();']"));
 		btn_DatTruoc.click();
 	}
@@ -193,6 +195,54 @@ public class OrderFunctions extends OrderPage {
 		
 		Assert.assertEquals(tempPrice, Float.parseFloat(strTempPrice)); 
 	}
+	
+	public int addOneOrderBelowPrice(WebDriver driver, int price) {
+		List<WebElement> listPrice = driver.findElements(By.xpath(".//div[@class='product-price']/p[@class='current-price']/span[1]"));
+
+		JavascriptExecutor js = (JavascriptExecutor)TestBase.driver;
+		for (int i = 0; i < listPrice.size(); i++) {
+			String strPrice = js.executeScript("return document.querySelectorAll('.product-price a .current-price')[" + i +  "].innerText;").toString();
+			strPrice = strPrice.replace(",", "").substring(0, strPrice.length()-2);
+			strPrice = CommonFunctions.chuanHoa(strPrice);
+			int iPrice = Integer.parseInt(strPrice);
+			if(iPrice < price) {
+				CommonFunctions.pause(1);
+				js.executeScript("document.querySelectorAll('.product-price a .current-price')[" + i +  "].click();");
+				System.out.println("1");
+				return iPrice; 
+			} else continue;
+		}
+		return 0;
+	}
+	
+	/****
+	 * 
+	 * @param driver
+	 * @param defaulPrice
+	 * @param belowPrice
+	 */
+	public void checkPopupBelowPrice(WebDriver driver, int defaultPrice, int belowPrice) {
+		CommonFunctions.pause(1);
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		String titlePopup = js.executeScript("return document.querySelector('#alert-modal >p').innerText").toString();		
+		Assert.assertEquals(titlePopup, resource.getResource("popupTitle"));
+		List<WebElement> tempPrice = driver.findElements(By.xpath(".//p[@id='alert-msg']/i"));
+		for (int i = 0; i < tempPrice.size(); i++) {
+			if(i == 0) {
+				String strBelowPrice = js.executeScript("return document.querySelectorAll('#alert-msg > i')[" + i +"].innerText").toString();
+				strBelowPrice = CommonFunctions.chuanHoa(strBelowPrice);
+				strBelowPrice = strBelowPrice.substring(0, strBelowPrice.length() -2).replace(",", "");
+				int iBelowPrice = Integer.parseInt(strBelowPrice);
+				Assert.assertEquals(iBelowPrice, belowPrice);
+			} else if (i == 1) {
+				String strDefaulPrice = js.executeScript("return document.querySelectorAll('#alert-msg > i')[" + i +"].innerText").toString();
+				strDefaulPrice = CommonFunctions.chuanHoa(strDefaulPrice);
+				strDefaulPrice = strDefaulPrice.substring(0, strDefaulPrice.length() -2).replace(",", "");
+				int iDefaulPrice = Integer.parseInt(strDefaulPrice);
+				Assert.assertEquals(iDefaulPrice, defaultPrice);
+			}				
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	public void checkPrice1(WebDriver driver) {
@@ -264,93 +314,7 @@ public class OrderFunctions extends OrderPage {
 			return false;
 		}
 		return false;
-	}
-
-	@SuppressWarnings("unchecked")
-	public void checkTotalPrice(WebDriver driver, Boolean eSevice, Boolean eDelivery) {
-		CommonFunctions.pause(1);
-		// has fee service and delivery service
-		if (eSevice == true && eDelivery == true) {
-			List<WebElement> element = (List<WebElement>) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>p>span');");
-			int i;
-			for (i = 0; i < element.size(); i++) {
-				String sService = (String) ((JavascriptExecutor) driver).executeScript(
-						"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>p>span')[" + i
-								+ "].innerText;");
-				if (sService.equals("PHÃ� Dá»ŠCH Vá»¤")) {
-					i--;
-					break;
-				}
-			}
-			CommonFunctions.pause(2);
-			String feeService = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>span')[" + i
-							+ "].innerText;");
-			feeService = CommonFunctions.chuyenDoiKyTu(feeService, "% phá»¥c vá»¥", "");
-			String boxFeeService = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.container-bill div span span.bold')[0].innerText;");
-			boxFeeService = CommonFunctions.chuyenDoiKyTu(boxFeeService, "%", "");
-			String totalPrice = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.container-bill div span.bold.pull-right')[0].innerText;");
-			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, ",", "");
-			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, "Ä‘", "");
-			String priceService = (String) ((JavascriptExecutor) driver)
-					.executeScript("return document.querySelectorAll('.container-bill span.pull-right')[2].innerText;");
-			priceService = CommonFunctions.chuyenDoiKyTu(priceService, ",", "");
-			priceService = CommonFunctions.chuyenDoiKyTu(priceService, "Ä‘", "");
-			String tempTotalPrice = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.container-bill div span.pull-right.txt-blue')[0].innerText;");
-			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, ",", "");
-			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, "Ä‘", "");
-			int _priceService = Integer.parseInt(totalPrice) * Integer.parseInt(feeService) / 100;
-			int _tempTotalPrice = _priceService + Integer.parseInt(totalPrice);
-			AssertJUnit.assertEquals(feeService, boxFeeService);
-			AssertJUnit.assertEquals(Integer.toString(_priceService), priceService);
-			AssertJUnit.assertEquals(Integer.toString(_tempTotalPrice), tempTotalPrice);
-		} // has fee service and not delivery service
-		else if (eSevice == true && eDelivery == false) {
-			List<WebElement> element = (List<WebElement>) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>p>span');");
-			int i;
-			for (i = 0; i < element.size(); i++) {
-				String sService = (String) ((JavascriptExecutor) driver).executeScript(
-						"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>p>span')[" + i
-								+ "].innerText;");
-				if (sService.equals("PHÃ� Dá»ŠCH Vá»¤")) {
-					i--;
-					break;
-				}
-			}
-			CommonFunctions.pause(2);
-			String feeService = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.info-delivery-restaurant .column-info-deli>span')[" + i
-							+ "].innerText;");
-			feeService = CommonFunctions.chuyenDoiKyTu(feeService, "% phá»¥c vá»¥", "");
-			String boxFeeService = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.container-bill div span span.bold')[0].innerText;");
-			boxFeeService = CommonFunctions.chuyenDoiKyTu(boxFeeService, "%", "");
-			String totalPrice = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.container-bill div span.bold.pull-right')[0].innerText;");
-			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, ",", "");
-			totalPrice = CommonFunctions.chuyenDoiKyTu(totalPrice, "Ä‘", "");
-			String priceService = (String) ((JavascriptExecutor) driver)
-					.executeScript("return document.querySelectorAll('.container-bill span.pull-right')[2].innerText;");
-			priceService = CommonFunctions.chuyenDoiKyTu(priceService, ",", "");
-			priceService = CommonFunctions.chuyenDoiKyTu(priceService, "Ä‘", "");
-			String tempTotalPrice = (String) ((JavascriptExecutor) driver).executeScript(
-					"return document.querySelectorAll('.container-bill div span.pull-right.txt-blue')[0].innerText;");
-			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, ",", "");
-			tempTotalPrice = CommonFunctions.chuyenDoiKyTu(tempTotalPrice, "Ä‘", "");
-			int _priceService = Integer.parseInt(totalPrice) * Integer.parseInt(feeService) / 100;
-			int _tempTotalPrice = _priceService + Integer.parseInt(totalPrice);
-			AssertJUnit.assertEquals(feeService, boxFeeService);
-			AssertJUnit.assertEquals(Integer.toString(_priceService), priceService);
-			AssertJUnit.assertEquals(Integer.toString(_tempTotalPrice), tempTotalPrice);
-		} else {
-			System.out.println("No service");
-		}
-	}
+	}	
 
 	@SuppressWarnings("unchecked")
 	public String countNumberOrder(WebDriver driver) {
@@ -372,6 +336,7 @@ public class OrderFunctions extends OrderPage {
 
 	public void resetOrder(WebDriver driver) {
 		driver.findElement(By.xpath(".//a[@ng-click='detailCtrl.clearCart();']")).click();
+		CommonFunctions.pause(1);
 	}
 
 	public void addCart(WebDriver driver) {
@@ -492,99 +457,6 @@ public class OrderFunctions extends OrderPage {
 		AssertJUnit.assertEquals("Ä�á»’NG Ã�", _submit);
 		// check button cancel
 		_cancel.click();
-	}
-	
-	/*@SuppressWarnings("unchecked")
-	public void checkPopupOrderNotDeli(WebDriver driver) {
-		WebElement add = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('" + btn_Add + "');");
-		add.click();
-
-		CommonFunctions.pause(1);
-		WebElement btn_DatTruoc = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('" + btn_order + "')[1];");
-		WebElement getPrice = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('.add-minus-food span');");
-
-		//String _getPrice = getPrice.getText();
-		btn_DatTruoc.click();
-		//
-		CommonFunctions.pause(1);
-		List<WebElement> message = (List<WebElement>) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('#alert-modal p span');");
-
-		String titlePopup = "";
-		int i = 0;
-		String str;
-		for (i = 0; i< message.size()-2; i++) {
-			if (i != 0 && i % 2 == 0){
-				str = (String)((JavascriptExecutor) driver)
-					.executeScript("return document.querySelectorAll('#alert-modal p span')["+ i +"].innerText;");
-				titlePopup += " " + str;
-			} else {
-				str = (String)((JavascriptExecutor) driver)
-						.executeScript("return document.querySelectorAll('#alert-modal p span')["+ i +"].innerText;");
-				titlePopup += str;
-			}	
-		}
-		
-		String getPricePopup = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('#alert-msg').innerText;");
-		getPricePopup = CommonFunctions.spilitString(getPricePopup);
-		
-		
-		WebElement defaultPrice = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('#alert-msg i')[1];");
-
-		String _getPricePopup = CommonFunctions.chuyenDoiKyTu(getPricePopup.getText(), " ", "");
-		_getPrice = CommonFunctions.chuyenDoiKyTu(_getPrice, "", "");
-
-		String _option1 = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('#alert-msg label')[0].innerText;");
-		String _option2 = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('#alert-msg label')[1].innerText;");
-		// check button name
-		WebElement _cancel = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('#alert-modal a.btn-cancel');");
-		String _submit = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('#alert-modal a.btn-ok').innerText;");
-
-		CommonFunctions.pause(2);
-		AssertJUnit.assertEquals("DeliveryNow thÃ´ng bÃ¡o", titlePopup);
-		AssertJUnit.assertEquals(_getPrice, _getPricePopup);
-		AssertJUnit.assertEquals("100,000 Ä‘", defaultPrice.getText()); // default
-																		// price
-		AssertJUnit.assertEquals("Tiáº¿p tá»¥c chá»�n thÃªm mÃ³n", _option1);
-		AssertJUnit.assertEquals("Cháº¥p nháº­n phÃ­ dá»‹ch vá»¥ lÃ  " + SearchPage.priceRequire + " Ä‘ Â vÃ  tiáº¿n hÃ nh thanh toÃ¡n",
-				_option2); // input
-		AssertJUnit.assertEquals("Há»¦Y", _cancel.getText());
-		AssertJUnit.assertEquals("Ä�á»’NG Ã�", _submit);
-		// check button cancel
-		_cancel.click();
-	}*/
-
-	public void checkButtonPopupOrderPrice(WebDriver driver, String how, int index) {
-		CommonFunctions.pause(1);
-		WebElement btn_DatTruoc = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('" + btn_order + "')[1];");
-		btn_DatTruoc.click();
-		CommonFunctions.pause(2);
-		WebElement _cancel = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('#alert-modal a.btn-cancel');");
-		WebElement _submit = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('#alert-modal a.btn-ok');");
-
-		WebElement oRadio = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('#alert-msg label')[" + index + "];");
-		oRadio.click();
-		CommonFunctions.pause(1);
-		if (how.equalsIgnoreCase("cancel")) {
-			_cancel.click();
-			CommonFunctions.pause(1);
-		} else if (how.equalsIgnoreCase("submit")) {
-			_submit.click();
-			CommonFunctions.pause(1);
-		}
 	}
 
 	public boolean checkPopupOrderInfo(WebDriver driver) {

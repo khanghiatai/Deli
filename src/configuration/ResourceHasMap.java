@@ -33,7 +33,7 @@ public class ResourceHasMap {
 		hm.put("buttonName", "Đồng ý");
 		//hm.put("buttonName", "Chính xác");
 		hm.put("orderNoted", "Giao hàng đúng giờ!");
-		
+		hm.put("popupTitle", "DeliveryNow thông báo");
 	}
 	
 	private void dayOffWeek(){
