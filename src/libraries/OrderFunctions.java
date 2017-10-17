@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
+
+import bsh.Console;
 import configuration.ResourceHasMap;
 import configuration.TestBase;
 import objects.OrderPage;
@@ -242,6 +244,12 @@ public class OrderFunctions extends OrderPage {
 				Assert.assertEquals(iDefaulPrice, defaultPrice);
 			}				
 		}
+		String strContinueOrder = driver.findElement(By.xpath(".//label[@for='continute-rad']")).getText();
+		strContinueOrder = CommonFunctions.chuanHoa(strContinueOrder);
+		String strAceptFee = driver.findElement(By.xpath(".//label[@for='accept-rad']")).getText();
+		strAceptFee = CommonFunctions.chuanHoa(strAceptFee);
+		Assert.assertEquals(strContinueOrder, resource.getResource("continueorder"));
+		Assert.assertEquals(strAceptFee, resource.getResource("aceptfee")); 
 	}
 
 	@SuppressWarnings("unchecked")

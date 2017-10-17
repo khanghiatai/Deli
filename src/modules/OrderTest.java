@@ -107,15 +107,16 @@ public class OrderTest {
 	}	
 	
 	//@Test 
-	public void order010_OrderBelowPrice() {
+	/*public void order010_OrderBelowPrice() {
 		// click 1 food, return price of food
 		int ibelowPrice = order.addOneOrderBelowPrice(TestBase.driver, defaultPrice);
 		order.clickButtonOrder(TestBase.driver); 
 		order.checkPopupBelowPrice(TestBase.driver, defaultPrice, ibelowPrice);	
 		
 		TestBase.driver.findElement(By.id("confirm-modal-cancel-btn-1")).click();
-//		order.resetOrder(TestBase.driver); 		
-	}
+		TestBase.driver.navigate().refresh();
+		order.resetOrder(TestBase.driver); 		
+	}*/
 
 	//@Test 
 	public void order011_AddMenuAfterReset(){		

@@ -34,6 +34,8 @@ public class ResourceHasMap {
 		//hm.put("buttonName", "Chính xác");
 		hm.put("orderNoted", "Giao hàng đúng giờ!");
 		hm.put("popupTitle", "DeliveryNow thông báo");
+		hm.put("continueorder", "Tiếp tục chọn thêm món");
+		hm.put("aceptfee", "Chấp nhận phí dịch vụ là 20,000 đ và tiến hành thanh toán");
 	}
 	
 	private void dayOffWeek(){
