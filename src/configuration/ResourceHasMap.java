@@ -36,6 +36,10 @@ public class ResourceHasMap {
 		hm.put("popupTitle", "DeliveryNow thông báo");
 		hm.put("continueorder", "Tiếp tục chọn thêm món");
 		hm.put("aceptfee", "Chấp nhận phí dịch vụ là 20,000 đ và tiến hành thanh toán");
+		hm.put("checkout_address", "Thời gian & Địa chỉ nhận hàng");
+		hm.put("checkout_indoorder", "Thông tin đơn hàng");
+		hm.put("checkout_finish", "Hoàn tất");
+
 	}
 	
 	private void dayOffWeek(){

@@ -115,19 +115,21 @@ public class OrderTest {
 		
 		TestBase.driver.findElement(By.id("confirm-modal-cancel-btn-1")).click();
 		TestBase.driver.navigate().refresh();
+		CommonFunctions.pause(2);
 		order.resetOrder(TestBase.driver); 		
 	}*/
 
 	//@Test 
 	public void order011_AddMenuAfterReset(){		
 		order.clickAddFood(TestBase.driver); 
-		order.checkPrice(TestBase.driver);
-		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));		
+		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
+		order.checkPrice(TestBase.driver);				
 	}	
 	
 	//@Test 
 	public void order012_CheckPopupOrderPrice(){				
 		order.clickButtonOrder(TestBase.driver); 
+		
 	}	
 	
 	@AfterClass

@@ -251,6 +251,17 @@ public class OrderFunctions extends OrderPage {
 		Assert.assertEquals(strContinueOrder, resource.getResource("continueorder"));
 		Assert.assertEquals(strAceptFee, resource.getResource("aceptfee")); 
 	}
+	
+	public void checkPopupConfirmOrder(WebDriver driver) {
+		List<WebElement> listTitleName = driver.findElements(By.xpath(".//*[@class='checkout-steps']/div"));
+		for (int i = 0; i < listTitleName.size(); i++) {
+			switch(i) {
+			case 0: 
+				driver.findElement(By.xpath(".//*[@class='checkout-steps']/div"));
+			}
+		}
+		
+	}
 
 	@SuppressWarnings("unchecked")
 	public void checkPrice1(WebDriver driver) {
