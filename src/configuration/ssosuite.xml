@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
     <parameter name="browserName" value="chrome"/>    
-    <parameter name="url" value="http://sandbox.deliverynow.vn:8081/ha-noi/lang-nuong-nam-bo"/>
+    <parameter name="url" value="http://sandbox.deliverynow.vn:8081/ho-chi-minh/com-ga-ba-luan-tam-ky-cao-thang"/>
     <parameter name="timeout" value="60"/>
     <test name="Test">
         <classes>

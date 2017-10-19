@@ -31,15 +31,15 @@ public class ResourceHasMap {
 		hm.put("titleMesg", "DeliveryNow thông báo");
 		hm.put("contentMesg", "Bạn vui lòng chọn món ăn sẽ gọi.");
 		hm.put("buttonName", "Đồng ý");
-		//hm.put("buttonName", "Chính xác");
 		hm.put("orderNoted", "Giao hàng đúng giờ!");
 		hm.put("popupTitle", "DeliveryNow thông báo");
 		hm.put("continueorder", "Tiếp tục chọn thêm món");
 		hm.put("aceptfee", "Chấp nhận phí dịch vụ là 20,000 đ và tiến hành thanh toán");
 		hm.put("checkout_address", "Thời gian & Địa chỉ nhận hàng");
-		hm.put("checkout_indoorder", "Thông tin đơn hàng");
+		hm.put("checkout_infoorder", "Thông tin đơn hàng");
 		hm.put("checkout_finish", "Hoàn tất");
-
+		hm.put("checkout_city", ", Viet Nam");
+		hm.put("checkout_city", ", Việt Nam"); // len live thi bo cai nay di, dung cai tren
 	}
 	
 	private void dayOffWeek(){

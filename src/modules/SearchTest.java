@@ -2,6 +2,7 @@ package modules;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 //import org.sikuli.script.Screen;
@@ -34,7 +35,7 @@ public class SearchTest extends TestBase {
 	
 	@Test
 	public void getWeb() {
-		CommonFunctions.pause(1);
+		CommonFunctions.pause(1);		
 		/*WebElement link_OK = (WebElement) ((JavascriptExecutor) driver)
 				.executeScript("return document.querySelector('.modal-action');");
 		link_OK.click();*/

@@ -1,6 +1,5 @@
 package modules;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import configuration.ResourceHasMap;
@@ -127,9 +126,11 @@ public class OrderTest {
 	}	
 	
 	//@Test 
-	public void order012_CheckPopupOrderPrice(){				
+	public void order012_CheckPopupOrderPrice(){	
+		String strResName = order.getRestaurantName(TestBase.driver);
+		String strAddress = order.getRestaurantAddress(TestBase.driver);
 		order.clickButtonOrder(TestBase.driver); 
-		
+		order.checkPopupConfirmOrder(TestBase.driver, strResName, strAddress);		
 	}	
 	
 	@AfterClass

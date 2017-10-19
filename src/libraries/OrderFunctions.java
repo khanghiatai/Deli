@@ -9,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
-
-import bsh.Console;
 import configuration.ResourceHasMap;
 import configuration.TestBase;
 import objects.OrderPage;
@@ -23,14 +21,14 @@ public class OrderFunctions extends OrderPage {
 	String eCountCart = "cart-qty";
 	String eCountPer = ".cart-stats>span.ng-binding";
 	String ePhan_Nguoi = ".cart-stats>span";
-	String btn_Add = ".scrollspy .btn-adding";
+	//String btn_Add = ".scrollspy .btn-adding";
 	String btn_order = ".btn-book-first";
 	String lbl_PopupTitle = ".//div[@id='alert-container']/div/p";
 	String lbl_PopupMessage = "alert-msg";
 	String btn_Oke = ".//div[@id='alert-modal']/div/a";
 	String box_Menu = ".scrollspy div.box-menu-detail";
 	String priceOnCart = ".add-minus-food span";
-	String eReset = ".btn-reset";
+
 	String btnAddCart = ".btn-add-cart";
 	String btnRemoveCart = ".btn-remove-cart";
 	static String _childNameFood = "";
@@ -52,9 +50,6 @@ public class OrderFunctions extends OrderPage {
 
 		WebElement nguoi = (WebElement) ((JavascriptExecutor) driver)
 				.executeScript("return document.querySelectorAll('" + ePhan_Nguoi + "')[4];");
-
-		//WebElement countCart = driver.findElement(By.id("cart-qty"));
-		//countCart.click();
 		
 		// Check Cart Status
 		if (phan.getText().equalsIgnoreCase(resource.getResource("setVi")))
@@ -87,9 +82,9 @@ public class OrderFunctions extends OrderPage {
 	public void addMenuNoLogin(WebDriver driver) {
 		try {
 			CommonFunctions.pause(1);
-			WebElement add = (WebElement) ((JavascriptExecutor) driver)
-					.executeScript("return document.querySelector('" + btn_Add + "');");
-			add.click();
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("return document.querySelector('.scrollspy .btn-adding').click();");
+			
 		} catch (Exception e) {
 			driver.navigate().refresh();
 			CommonFunctions.pause(1);
@@ -252,15 +247,40 @@ public class OrderFunctions extends OrderPage {
 		Assert.assertEquals(strAceptFee, resource.getResource("aceptfee")); 
 	}
 	
-	public void checkPopupConfirmOrder(WebDriver driver) {
+	public void checkPopupConfirmOrder(WebDriver driver, String resName, String address) {
+		// check title popup
 		List<WebElement> listTitleName = driver.findElements(By.xpath(".//*[@class='checkout-steps']/div"));
-		for (int i = 0; i < listTitleName.size(); i++) {
+		for (int i = 1; i < listTitleName.size() + 1; i++) {	
+			CommonFunctions.pause(2); 
 			switch(i) {
-			case 0: 
-				driver.findElement(By.xpath(".//*[@class='checkout-steps']/div"));
-			}
+			case 1: 				
+				String strAddress = driver.findElement(By.xpath(".//*[@class='checkout-steps']/div/div["+ i +"]")).getText();
+				strAddress = strAddress.substring(1, strAddress.length());
+				strAddress = CommonFunctions.chuanHoa(strAddress);
+				Assert.assertEquals(strAddress, resource.getResource("checkout_address"));
+				break;
+			case 2: 
+				String strInfoOrder = driver.findElement(By.xpath(".//*[@class='checkout-steps']/div/div["+ i +"]")).getText();
+				strInfoOrder = strInfoOrder.substring(2, strInfoOrder.length());
+				Assert.assertEquals(strInfoOrder, resource.getResource("checkout_infoorder"));
+				break;
+			case 3: 
+				String strFinish = driver.findElement(By.xpath(".//*[@class='checkout-steps']/div/div["+ i +"]")).getText();
+				strFinish = strFinish.substring(2, strFinish.length());
+				Assert.assertEquals(strFinish, resource.getResource("checkout_finish"));
+				break;
+			}			
 		}
+		//check res name
+		String strResName = driver.findElement(By.xpath("//*[@class='delivery-pick-adress']/div[1]/span")).getText();
+		Assert.assertEquals(strResName.toLowerCase(), resName.toLowerCase()); 
+		// check address of res
+		address = address + resource.getResource("checkout_city");
+		String strAddress = driver.findElement(By.xpath("//*[@class='delivery-pick-adress']/div[2]/span")).getText();
+		Assert.assertEquals(address.toLowerCase(), strAddress.toLowerCase()); 
 		
+		//String a =  driver.findElement(By.xpath(".//div[@class='delivery-drop']/a")).getText();
+		//System.out.println(a); 
 	}
 
 	@SuppressWarnings("unchecked")
@@ -416,76 +436,15 @@ public class OrderFunctions extends OrderPage {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public void checkPopupOrderPrice(WebDriver driver) {
-		CommonFunctions.pause(1);
-		WebElement add = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('" + btn_Add + "');");
-		add.click();
-
-		CommonFunctions.pause(1);
-		WebElement btn_DatTruoc = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('" + btn_order + "')[1];");
-		WebElement getPrice = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('.add-minus-food span');");
-
-		String _getPrice = getPrice.getText();
-		btn_DatTruoc.click();
-
-		CommonFunctions.pause(2);
-		List<WebElement> message = (List<WebElement>) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('#alert-modal p span');");
-
-		String titlePopup = "";
-		int i = 0;
-		for (WebElement element : message) {
-			if (i != 0 && i % 2 == 0)
-				titlePopup += " " + element.getText();
-			else
-				titlePopup += element.getText();
-			i++;
-		}
-		CommonFunctions.pause(1);
-		WebElement getPricePopup = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('#alert-msg i');");
-		WebElement defaultPrice = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('#alert-msg i')[1];");
-
-		String _getPricePopup = CommonFunctions.chuyenDoiKyTu(getPricePopup.getText(), " ", "");
-		_getPrice = CommonFunctions.chuyenDoiKyTu(_getPrice, "", "");
-
-		String _option1 = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('#alert-msg label')[0].innerText;");
-		String _option2 = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('#alert-msg label')[1].innerText;");
-		// check button name
-		WebElement _cancel = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('#alert-modal a.btn-cancel');");
-		String _submit = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('#alert-modal a.btn-ok').innerText;");
-
-
-		AssertJUnit.assertEquals("DeliveryNow thÃ´ng bÃ¡o", titlePopup);
-		AssertJUnit.assertEquals(_getPrice, _getPricePopup);
-		AssertJUnit.assertEquals("100,000 Ä‘", defaultPrice.getText()); // default
-																		// price
-		AssertJUnit.assertEquals("Tiáº¿p tá»¥c chá»�n thÃªm mÃ³n", _option1);
-		AssertJUnit.assertEquals("Cháº¥p nháº­n phÃ­ dá»‹ch vá»¥ lÃ  " + SearchPage.priceRequire + " Ä‘ Â vÃ  tiáº¿n hÃ nh thanh toÃ¡n",
-				_option2); // input
-		AssertJUnit.assertEquals("Há»¦Y", _cancel.getText());
-		AssertJUnit.assertEquals("Ä�á»’NG Ã�", _submit);
-		// check button cancel
-		_cancel.click();
-	}
-
-	public boolean checkPopupOrderInfo(WebDriver driver) {
+	//????
+	/*public boolean checkPopupOrderInfo(WebDriver driver) {
 		CommonFunctions.pause(2);
 		WebElement element = (WebElement) ((JavascriptExecutor) driver)
 				.executeScript("return document.querySelector('.step.active')");
 		if (element.isDisplayed())
 			return true;
 		return false;
-	}
+	}*/
 
 	public void checkUserName(WebDriver driver, String how, String locator) {
 		SSOFunctions sso = new SSOFunctions(driver);
@@ -499,13 +458,17 @@ public class OrderFunctions extends OrderPage {
 		hpl_Login.click();
 	}
 	
-	public String getRestaurantInfo(WebDriver driver){
-		CommonFunctions.pause(1);
-		String _name = (String)((JavascriptExecutor)driver)
-				.executeScript("return document.querySelector('.name-hot-restaurant').innerText;");
-		String _addRess = (String)((JavascriptExecutor)driver)
-				.executeScript("return document.querySelector('.info-basic-hot-restaurant > p').innerText;");		
-		return _name + "|" + _addRess;
+
+	public String getRestaurantName(WebDriver driver){
+		String _name = ((JavascriptExecutor)driver)
+				.executeScript("return document.querySelector('.name-hot-restaurant').innerText;").toString();
+		return _name;
+	}	
+
+	public String getRestaurantAddress(WebDriver driver){			
+		String _addRess = ((JavascriptExecutor)driver)
+				.executeScript("return document.querySelector('.info-basic-hot-restaurant > p').innerText;").toString();		
+		return _addRess;
 	}
 	
 	public void checkOrderInfo(WebDriver driver, String restaurantName) {

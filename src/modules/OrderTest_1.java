@@ -28,10 +28,10 @@ public class OrderTest_1 {
 		CommonFunctions.switchToTab(driver, 1);
 		order.clickNameFood(driver);
 		order.clickButtonOrder(driver); 
-		String name = order.getRestaurantInfo(driver);
-		if (order.isInsertOrderReceive(driver) == false){
-			order.checkOrderInfo(driver, name);
-		}		
+		//String name = order.getRestaurantInfo(driver);
+//		if (order.isInsertOrderReceive(driver) == false){
+//			order.checkOrderInfo(driver, name);
+//		}		
 	}
 	
 	@Test
