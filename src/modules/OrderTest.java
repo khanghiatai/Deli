@@ -42,8 +42,7 @@ public class OrderTest {
 		try {
 			if (order.isLoginPage(TestBase.driver) == true){			
 				sso = new SSOFunctions(TestBase.driver);
-				sso.loginSSO(sso.USERNAME, sso.PASSWORD);			
-				//sso.getUserName(TestBase.driver); 								
+				sso.loginSSO(sso.USERNAME, sso.PASSWORD);											
 			} 
 			 
 		} catch (Exception e) {
@@ -54,8 +53,7 @@ public class OrderTest {
 				sso = new SSOFunctions(TestBase.driver);
 				sso.loginSSO(sso.USERNAME, sso.PASSWORD);			
 				sso.getUserName(TestBase.driver); 								
-			} 
-			
+			} 			
 			order.clickButtonOrder(TestBase.driver);	
 			order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName"));
 		}		
@@ -76,8 +74,7 @@ public class OrderTest {
 	//@Test
 	public void order006_CheckNote(){
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
-	}		
-	
+	}			
 
 	//@Test
 	public void order007_AddCart(){
@@ -85,8 +82,7 @@ public class OrderTest {
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "1";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
-	}
-	
+	}	
 	
 	//@Test
 	public void order008_RemoveCart(){
@@ -94,8 +90,7 @@ public class OrderTest {
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "1";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
-	}	
-	
+	}		
 
 	//@Test
 	public void order009_ResetAndCheckInfo(){
@@ -132,6 +127,10 @@ public class OrderTest {
 		order.clickButtonOrder(TestBase.driver); 
 		order.checkPopupConfirmOrder(TestBase.driver, strResName, strAddress);		
 	}	
+	
+	public void order013_ConfirmOrder() {
+		order.isHasAddressUser(TestBase.driver);
+	}
 	
 	@AfterClass
 	public void tearDown(){

@@ -278,9 +278,24 @@ public class OrderFunctions extends OrderPage {
 		address = address + resource.getResource("checkout_city");
 		String strAddress = driver.findElement(By.xpath("//*[@class='delivery-pick-adress']/div[2]/span")).getText();
 		Assert.assertEquals(address.toLowerCase(), strAddress.toLowerCase()); 
-		
-		//String a =  driver.findElement(By.xpath(".//div[@class='delivery-drop']/a")).getText();
-		//System.out.println(a); 
+		// check radio confirm
+		String option = driver.findElement(By.xpath(".//*[@ng-switch-when='1']/div[2]/div[2]/div[1]")).getText();
+		Assert.assertEquals(option.toLowerCase(), resource.getResource("checkout_optionconfirm").toLowerCase());
+		// check option default
+		String optionDefault = driver.findElement(By.xpath(".//label[@for='order-standard-1']")).getText();
+		Assert.assertEquals(optionDefault.toLowerCase(), resource.getResource("checkout_optiondefault").toLowerCase());
+		// check box time receive
+		String timeReceive = driver.findElement(By.xpath(".//div[@ng-switch-when='1']/div[2]/div[2]/div[3]")).getText();
+		Assert.assertEquals(timeReceive.toLowerCase(), resource.getResource("checkout_timereceive").toLowerCase());
+		// check note order
+		String noted = driver.findElement(By.xpath(".//label[@for='note1']")).getText();
+		Assert.assertEquals(noted.toLowerCase(), resource.getResource("checkout_noted").toLowerCase());		
+	}
+	
+	public boolean isHasAddressUser(WebDriver driver) {		
+		String strText =  driver.findElement(By.xpath(".//div[@class='delivery-drop']/a")).getText();
+		if(strText.equalsIgnoreCase(resource.getResource("checkout_addlabel"))) return true; 
+		else return false;
 	}
 
 	@SuppressWarnings("unchecked")

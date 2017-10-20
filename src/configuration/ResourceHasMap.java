@@ -40,6 +40,11 @@ public class ResourceHasMap {
 		hm.put("checkout_finish", "Hoàn tất");
 		hm.put("checkout_city", ", Viet Nam");
 		hm.put("checkout_city", ", Việt Nam"); // len live thi bo cai nay di, dung cai tren
+		hm.put("checkout_optionconfirm", "Chọn Hình Thức Giao Hàng");
+		hm.put("checkout_optiondefault", "Giao hàng chuẩn");
+		hm.put("checkout_timereceive", "Thời Gian Nhận Hàng");	
+		hm.put("checkout_noted", "Ghi chú cho đơn hàng");
+		hm.put("checkout_addlabel", "+ Thêm");
 	}
 	
 	private void dayOffWeek(){
