@@ -35,17 +35,6 @@ public class OrderTest_1 {
 	}
 	
 	@Test
-	public void order020_InsertDeliveryInfo(){
-		if (order.isInsertOrderReceive(driver) == true){
-			order.addOrderReceive(driver);
-		} else if (order.isInsertOrderReceive(driver) == false){
-			order.insertOrderReceive(driver); 			
-		} else {
-			Assert.assertEquals(true, false); 
-		}		
-	}
-	
-	@Test
 	public void order021_EditDeliveryInfo(){
 //		if(order.isInsertOrderReceive(driver) == true){
 //			order.editOrderReceive(driver);

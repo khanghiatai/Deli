@@ -11,14 +11,16 @@ public class ResourceHasMap {
 	private HashMap<String, String> hm = new HashMap<String, String>();
 
 	public ResourceHasMap() {
-		genResource();
+		userResource();
 		orderResource();		
 		dayOffWeek();
 	}
 
-	private void genResource() {
-		hm.put("noPass", "Vui lòng nhập mật khẩu");
-		
+	private void userResource() {
+		hm.put("username", "Kha Nghĩa Tài");
+		hm.put("userphone", "0909959982");
+		hm.put("useraddress", "244 Cống Quỳnh");
+		hm.put("usernote", "Lầu 8, đem đủ ống hút");
 	}
 	
 	private void searchResource(){

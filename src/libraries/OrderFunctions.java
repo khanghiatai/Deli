@@ -297,6 +297,22 @@ public class OrderFunctions extends OrderPage {
 		if(strText.equalsIgnoreCase(resource.getResource("checkout_addlabel"))) return true; 
 		else return false;
 	}
+	
+	public void insertAddress(WebDriver driver, String name, String address, String phone, String note) {
+		WebElement wName = driver.findElement(By.id("fullname"));
+		wName.clear();
+		wName.sendKeys(name);
+		WebElement wPhone = driver.findElement(By.id("phone"));
+		wPhone.clear();
+		wPhone.sendKeys(phone);
+		WebElement wAdress = driver.findElement(By.id("address"));
+		wAdress.clear();
+		wAdress.sendKeys(address);
+		WebElement wNote = driver.findElement(By.xpath(".//textarea[@ng-model='detailCtrl.orderNote']"));
+		wNote.clear();
+		wNote.sendKeys(note);
+		//
+	}
 
 	@SuppressWarnings("unchecked")
 	public void checkPrice1(WebDriver driver) {
@@ -486,151 +502,6 @@ public class OrderFunctions extends OrderPage {
 		return _addRess;
 	}
 	
-	public void checkOrderInfo(WebDriver driver, String restaurantName) {
-		String[] str = restaurantName.split("\\|", restaurantName.indexOf("|"));
-		String _name = str[0];
-		String _addRess = str[1];
-		CommonFunctions.pause(2);
-		String name = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('.delivery-pick-adress >div>span')[0].innerText;");
-		String addRess = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('.delivery-pick-adress >div>span')[1].innerText;");
-
-		String _statusOrder_2 = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('.checkout-steps div.step:nth-of-type(2)').innerText;");
-		String _statusOrder_3 = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('.checkout-steps div.step:nth-of-type(3)').innerText;");
-
-		_statusOrder_2 = CommonFunctions.chuanHoa(_statusOrder_2);
-		_statusOrder_2 = _statusOrder_2.substring(2, _statusOrder_2.length());
-
-		_statusOrder_3 = CommonFunctions.chuanHoa(_statusOrder_3);
-		_statusOrder_3 = _statusOrder_3.substring(2, _statusOrder_3.length());
-
-		WebElement redDot = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('.delivery-pick-dot span');");
-		WebElement GreenDot = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('.delivery-drop-dot span');");
-		String lbl_Adress = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelectorAll('.delivery-drop div div span')[1].innerText;");
-		String lbl_Option = (String) ((JavascriptExecutor) driver).executeScript(
-				"return document.querySelectorAll('.modal-content .ng-scope div.capitalize')[0].innerText;");
-		String lbl_Time = (String) ((JavascriptExecutor) driver).executeScript(
-				"return document.querySelectorAll('.modal-content .ng-scope div.capitalize')[1].innerText;");
-		String lbl_Note = (String) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('label.active').innerText;");
-		WebElement txt_FullName = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.getElementById('fullname');");
-		WebElement txt_Phone = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.getElementById('phone');");
-		WebElement txt_Address = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.getElementById('address');");
-		WebElement txt_Note = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.getElementById('note1');");
-		// check test
-		
-		//Assert.assertEquals(mMap.get("TimeAddressReciver"), _statusOrder_1);
-		Assert.assertEquals("ThÃ´ng tin Ä‘Æ¡n hÃ ng", _statusOrder_2);
-		Assert.assertEquals("HoÃ n táº¥t", _statusOrder_3);
-		Assert.assertEquals("rgba(204, 0, 0, 1)", redDot.getCssValue("color"));
-		Assert.assertEquals("rgba(0, 128, 0, 1)", GreenDot.getCssValue("color"));
-		Assert.assertEquals(_name, name);
-		Assert.assertEquals(addRess, _addRess + ", Viet Nam");
-		Assert.assertEquals("Ä�á»‹a Ä�iá»ƒm Nháº­n HÃ ng", lbl_Adress);
-		Assert.assertEquals("Chá»�n HÃ¬nh Thá»©c Giao HÃ ng", lbl_Option);
-		Assert.assertEquals("Thá»�i Gian Nháº­n HÃ ng", lbl_Time);
-		Assert.assertEquals("Ghi chÃº cho Ä‘Æ¡n hÃ ng", lbl_Note);
-		Assert.assertEquals("Há»� tÃªn", txt_FullName.getAttribute("placeholder"));
-		Assert.assertEquals("Sá»‘ Ä‘iá»‡n thoáº¡i", txt_Phone.getAttribute("placeholder"));
-		Assert.assertEquals("Vd: sá»‘ 10, NgÃµ 20, NgÃ¡ch 30, Háº»m 40, PhÆ°á»�ng 15, Ä�Æ°á»�ng Cá»‘ng Quá»³nh",
-				txt_Address.getAttribute("placeholder"));
-		Assert.assertEquals("VÃ­ dá»¥: TÃ²a nhÃ  ABC, láº§u 8, cho thÃªm 2 ly nhá»±a....", txt_Note.getAttribute("placeholder"));
-		// check control
-		Assert.assertEquals(true,
-				checkCombobox(driver, "return document.querySelectorAll('.browser-default.ng-pristine')[0];"));
-//		Assert.assertEquals(true,
-//				checkCombobox(driver, "return document.querySelectorAll('.browser-default.ng-pristine')[1];"));
-		Assert.assertEquals(true, checkControl(driver, "return document.querySelector('input.datepicker');"));
-		Assert.assertEquals(true, checkControl(driver, "return document.querySelector('#confirminfo a');"));
-		Assert.assertEquals(true, checkControl(driver, "return document.querySelector('#confirminfo a');"));
-		Assert.assertEquals(true, checkControl(driver,
-				"return document.querySelectorAll('#confirminfo .modal-footer>a.modal-action')[0];"));
-	}	
-	
-	public void insertOrderReceive(WebDriver driver){
-		CommonFunctions.pause(1);
-		WebElement txt_FullName = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.getElementById('fullname');");
-		WebElement txt_Phone = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.getElementById('phone');");
-		WebElement txt_Address = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.getElementById('address');");
-		WebElement txt_Note = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.getElementById('note1');");
-		WebElement btn_Continue  = (WebElement)((JavascriptExecutor)driver)
-				.executeScript("return document.querySelector('#confirminfo .modal-footer a.modal-action');");
-		// input data
-		txt_FullName.clear();
-		txt_FullName.sendKeys("Kha NghÄ©a TÃ i");
-		
-		txt_Phone.clear();
-		txt_Phone.sendKeys("0909959982");
-		
-		txt_Address.clear();
-		txt_Address.sendKeys("244 Cá»‘ng Quá»³nh P. Pháº¡m NgÅ© LÃ£o, Q. 1");
-		
-		txt_Note.clear();
-		txt_Note.sendKeys("Ä�áº¿n nÆ¡i thÃ¬ gá»�i, giao hÃ ng Ä‘Ãºng giá»�");
-		
-		btn_Continue.click();
-		// 
-		// check new popup
-		//
-		CommonFunctions.pause(1);
-		WebElement btn_Finish  = (WebElement)((JavascriptExecutor)driver)
-				.executeScript("return document.querySelectorAll('a.modal-action.waves-effect.waves-effect')[1]");
-		btn_Finish.click();
-		CommonFunctions.pause(1);
-		WebElement btn_Confirm  = (WebElement)((JavascriptExecutor)driver)
-				.executeScript("return document.querySelectorAll('a.modal-action.waves-effect.waves-effect')[3]");
-		btn_Confirm.click();
-	}
-	
-	public void addOrderReceive(WebDriver driver){
-		CommonFunctions.pause(1);
-		//check control 
-		String hplAddJE = "return document.querySelector('.delivery-drop a.add-new-addres');";
-		String hplEditJE = "return document.querySelector('#editAddress');";
-		String selectOption = "return document.querySelector('.delivery-drop>div>div>a');";
-		boolean isHplAdd = checkControl(driver, hplAddJE);
-		boolean isHplEdit = checkControl(driver, hplEditJE);
-		if(isHplAdd == true && isHplEdit == true){
-			// code
-			WebElement _add = (WebElement)((JavascriptExecutor) driver)
-					.executeScript(hplAddJE);
-			_add.click();
-			CommonFunctions.pause(1);
-			Assert.assertEquals(true, checkControl(driver, selectOption));
-			insertOrderReceive(driver);			
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public void editOrderReceive(WebDriver driver){
-		String hplAddJE = "return document.querySelector('.delivery-drop a.add-new-addres');";
-		String hplEditJE = "return document.querySelectorAll('#editAddress');"; /////////////
-		String selectOption = "return document.querySelector('.delivery-drop>div>div>a');";
-		boolean isHplAdd = checkControl(driver, hplAddJE);
-		boolean isHplEdit = checkControl(driver, hplEditJE);
-		if(isHplAdd == true){			
-			WebElement _edit = (WebElement)((JavascriptExecutor) driver)
-					.executeScript(hplEditJE);
-			CommonFunctions.pause(1);
-			Assert.assertEquals(true, checkControl(driver, selectOption));
-			insertOrderReceive(driver);			
-		}
-	}
-	
 	public boolean isInsertOrderReceive(WebDriver driver){		
 		try {
 			String hplAddJE = "return document.querySelector('.delivery-drop a.add-new-addres');";
@@ -643,6 +514,10 @@ public class OrderFunctions extends OrderPage {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	public void clickContinueOrder(WebDriver driver) {
+		driver.findElement(By.xpath(".//*[@class='modal-footer']/a[@ng-click='detailCtrl.incrementStep()'][1]")).click();
 	}
 	
 	private boolean checkCombobox(WebDriver driver, String locatorDOM){

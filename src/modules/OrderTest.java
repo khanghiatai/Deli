@@ -129,7 +129,12 @@ public class OrderTest {
 	}	
 	
 	public void order013_ConfirmOrder() {
-		order.isHasAddressUser(TestBase.driver);
+		boolean bAddress = order.isHasAddressUser(TestBase.driver);
+		if(bAddress == false) {
+			order.insertAddress(TestBase.driver, resource.getResource("username"),  
+								resource.getResource("useraddress"),  resource.getResource("userphone"),  resource.getResource("usernote"));
+			order.clickContinueOrder(TestBase.driver);			
+		}		
 	}
 	
 	@AfterClass
