@@ -16,7 +16,7 @@ public class SSOPage {
 	}
 	
 	public static final String USERNAME = "khanghiatai@gmail.com";
-	public static final String PASSWORD = "123123";
+	public static final String PASSWORD = "123456";
 	public static String USERPROFILE;
 	
 	@FindBy(id = "Email")

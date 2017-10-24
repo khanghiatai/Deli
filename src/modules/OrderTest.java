@@ -56,13 +56,13 @@ public class OrderTest {
 				//sso.getUserName(TestBase.driver); 								
 			} 
 			// temp //
-			//order.clickButtonOrder(TestBase.driver);	
-			//order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName"));
+			order.clickButtonOrder(TestBase.driver);	
+			order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName"));
 		}		
 	}
 	
 
-	/*//@Test
+	//@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
 		order.clickNameFood(TestBase.driver);
@@ -120,7 +120,7 @@ public class OrderTest {
 		order.clickAddFood(TestBase.driver); 
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 		order.checkPrice(TestBase.driver);				
-	}	*/
+	}	
 	
 	//@Test 
 	public void order012_CheckPopupOrderPrice(){	

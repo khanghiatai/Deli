@@ -468,13 +468,14 @@ public class OrderFunctions extends OrderPage {
 	}
 
 	public void checkPopupOrderInfo(WebDriver driver) {
+		// check title popup
 		List<WebElement> listTitleName = driver.findElements(By.xpath(".//*[@class='checkout-steps']/div"));
-		/*for (int i = 1; i < listTitleName.size() + 1; i++) {	
+		for (int i = 1; i < listTitleName.size() + 1; i++) {	
 			CommonFunctions.pause(2); 
 			switch(i) {
 			case 1: 				
 				String strAddress = driver.findElement(By.xpath(".//*[@class='checkout-steps']/div/div["+ i +"]")).getText();
-				strAddress = strAddress.substring(1, strAddress.length());
+				strAddress = strAddress.substring(5, strAddress.length());
 				strAddress = CommonFunctions.chuanHoa(strAddress);
 				Assert.assertEquals(strAddress, resource.getResource("checkout_address"));
 				break;
@@ -489,10 +490,11 @@ public class OrderFunctions extends OrderPage {
 				Assert.assertEquals(strFinish, resource.getResource("checkout_finish"));
 				break;
 			}			
-		}*/
-		checkPrice(driver);
+		}
+		checkOrderDeatail(driver);		
+		checkOrderFee(driver);
 	}
-
+	
 	public void checkUserName(WebDriver driver, String how, String locator) {
 		SSOFunctions sso = new SSOFunctions(driver);
 		sso.checkUserProfile(driver, how, locator);
@@ -536,7 +538,42 @@ public class OrderFunctions extends OrderPage {
 		driver.findElement(By.xpath(".//*[@class='modal-footer']/a[@ng-click='detailCtrl.incrementStep()'][1]")).click();
 	}
 	
-	private boolean checkCombobox(WebDriver driver, String locatorDOM){
+	/**************** Private ****************/
+	private void checkOrderDeatail(WebDriver driver) {
+		List<WebElement> countFoodOnBox = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p"));
+		List<WebElement> countFoodOnPopup = driver.findElements(By.xpath(".//div[@class='pull-left']"));
+		// get length & check length
+		Assert.assertEquals(countFoodOnBox.size(), countFoodOnPopup.size());
+		
+		List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
+		List<WebElement> listNumFood = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[2]"));
+		List<WebElement> listPrice = driver.findElements(By.xpath(".//input[@ng-model='item.Note']/following-sibling::span"));	
+		List<WebElement> strNumFood = driver.findElements(By.xpath(".//div[@class='pull-left']/p/span[1]"));
+		List<WebElement> strOrder = driver.findElements(By.xpath(".//div[@class='pull-left']/p/span[2]"));
+		List<WebElement> strPrice = driver.findElements(By.xpath(".//div[@class='pull-left']/following-sibling::div"));
+		// check order
+		for (int index = 0; index < countFoodOnBox.size(); index++) {
+			Assert.assertEquals(listOrder.get(index).getText(), strOrder.get(index).getText());
+			Assert.assertEquals(listNumFood.get(index).getText(), strNumFood.get(index).getText());
+			
+			String _listPrice = CommonFunctions.chuanHoa(listPrice.get(index).getText());
+			_listPrice = _listPrice.substring(0, _listPrice.length()-1);
+			
+			String _strPrice = CommonFunctions.chuanHoa(strPrice.get(index).getText());
+			_strPrice = _strPrice.substring(0, _strPrice.length()-1);
+					
+			Assert.assertEquals(_listPrice, _strPrice);						
+		}
+	}
+
+	private void checkOrderFee(WebDriver driver) {
+		// total 
+		String a = driver.findElement(By.xpath(".//div[@class='container-bill']/div[4]/span[2]")).getText();
+		String b = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[1]/span")).getText();
+		System.out.println(a + b); 
+	}
+	
+	/*private boolean checkCombobox(WebDriver driver, String locatorDOM){
 		try {
 			WebElement combobox = (WebElement)((JavascriptExecutor)driver)
 					.executeScript(locatorDOM);
@@ -550,7 +587,7 @@ public class OrderFunctions extends OrderPage {
 			return false;
 		}
 		return false;
-	}
+	}*/
 	
 	private boolean checkControl(WebDriver driver, String locatorDOM){
 		try {
