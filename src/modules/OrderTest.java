@@ -1,5 +1,6 @@
 package modules;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import configuration.ResourceHasMap;
@@ -52,15 +53,16 @@ public class OrderTest {
 			if (order.isLoginPage(TestBase.driver) == true){			
 				sso = new SSOFunctions(TestBase.driver);
 				sso.loginSSO(sso.USERNAME, sso.PASSWORD);			
-				sso.getUserName(TestBase.driver); 								
-			} 			
-			order.clickButtonOrder(TestBase.driver);	
-			order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName"));
+				//sso.getUserName(TestBase.driver); 								
+			} 
+			// temp //
+			//order.clickButtonOrder(TestBase.driver);	
+			//order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName"));
 		}		
 	}
 	
 
-	//@Test
+	/*//@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
 		order.clickNameFood(TestBase.driver);
@@ -100,8 +102,8 @@ public class OrderTest {
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
 	}	
 	
-	//@Test 
-	/*public void order010_OrderBelowPrice() {
+	//@Test  Use
+	public void order010_OrderBelowPrice() {
 		// click 1 food, return price of food
 		int ibelowPrice = order.addOneOrderBelowPrice(TestBase.driver, defaultPrice);
 		order.clickButtonOrder(TestBase.driver); 
@@ -111,14 +113,14 @@ public class OrderTest {
 		TestBase.driver.navigate().refresh();
 		CommonFunctions.pause(2);
 		order.resetOrder(TestBase.driver); 		
-	}*/
+	}
 
 	//@Test 
 	public void order011_AddMenuAfterReset(){		
 		order.clickAddFood(TestBase.driver); 
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 		order.checkPrice(TestBase.driver);				
-	}	
+	}	*/
 	
 	//@Test 
 	public void order012_CheckPopupOrderPrice(){	
@@ -133,8 +135,12 @@ public class OrderTest {
 		if(bAddress == false) {
 			order.insertAddress(TestBase.driver, resource.getResource("username"),  
 								resource.getResource("useraddress"),  resource.getResource("userphone"),  resource.getResource("usernote"));
-			order.clickContinueOrder(TestBase.driver);			
-		}		
+			order.clickContinueOrder(TestBase.driver);	
+			order.checkPopupOrderInfo(TestBase.driver);
+		} else {
+			order.clickContinueOrder(TestBase.driver);	
+			order.checkPopupOrderInfo(TestBase.driver);
+		}
 	}
 	
 	@AfterClass

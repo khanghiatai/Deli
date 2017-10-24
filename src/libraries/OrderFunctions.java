@@ -467,15 +467,31 @@ public class OrderFunctions extends OrderPage {
 		}
 	}
 
-	//????
-	/*public boolean checkPopupOrderInfo(WebDriver driver) {
-		CommonFunctions.pause(2);
-		WebElement element = (WebElement) ((JavascriptExecutor) driver)
-				.executeScript("return document.querySelector('.step.active')");
-		if (element.isDisplayed())
-			return true;
-		return false;
-	}*/
+	public void checkPopupOrderInfo(WebDriver driver) {
+		List<WebElement> listTitleName = driver.findElements(By.xpath(".//*[@class='checkout-steps']/div"));
+		/*for (int i = 1; i < listTitleName.size() + 1; i++) {	
+			CommonFunctions.pause(2); 
+			switch(i) {
+			case 1: 				
+				String strAddress = driver.findElement(By.xpath(".//*[@class='checkout-steps']/div/div["+ i +"]")).getText();
+				strAddress = strAddress.substring(1, strAddress.length());
+				strAddress = CommonFunctions.chuanHoa(strAddress);
+				Assert.assertEquals(strAddress, resource.getResource("checkout_address"));
+				break;
+			case 2: 
+				String strInfoOrder = driver.findElement(By.xpath(".//*[@class='checkout-steps']/div/div["+ i +"]")).getText();
+				strInfoOrder = strInfoOrder.substring(2, strInfoOrder.length());
+				Assert.assertEquals(strInfoOrder, resource.getResource("checkout_infoorder"));
+				break;
+			case 3: 
+				String strFinish = driver.findElement(By.xpath(".//*[@class='checkout-steps']/div/div["+ i +"]")).getText();
+				strFinish = strFinish.substring(2, strFinish.length());
+				Assert.assertEquals(strFinish, resource.getResource("checkout_finish"));
+				break;
+			}			
+		}*/
+		checkPrice(driver);
+	}
 
 	public void checkUserName(WebDriver driver, String how, String locator) {
 		SSOFunctions sso = new SSOFunctions(driver);

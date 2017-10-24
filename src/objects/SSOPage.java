@@ -15,7 +15,7 @@ public class SSOPage {
 		PageFactory.initElements(factory, this);		
 	}
 	
-	public static final String USERNAME = "tai.kha";
+	public static final String USERNAME = "khanghiatai@gmail.com";
 	public static final String PASSWORD = "123123";
 	public static String USERPROFILE;
 	
@@ -51,15 +51,6 @@ public class SSOPage {
 	
 	@FindBy(css = ".name-user")
 	public WebElement user;
-	
-	@FindBy(linkText = "Đăng xuất")
-	public WebElement btn_logout;
-	
-	@FindBy(linkText = "Cập nhật tài khoản")
-	public WebElement btn_UpdateAccount;
-	
-	@FindBy(xpath = ".//a[@class='tit-group']/span[.='Cập nhật tài khoản']")
-	public WebElement lnk_UpdateAccount;
 	
 	@FindBy(css = ".profile-usertitle-name")
 	public WebElement lbl_UserProfile; 

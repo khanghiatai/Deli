@@ -89,7 +89,7 @@ public class SSOTest{
 	
 	@Test(priority = 5)
 	public void logout(){
-		sso.logout();
+		//sso.logout();
 		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

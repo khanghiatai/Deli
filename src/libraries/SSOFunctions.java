@@ -22,10 +22,10 @@ public class SSOFunctions extends SSOPage{
 		btn_DangNhap.click();		
 	}
 	
-	public void logout(){
+	/*public void logout(){
 		user.click();
 		btn_logout.click();		
-		AssertJUnit.assertEquals("Đăng nhập", btn_login.getText());
+		AssertJUnit.assertEquals("", btn_login.getText());
 	}
 	
 	public void getUserName(WebDriver driver){
@@ -42,7 +42,7 @@ public class SSOFunctions extends SSOPage{
 			driver.navigate().back();
 			driver.navigate().back();
 		}
-	}
+	}*/
 	
 	/***
 	 * Check full name of user
