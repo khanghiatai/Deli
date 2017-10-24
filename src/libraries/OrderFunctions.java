@@ -568,9 +568,26 @@ public class OrderFunctions extends OrderPage {
 
 	private void checkOrderFee(WebDriver driver) {
 		// total 
+		//Sub Total
 		String a = driver.findElement(By.xpath(".//div[@class='container-bill']/div[4]/span[2]")).getText();
+		//Sub Total
 		String b = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[1]/span")).getText();
-		System.out.println(a + b); 
+		//Delivery fee
+		String c = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[3]/span[2]")).getText();
+		//Shipping fee discount
+		String d = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[4]/span")).getText();
+		// Confirm Fee:
+		String e = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[7]/span")).getText();
+		//Total
+		String f = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[8]/span")).getText();
+		System.out.println(a + b);
+		System.out.println("C:" + c);
+		System.out.println("D:" + d);
+		System.out.println("E:" + e);
+		System.out.println("F:" + f);
+
+		// fee ship
+		//span[@ng-show='!detailCtrl.hasMilestoneFee']
 	}
 	
 	/*private boolean checkCombobox(WebDriver driver, String locatorDOM){
