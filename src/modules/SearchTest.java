@@ -19,10 +19,12 @@ import support.CommonFunctions;
 public class SearchTest extends TestBase {
 	SearchFunctions search;
 	SSOFunctions sso;
+	static String strUrl; 
 
 	@Parameters({ "url" })
 	@BeforeClass
 	public static void setUp(String url) {
+		strUrl = url;
 		try {
 			driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);

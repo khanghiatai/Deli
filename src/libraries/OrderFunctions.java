@@ -495,6 +495,36 @@ public class OrderFunctions extends OrderPage {
 		checkOrderFee(driver);
 	}
 	
+	public void clickFinishOrder(WebDriver driver) {
+		driver.findElement(By.xpath("//*[@class='modal-footer']/a[2][@ng-click='detailCtrl.incrementStep()']")).click();		
+	}
+	
+	public void checkPopupFinishOrder(WebDriver driver) {
+		// title 
+		String strTitle = driver.findElement(By.xpath("//*[@class='header-vat']")).getText();
+		Assert.assertEquals(strTitle, resource.getResource("titlesuccess").toUpperCase());
+	
+		// content
+		String strContent = driver.findElement(By.xpath("//*[@class='msg-order-success']")).getText();
+		Assert.assertEquals(strContent, resource.getResource("contentsuccess"));
+
+		// link text
+		String strHistory = driver.findElement(By.xpath("//*[@class='ng-scope']/div[4]/a")).getText();
+		Assert.assertEquals(strHistory, resource.getResource("historyorder").toUpperCase());
+		
+		// link text wait confirm
+		String strWait = driver.findElement(By.xpath("//*[@ng-show='!detailCtrl.hasNextStep()' or @ng-click='detailCtrl.reload()']")).getText();
+		Assert.assertEquals(strWait, resource.getResource("waitconfirm").toUpperCase());
+	}
+	
+	public void clickWaitConfirm(WebDriver driver) {
+		driver.findElement(By.xpath("//*[@ng-show='!detailCtrl.hasNextStep()' or @ng-click='detailCtrl.reload()']")).click();
+	}
+	
+	public void clickBackPreviosPopup(WebDriver driver) {
+		driver.findElement(By.id("backPreviousStep")).click();
+	}
+	
 	public void checkUserName(WebDriver driver, String how, String locator) {
 		SSOFunctions sso = new SSOFunctions(driver);
 		sso.checkUserProfile(driver, how, locator);
@@ -567,11 +597,14 @@ public class OrderFunctions extends OrderPage {
 	}
 
 	private void checkOrderFee(WebDriver driver) {
-		// total 
-		//Sub Total
-		String a = driver.findElement(By.xpath(".//div[@class='container-bill']/div[4]/span[2]")).getText();
-		//Sub Total
-		String b = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[1]/span")).getText();
+		//Sub Total 
+		String totalPrice = driver.findElement(By.xpath(".//div[@class='container-bill']/div[4]/span[2]")).getText();
+		totalPrice = CommonFunctions.chuanHoa(totalPrice);
+		totalPrice = totalPrice.substring(0, totalPrice.length()-1);
+
+		String subTotal = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[1]/span")).getText();
+		subTotal = CommonFunctions.chuanHoa(subTotal);
+		subTotal = subTotal.substring(0, subTotal.length()-1);
 		//Delivery fee
 		String c = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[3]/span[2]")).getText();
 		//Shipping fee discount
@@ -580,14 +613,15 @@ public class OrderFunctions extends OrderPage {
 		String e = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[7]/span")).getText();
 		//Total
 		String f = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[8]/span")).getText();
-		System.out.println(a + b);
+
 		System.out.println("C:" + c);
 		System.out.println("D:" + d);
 		System.out.println("E:" + e);
 		System.out.println("F:" + f);
 
 		// fee ship
-		//span[@ng-show='!detailCtrl.hasMilestoneFee']
+		String g = driver.findElement(By.xpath("//span[@ng-show='!detailCtrl.hasMilestoneFee']")).getText();
+		System.out.println("G:" + g);
 	}
 	
 	/*private boolean checkCombobox(WebDriver driver, String locatorDOM){

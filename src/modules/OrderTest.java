@@ -100,37 +100,23 @@ public class OrderTest {
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "0";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
-	}	
+	}		
 	
-	//@Test  Use
-	public void order010_OrderBelowPrice() {
-		// click 1 food, return price of food
-		int ibelowPrice = order.addOneOrderBelowPrice(TestBase.driver, defaultPrice);
-		order.clickButtonOrder(TestBase.driver); 
-		order.checkPopupBelowPrice(TestBase.driver, defaultPrice, ibelowPrice);	
-		
-		TestBase.driver.findElement(By.id("confirm-modal-cancel-btn-1")).click();
-		TestBase.driver.navigate().refresh();
-		CommonFunctions.pause(2);
-		order.resetOrder(TestBase.driver); 		
-	}
-
-	//@Test 
-	public void order011_AddMenuAfterReset(){		
+	public void order010_AddMenuAfterReset(){		
 		order.clickAddFood(TestBase.driver); 
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 		order.checkPrice(TestBase.driver);				
 	}	
 	
 	//@Test 
-	public void order012_CheckPopupOrderPrice(){	
+	public void order011_CheckPopupOrderPrice(){	
 		String strResName = order.getRestaurantName(TestBase.driver);
 		String strAddress = order.getRestaurantAddress(TestBase.driver);
 		order.clickButtonOrder(TestBase.driver); 
 		order.checkPopupConfirmOrder(TestBase.driver, strResName, strAddress);		
 	}	
 	
-	public void order013_ConfirmOrder() {
+	public void order012_ConfirmOrder() {
 		boolean bAddress = order.isHasAddressUser(TestBase.driver);
 		if(bAddress == false) {
 			order.insertAddress(TestBase.driver, resource.getResource("username"),  
@@ -143,8 +129,35 @@ public class OrderTest {
 		}
 	}
 	
+	public void order013_checkBackPrevious() { 
+		order.clickBackPreviosPopup(TestBase.driver);
+		order.clickContinueOrder(TestBase.driver);	
+		order.checkPopupOrderInfo(TestBase.driver);
+	}	
+	
+	public void order014_OrderSuccess() {
+		order.clickFinishOrder(TestBase.driver); 
+		order.checkPopupFinishOrder(TestBase.driver);
+		order.clickWaitConfirm(TestBase.driver);
+	}
+	
+	//@Test  Use
+	public void order015_OrderBelowPrice() {
+		CommonFunctions.visit(TestBase.driver, SearchTest.strUrl);
+		// click 1 food, return price of food
+		int ibelowPrice = order.addOneOrderBelowPrice(TestBase.driver, defaultPrice);
+		order.clickButtonOrder(TestBase.driver); 
+		order.checkPopupBelowPrice(TestBase.driver, defaultPrice, ibelowPrice);	
+		
+		TestBase.driver.findElement(By.id("confirm-modal-cancel-btn-1")).click();
+		TestBase.driver.navigate().refresh();
+		CommonFunctions.pause(2);
+		order.resetOrder(TestBase.driver); 		
+	}
+
+	//@Test 	
 	@AfterClass
 	public void tearDown(){
-		TestBase.driver.quit();
+		//TestBase.driver.quit();
 	}
 }
