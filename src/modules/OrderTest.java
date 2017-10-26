@@ -1,6 +1,7 @@
 package modules;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import configuration.ResourceHasMap;
@@ -15,6 +16,8 @@ public class OrderTest {
 	OrderFunctions order = new OrderFunctions(TestBase.driver);		
 	SSOFunctions sso = new SSOFunctions(TestBase.driver);
 	int defaultPrice = 100000;
+	String strResName;
+	String strAddress;
 
 	//@Test
 	public void order001_CheckCartInfoNoLogin(){
@@ -110,8 +113,8 @@ public class OrderTest {
 	
 	//@Test 
 	public void order011_CheckPopupOrderPrice(){	
-		String strResName = order.getRestaurantName(TestBase.driver);
-		String strAddress = order.getRestaurantAddress(TestBase.driver);
+		strResName = order.getRestaurantName(TestBase.driver);
+		strAddress = order.getRestaurantAddress(TestBase.driver);
 		order.clickButtonOrder(TestBase.driver); 
 		order.checkPopupConfirmOrder(TestBase.driver, strResName, strAddress);		
 	}	
@@ -139,25 +142,49 @@ public class OrderTest {
 		order.clickFinishOrder(TestBase.driver); 
 		order.checkPopupFinishOrder(TestBase.driver);
 		order.clickWaitConfirm(TestBase.driver);
+		order.checkInfoAfterOrder(TestBase.driver, strResName, strAddress);
 	}
 	
-	//@Test  Use
-	public void order015_OrderBelowPrice() {
-		CommonFunctions.visit(TestBase.driver, SearchTest.strUrl);
+	public void order015_CheckIncomming() {
+		TestBase.driver.findElement(By.xpath("//*[@title='deliveryNow.vn']")).click();
+		order.checkIncomming(TestBase.driver, strResName, strAddress); 
+		// ******* Chua xong 
+	}
+	
+	//@Test 
+	public void order016_CancelOrderBelowPrice() {
+		TestBase.driver.navigate().back();
 		// click 1 food, return price of food
 		int ibelowPrice = order.addOneOrderBelowPrice(TestBase.driver, defaultPrice);
 		order.clickButtonOrder(TestBase.driver); 
 		order.checkPopupBelowPrice(TestBase.driver, defaultPrice, ibelowPrice);	
-		
-		TestBase.driver.findElement(By.id("confirm-modal-cancel-btn-1")).click();
+		order.clickCancelOrderBelowPrice(TestBase.driver);		
 		TestBase.driver.navigate().refresh();
-		CommonFunctions.pause(2);
-		order.resetOrder(TestBase.driver); 		
 	}
-
-	//@Test 	
-	@AfterClass
-	public void tearDown(){
-		//TestBase.driver.quit();
+	
+	public void order017_ContinueOrderBelowPrice() {
+		//order.clickButtonOrder(TestBase.driver); 
+		if(order.countCarItems(TestBase.driver) > 0) {
+			order.clickButtonOrder(TestBase.driver); 
+			TestBase.driver.findElement(By.xpath("//label[@for='continute-rad']")).click();	
+			TestBase.driver.findElement(By.xpath("//*[@id='alert-modal']/div[2]/a[2]")).click();
+		} else Assert.assertEquals(0, 1); // miss order
+	}
+	
+	public void order018_OrderBelowPrice() {
+		//order.clickButtonOrder(TestBase.driver); 
+		if(order.countCarItems(TestBase.driver) > 0) {
+			order.clickButtonOrder(TestBase.driver); 
+			TestBase.driver.findElement(By.xpath("//label[@for='accept-rad']")).click();	
+			TestBase.driver.findElement(By.xpath("//*[@id='alert-modal']/div[2]/a[2]")).click();
+		} else Assert.assertEquals(0, 1); // miss order
+	}
+	
+	public void order019() {
+		order011_CheckPopupOrderPrice();
+		order012_ConfirmOrder();
+		/*order013_checkBackPrevious();
+		order014_OrderSuccess();
+		order015_CheckIncomming();*/
 	}
 }

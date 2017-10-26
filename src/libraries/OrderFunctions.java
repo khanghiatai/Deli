@@ -247,6 +247,20 @@ public class OrderFunctions extends OrderPage {
 		Assert.assertEquals(strAceptFee, resource.getResource("aceptfee")); 
 	}
 	
+	public int countCarItems(WebDriver driver) {
+		return Integer.parseInt(driver.findElement(By.id("cart-qty")).getText());
+	}
+	
+	public void clickCancelOrderBelowPrice(WebDriver driver) {
+		CommonFunctions.pause(1);
+		driver.findElement(By.xpath("//*[@id='alert-modal']/div[2]/a[1]")).click();
+	}
+	
+	/*public void clickOKContinueOrder(WebDriver driver) {
+		CommonFunctions.pause(3);
+		driver.findElement(By.xpath("//*[@id='alert-modal']/div[2]/a[2]")).click();
+	}*/
+	
 	public void checkPopupConfirmOrder(WebDriver driver, String resName, String address) {
 		// check title popup
 		List<WebElement> listTitleName = driver.findElements(By.xpath(".//*[@class='checkout-steps']/div"));
@@ -515,6 +529,21 @@ public class OrderFunctions extends OrderPage {
 		// link text wait confirm
 		String strWait = driver.findElement(By.xpath("//*[@ng-show='!detailCtrl.hasNextStep()' or @ng-click='detailCtrl.reload()']")).getText();
 		Assert.assertEquals(strWait, resource.getResource("waitconfirm").toUpperCase());
+	}
+	
+	public void checkInfoAfterOrder(WebDriver driver, String resName, String address) {
+		// get name
+		String strResName = driver.findElement(By.xpath(".//*[@class='name-hot-restaurant']")).getText();
+		// get Address
+		String strAddress = driver.findElement(By.xpath(".//*[@itemprop='description']")).getText();
+		Assert.assertEquals(strResName, resName);
+		Assert.assertEquals(strAddress, address);
+	}
+	
+	public void checkIncomming(WebDriver driver, String resName, String address) {
+		String strName = driver.findElement(By.xpath(".//*[@class='order-summary']/a/div[1]")).getText();
+		Assert.assertEquals(strName, resName);
+		// code here
 	}
 	
 	public void clickWaitConfirm(WebDriver driver) {
