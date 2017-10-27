@@ -181,10 +181,10 @@ public class OrderTest {
 	}
 	
 	public void order019() {
-		order011_CheckPopupOrderPrice();
+		//order011_CheckPopupOrderPrice();
 		order012_ConfirmOrder();
-		/*order013_checkBackPrevious();
+		order013_checkBackPrevious();
 		order014_OrderSuccess();
-		order015_CheckIncomming();*/
+		order015_CheckIncomming();
 	}
 }
