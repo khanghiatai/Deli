@@ -95,9 +95,9 @@ public class OrderFunctions extends OrderPage {
 	}
 
 	public void clickButtonOrder(WebDriver driver) {
-		CommonFunctions.pause(1);
-		WebElement btn_DatTruoc = driver.findElement(By.xpath(".//a[@ng-click='detailCtrl.checkout();']"));
-		btn_DatTruoc.click();
+		CommonFunctions.pause(1);		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("document.querySelectorAll('.btn-book-first')[1].click();");
 	}
 
 	public void checkPopup(WebDriver driver, String title, String message, String nameButton) {

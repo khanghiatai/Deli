@@ -59,11 +59,11 @@ public class OrderTest {
 				//sso.getUserName(TestBase.driver); 								
 			} 
 			// temp //
+			CommonFunctions.pause(5);
 			order.clickButtonOrder(TestBase.driver);	
 			order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName"));
 		}		
 	}
-	
 
 	//@Test
 	public void order005_AddMenuAfterLogin(){	
@@ -163,7 +163,7 @@ public class OrderTest {
 	}
 	
 	public void order017_ContinueOrderBelowPrice() {
-		//order.clickButtonOrder(TestBase.driver); 
+		order.clickButtonOrder(TestBase.driver); 
 		if(order.countCarItems(TestBase.driver) > 0) {
 			order.clickButtonOrder(TestBase.driver); 
 			TestBase.driver.findElement(By.xpath("//label[@for='continute-rad']")).click();	
@@ -172,7 +172,7 @@ public class OrderTest {
 	}
 	
 	public void order018_OrderBelowPrice() {
-		//order.clickButtonOrder(TestBase.driver); 
+		order.clickButtonOrder(TestBase.driver); 
 		if(order.countCarItems(TestBase.driver) > 0) {
 			order.clickButtonOrder(TestBase.driver); 
 			TestBase.driver.findElement(By.xpath("//label[@for='accept-rad']")).click();	
@@ -180,11 +180,21 @@ public class OrderTest {
 		} else Assert.assertEquals(0, 1); // miss order
 	}
 	
-	public void order019() {
-		//order011_CheckPopupOrderPrice();
-		order012_ConfirmOrder();
+	public void order019_Confirm() {
+		CommonFunctions.pause(1);
+		order012_ConfirmOrder();	
+	}
+	
+	public void order020_BackPrevious() {
 		order013_checkBackPrevious();
+	}
+	
+	public void order021_Success() {
 		order014_OrderSuccess();
+	}
+	
+	public void order022_Incomming() {
 		order015_CheckIncomming();
 	}
+	
 }
