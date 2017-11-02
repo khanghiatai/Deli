@@ -2,9 +2,6 @@ package modules;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 //import org.sikuli.script.Screen;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -13,7 +10,7 @@ import org.testng.annotations.Test;
 import configuration.TestBase;
 import libraries.SSOFunctions;
 import libraries.SearchFunctions;
-import objects.SearchPage;
+
 import support.CommonFunctions;
 
 public class SearchTest extends TestBase {

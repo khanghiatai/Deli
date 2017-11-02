@@ -2,7 +2,6 @@ package modules;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import configuration.ResourceHasMap;
 import configuration.TestBase;
@@ -134,7 +133,8 @@ public class OrderTest {
 	
 	public void order013_checkBackPrevious() { 
 		order.clickBackPreviosPopup(TestBase.driver);
-		order.clickContinueOrder(TestBase.driver);	
+		CommonFunctions.selectedByIndex(TestBase.driver, "xpath", "//*[@ng-model='detailCtrl.deliveryHour']", 0); 
+		order.clickContinueOrder(TestBase.driver);			
 		order.checkPopupOrderInfo(TestBase.driver);
 	}	
 	

@@ -164,13 +164,13 @@ public class CommonFunctions {
 			select = new Select(driver.findElement(By.id(locator)));
 			select.selectByIndex(index);
 		} else if (how.equalsIgnoreCase("name")) {
-			select = new Select(driver.findElement(By.id(locator)));
+			select = new Select(driver.findElement(By.name(locator)));
 			select.selectByIndex(index);
 		} else if (how.equalsIgnoreCase("css")) {
-			select = new Select(driver.findElement(By.id(locator)));
+			select = new Select(driver.findElement(By.cssSelector(locator)));
 			select.selectByIndex(index);
 		} else if (how.equalsIgnoreCase("xpath")) {
-			select = new Select(driver.findElement(By.id(locator)));
+			select = new Select(driver.findElement(By.xpath(locator)));
 			select.selectByIndex(index);
 		} else {
 			System.out.println("Cannot find element: " + how + " = " + locator);
@@ -439,4 +439,22 @@ public class CommonFunctions {
 	public static void waitForControl(WebDriver driver, WebElement controlName) {
 	    new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOf(controlName));
 	}	
+	
+	public static int getNumberOfString(String str) {
+		char c1;
+		String strNum = "";
+		int num = 0;
+		for (int i = 0; i < str.length(); i++) {
+			c1 = str.charAt(i);			
+			try {
+				num = (int)c1 - '0';
+				if(num <= 9 && c1 != ' ') {
+					strNum += Integer.toString(num); 
+				}
+			} catch (Exception e) {
+				continue;
+			}			
+		}	
+		return Integer.parseInt(strNum);
+	}
 }

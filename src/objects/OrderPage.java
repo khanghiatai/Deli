@@ -54,4 +54,5 @@ public class OrderPage {
 	
 	@FindBys(@FindBy(xpath = ".//*[@class='scrollspy']//a[@class='title-name-food']"))
 	public List<WebElement> btn_Order;
+	
 }

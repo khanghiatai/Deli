@@ -23,9 +23,9 @@ public class ResourceHasMap {
 		hm.put("usernote", "Lầu 8, đem đủ ống hút");
 	}
 	
-	private void searchResource(){
+	/*private void searchResource(){
 		hm.put("banhcanhsieungon", "Bánh canh siêu ngon");		
-	}
+	}*/
 	
 	private void orderResource(){
 		hm.put("setVi", "phần");

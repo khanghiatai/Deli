@@ -15,7 +15,7 @@ public class SSOPage {
 		PageFactory.initElements(factory, this);		
 	}
 	
-	public static final String USERNAME = "khanghiatai@gmail.com";
+	public static final String USERNAME = "khangnghiatai@gmail.com";
 	public static final String PASSWORD = "123456";
 	public static String USERPROFILE;
 	

@@ -6,13 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 import configuration.ResourceHasMap;
 import configuration.TestBase;
 import objects.OrderPage;
-import objects.SearchPage;
 import support.CommonFunctions;
 
 public class OrderFunctions extends OrderPage {
@@ -127,6 +125,37 @@ public class OrderFunctions extends OrderPage {
 			String foodPrice = listMenuPrice.get(i).getText().replace(" ", "");
 			CommonFunctions.pause(1);
 			webElement.click();	
+			CommonFunctions.pause(2);	
+			List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
+			List<WebElement> listPrice = driver.findElements(By.xpath(".//input[@ng-model='item.Note']/following-sibling::span"));
+			
+			String name = listOrder.get(i).getText();
+			String price = listPrice.get(i).getText();
+			if(name.equalsIgnoreCase(foodName)) {
+				Assert.assertEquals(name, foodName); 		
+				Assert.assertEquals(price, foodPrice); 		
+			}	
+			i++;
+		}
+	}
+	
+	
+	public void clickNameFood1(WebDriver driver, String strResName) {		
+		int i = 0;
+		CommonFunctions.pause(2);
+		List<WebElement> listFoods = driver.findElements(By.xpath(".//*[@class='scrollspy']//a[@class='title-name-food']"));
+
+		for (WebElement webElement : listFoods) {
+			String foodName = webElement.getText();
+			List<WebElement> listMenuPrice = driver.findElements(By.xpath(".//div[@class='product-price']/a/p"));
+			String foodPrice = listMenuPrice.get(i).getText().replace(" ", "");
+			CommonFunctions.pause(1);
+			webElement.click();	
+			/******/
+			
+			checkInfoPopupToping(TestBase.driver, foodName, foodPrice);
+			
+			/*****/
 			CommonFunctions.pause(2);	
 			List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
 			List<WebElement> listPrice = driver.findElements(By.xpath(".//input[@ng-model='item.Note']/following-sibling::span"));
@@ -595,6 +624,20 @@ public class OrderFunctions extends OrderPage {
 	
 	public void clickContinueOrder(WebDriver driver) {
 		driver.findElement(By.xpath(".//*[@class='modal-footer']/a[@ng-click='detailCtrl.incrementStep()'][1]")).click();
+	}	
+	
+	public boolean checkInfoPopupToping(WebDriver driver, String foodName, String foodPrice) {		
+		try {
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			String strName = js.executeScript("return document.querySelector('.topping-item-modal-summary-right h3').innerText;").toString();
+			Assert.assertEquals(strName, foodName);
+			String strPrice = js.executeScript("return document.querySelector('.topping-item-modal-summary-price span').innerText;").toString();
+			strPrice = CommonFunctions.chuyenDoiKyTu(strPrice, " ", "").toLowerCase(); 
+			Assert.assertEquals(strPrice, foodPrice);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}		
 	}
 	
 	/**************** Private ****************/

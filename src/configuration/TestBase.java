@@ -63,7 +63,7 @@ public class TestBase {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 
         //Create the file name with date time format then grant to "screenShotFile"
-        screenShotFile =System.getProperty("user.dir")+"/src/test/java/reports/images/"+ " TestScreenShot"+ dateFormat + ".png";
+        screenShotFile =System.getProperty("user.dir")+"/images/"+ "TestScreenShot"+ dateFormat + ".png";
 
         if (testResult.getStatus() == ITestResult.FAILURE){
             File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
