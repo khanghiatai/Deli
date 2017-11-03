@@ -153,8 +153,9 @@ public class OrderFunctions extends OrderPage {
 			webElement.click();	
 			/******/
 			
-			checkInfoPopupToping(TestBase.driver, foodName, foodPrice);
-			
+			checkInfoPopupToping(driver, foodName, foodPrice);
+			//CommonFunctions.getNumberOfString(str)
+			minimumTopping(driver);
 			/*****/
 			CommonFunctions.pause(2);	
 			List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
@@ -626,7 +627,7 @@ public class OrderFunctions extends OrderPage {
 		driver.findElement(By.xpath(".//*[@class='modal-footer']/a[@ng-click='detailCtrl.incrementStep()'][1]")).click();
 	}	
 	
-	public boolean checkInfoPopupToping(WebDriver driver, String foodName, String foodPrice) {		
+	private boolean checkInfoPopupToping(WebDriver driver, String foodName, String foodPrice) {		
 		try {
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			String strName = js.executeScript("return document.querySelector('.topping-item-modal-summary-right h3').innerText;").toString();
@@ -638,6 +639,24 @@ public class OrderFunctions extends OrderPage {
 		} catch (Exception e) {
 			return false;
 		}		
+	}
+	
+	private int minimumTopping(WebDriver driver) {
+//		.topping-item-modal-list-item-container-name span:nth-child(1)
+		List<WebElement> listTopping = driver.findElements(By.xpath("//*[@class='topping-item-modal-list-item-container-name']"));
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		for (int i = 1; i <= listTopping.size(); i++) {
+			String strString = js.executeScript("return document.querySelectorAll('.topping-item-modal-list-item-container-name')[0].innerText").toString();
+			int num = CommonFunctions.getNumberOfString(strString);
+			List<WebElement> listItem = driver.findElements(By.xpath("//*[@class='topping-item-modal-list']/div[1]/div[2]/div/div"));
+			
+			if(num > 0) {				
+				for (int j = 1; j <= listItem.size(); j++) {
+					driver.findElement(By.xpath("//*[@class='topping-item-modal-list']/div[" + i +"]/div[2]/div/div["+ j +"]/div[1]/div/label")).click();					
+				}				
+			}
+		}
+		return 1;
 	}
 	
 	/**************** Private ****************/

@@ -448,7 +448,7 @@ public class CommonFunctions {
 			c1 = str.charAt(i);			
 			try {
 				num = (int)c1 - '0';
-				if(num <= 9 && c1 != ' ') {
+				if(num > 0 && num <= 9 && c1 != ' ') {
 					strNum += Integer.toString(num); 
 				}
 			} catch (Exception e) {
