@@ -86,7 +86,7 @@ public class OrderTest_1 {
 
 	
 	//@Test 
-	public void order016_CancelOrderBelowPrice() {
+	/*public void order016_CancelOrderBelowPrice() {
 		//TestBase.driver.navigate().back();
 		// click 1 food, return price of food
 		int ibelowPrice = order.addOneOrderBelowPrice(TestBase.driver, defaultPrice);
@@ -112,6 +112,6 @@ public class OrderTest_1 {
 			TestBase.driver.findElement(By.xpath("//label[@for='accept-rad']")).click();	
 			TestBase.driver.findElement(By.xpath("//*[@id='alert-modal']/div[2]/a[2]")).click();
 		} else Assert.assertEquals(0, 1); // miss order
-	}	
+	}	*/
 	
 }
