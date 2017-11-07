@@ -144,24 +144,23 @@ public class OrderFunctions extends OrderPage {
 		int i = 0;
 		CommonFunctions.pause(2);
 		List<WebElement> listFoods = driver.findElements(By.xpath(".//*[@class='scrollspy']//a[@class='title-name-food']"));
-
+		
 		for (WebElement webElement : listFoods) {
+			float toppongPrice = 0; 
 			String foodName = webElement.getText();
 			List<WebElement> listMenuPrice = driver.findElements(By.xpath(".//div[@class='product-price']/a/p"));
 			String foodPrice = listMenuPrice.get(i).getText().replace(" ", "");
 			webElement.click();	
-			/******/
-			boolean isPopup = isPopupTopping(driver);
-			//boolean isPopup = selectTopping(driver);
 			
+			/******/
+			boolean isPopup = isPopupTopping(driver);			
 			if(isPopup == true) {
-				checkInfoPopupToping(driver, foodName, foodPrice);
-				
-				selectTopping(driver);
+				CommonFunctions.pause(1);
+				checkInfoPopupToping(driver, foodName, foodPrice);				
+				toppongPrice = selectTopping(driver);
 				JavascriptExecutor js = (JavascriptExecutor)driver;
 				js.executeScript("document.querySelector('.topping-item-modal-footer a').click();");
-			}			
-			
+			}					
 			/*****/
 			CommonFunctions.pause(1);	
 			List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
@@ -169,10 +168,13 @@ public class OrderFunctions extends OrderPage {
 			
 			String name = listOrder.get(i).getText();
 			String price = listPrice.get(i).getText();
-//			if(name.equalsIgnoreCase(foodName)) {
-//				Assert.assertEquals(name, foodName); 		
-//				Assert.assertEquals(price, foodPrice); 		
-//			}	
+			if(name.equalsIgnoreCase(foodName)) {				
+				price = CommonFunctions.chuyenDoiKyTu(price.substring(0, price.length()-1), ",", "");
+				foodPrice = CommonFunctions.chuyenDoiKyTu(foodPrice.substring(0, foodPrice.length()-1), ",", "");
+				toppongPrice = toppongPrice + Float.parseFloat(foodPrice);				
+				Assert.assertEquals(name, foodName); 		
+				Assert.assertEquals(Float.parseFloat(price),toppongPrice); 
+			}	
 			i++;
 		}
 	}
@@ -218,7 +220,7 @@ public class OrderFunctions extends OrderPage {
 		String strFeeShip = driver.findElement(By.xpath("//span[@ng-show='!detailCtrl.hasMilestoneFee']")).getText().replace(",", "");//4
 		strFeeShip = strFeeShip.substring(0, strFeeShip.length() -4);
 		
-		String strTempPrice = driver.findElement(By.xpath("//div[@class='container-bill']/div[10]/span[2]")).getText().replace(",", "");//1
+		String strTempPrice = driver.findElement(By.xpath("//div[@class='container-bill']/div[11]/span[2]")).getText().replace(",", "");//1
 		strTempPrice = strTempPrice.substring(0, strTempPrice.length() -1);
 		
 		Assert.assertEquals(totalPrice, Float.parseFloat(strOrderPrice));
@@ -507,7 +509,7 @@ public class OrderFunctions extends OrderPage {
 			CommonFunctions.pause(1);
 			str1 = (String) ((JavascriptExecutor) driver)
 					.executeScript("return document.getElementsByTagName('input')[2].value;");
-			eChildPrice.click();
+			//eChildPrice.click();
 			try {
 				driver.navigate().refresh();
 			} catch (Exception e) {
@@ -664,29 +666,42 @@ public class OrderFunctions extends OrderPage {
 		}
 	}
 	
-	private void selectTopping(WebDriver driver) {
+	private float selectTopping(WebDriver driver) {
 		List<WebElement> listTopping = driver.findElements(By.xpath("//*[@class='topping-item-modal-list-item-container-name']"));
+		float fPrice = 0; 
 		if(listTopping.size() > 0) {
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			for (int i = 1; i <= listTopping.size(); i++) {
 				String strString = js.executeScript("return document.querySelectorAll('.topping-item-modal-list-item-container-name')[0].innerText").toString();
 				int num = CommonFunctions.getNumberOfString(strString);
 				List<WebElement> listItem = driver.findElements(By.xpath("//*[@class='topping-item-modal-list']/div[1]/div[2]/div/div"));
-				
-				if(num > 0 && listItem.size() < num) {				
+				String sPrice; 
+				if(num > 0 && listItem.size() < num) {	
+					
 					for (int j = 1; j <= listItem.size(); j++) {
 						driver.findElement(By.xpath("//*[@class='topping-item-modal-list']/div[" + i +"]/div[2]/div/div["+ j +"]/div[1]/div/label")).click();					
+						
+						sPrice = driver.findElement(By.xpath("//*[@class='topping-item-modal-list']/div[" + i +"]/div[2]/div/div["+ j +"]/div[1]/div[2]")).getText();
+						if(sPrice != null || sPrice != " " || sPrice != "") {
+							sPrice = CommonFunctions.chuyenDoiKyTu(sPrice.substring(1, sPrice.length()-1), ",", "");  //;
+							fPrice += Float.parseFloat(sPrice);
+						}
 					}				
 				} else if(num > 0 && listItem.size() >= num) {				
 					for (int j = 1; j <= num; j++) {
-						driver.findElement(By.xpath("//*[@class='topping-item-modal-list']/div[" + i +"]/div[2]/div/div["+ j +"]/div[1]/div/label")).click();					
+						driver.findElement(By.xpath("//*[@class='topping-item-modal-list']/div[" + i +"]/div[2]/div/div["+ j +"]/div[1]/div/label")).click();	
+						
+						sPrice = driver.findElement(By.xpath("//*[@class='topping-item-modal-list']/div[" + i +"]/div[2]/div/div["+ j +"]/div[1]/div[2]")).getText();
+						if(!sPrice.isEmpty()) {
+							sPrice = CommonFunctions.chuyenDoiKyTu(sPrice.substring(1, sPrice.length()-1), ",", "");  //;
+							fPrice += Float.parseFloat(sPrice);
+						}
 					}				
 				}
 			}
-		} 			
+		} 	
+		return fPrice;
 	}
-	
-	
 	
 		
 	/**************** Private ****************/

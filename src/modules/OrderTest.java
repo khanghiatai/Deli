@@ -67,7 +67,7 @@ public class OrderTest {
 	//@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
-		order.clickNameFood(TestBase.driver);
+		order.clickNameFood1(TestBase.driver, strResName);
 		// check price		
 		order.checkPrice(TestBase.driver);
 		String countOrder = order.countNumberOrder(TestBase.driver);
@@ -105,7 +105,7 @@ public class OrderTest {
 	}		
 	
 	public void order010_AddMenuAfterReset(){		
-		order.clickAddFood(TestBase.driver); 
+		order.clickNameFood1(TestBase.driver, strResName); 
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 		order.checkPrice(TestBase.driver);				
 	}	

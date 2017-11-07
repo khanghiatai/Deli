@@ -70,13 +70,8 @@ public class OrderTest_1 {
 	//@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
-		order.clickNameFood1(TestBase.driver, strResName);
+		order.clickNameFood1(TestBase.driver, strResName);		
 		
-		/*************/
-		//order.checkInfoPopupToping(TestBase.driver, strResName, "");
-		
-		
-		/************/
 		// check price		
 		order.checkPrice(TestBase.driver);
 		String countOrder = order.countNumberOrder(TestBase.driver);
