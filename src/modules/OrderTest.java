@@ -14,7 +14,7 @@ public class OrderTest {
 	ResourceHasMap resource = new ResourceHasMap();
 	OrderFunctions order = new OrderFunctions(TestBase.driver);		
 	SSOFunctions sso = new SSOFunctions(TestBase.driver);
-	int defaultPrice = 100000;
+	int defaultPrice = 40000;
 	String strResName;
 	String strAddress;
 
@@ -67,7 +67,7 @@ public class OrderTest {
 	//@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
-		order.clickNameFood1(TestBase.driver, strResName);
+		order.clickNameFood1(TestBase.driver);
 		// check price		
 		order.checkPrice(TestBase.driver);
 		String countOrder = order.countNumberOrder(TestBase.driver);
@@ -105,7 +105,7 @@ public class OrderTest {
 	}		
 	
 	public void order010_AddMenuAfterReset(){		
-		order.clickNameFood1(TestBase.driver, strResName); 
+		order.clickNameFood1(TestBase.driver); 
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 		order.checkPrice(TestBase.driver);				
 	}	

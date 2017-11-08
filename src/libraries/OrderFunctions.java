@@ -114,7 +114,7 @@ public class OrderFunctions extends OrderPage {
 		return false;
 	}
 	
-	public void clickNameFood(WebDriver driver) {		
+	/*public void clickNameFood(WebDriver driver) {		
 		int i = 0;
 		CommonFunctions.pause(2);
 		List<WebElement> listFoods = driver.findElements(By.xpath(".//*[@class='scrollspy']//a[@class='title-name-food']"));
@@ -137,31 +137,33 @@ public class OrderFunctions extends OrderPage {
 			}	
 			i++;
 		}
-	}
+	}*/
 	
 	
-	public void clickNameFood1(WebDriver driver, String strResName) {		
+	public void clickNameFood1(WebDriver driver) {		
 		int i = 0;
-		CommonFunctions.pause(2);
+		CommonFunctions.pause(1);
 		List<WebElement> listFoods = driver.findElements(By.xpath(".//*[@class='scrollspy']//a[@class='title-name-food']"));
+		JavascriptExecutor js = (JavascriptExecutor)driver;
 		
 		for (WebElement webElement : listFoods) {
 			float toppongPrice = 0; 
 			String foodName = webElement.getText();
 			List<WebElement> listMenuPrice = driver.findElements(By.xpath(".//div[@class='product-price']/a/p"));
 			String foodPrice = listMenuPrice.get(i).getText().replace(" ", "");
-			webElement.click();	
-			
+			CommonFunctions.pause(1);
+			js.executeScript("document.querySelectorAll('.scrollspy .title-name-food')["+ i +"].click();"); 
+						
 			/******/
 			boolean isPopup = isPopupTopping(driver);			
 			if(isPopup == true) {
 				CommonFunctions.pause(1);
 				checkInfoPopupToping(driver, foodName, foodPrice);				
-				toppongPrice = selectTopping(driver);
-				JavascriptExecutor js = (JavascriptExecutor)driver;
+				toppongPrice = selectTopping(driver);				
 				js.executeScript("document.querySelector('.topping-item-modal-footer a').click();");
 			}					
 			/*****/
+			
 			CommonFunctions.pause(1);	
 			List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
 			List<WebElement> listPrice = driver.findElements(By.xpath(".//input[@ng-model='item.Note']/following-sibling::span"));
@@ -220,7 +222,7 @@ public class OrderFunctions extends OrderPage {
 		String strFeeShip = driver.findElement(By.xpath("//span[@ng-show='!detailCtrl.hasMilestoneFee']")).getText().replace(",", "");//4
 		strFeeShip = strFeeShip.substring(0, strFeeShip.length() -4);
 		
-		String strTempPrice = driver.findElement(By.xpath("//div[@class='container-bill']/div[11]/span[2]")).getText().replace(",", "");//1
+		String strTempPrice = driver.findElement(By.xpath("//div[@class='container-bill']/div[10]/span[2]")).getText().replace(",", "");//1
 		strTempPrice = strTempPrice.substring(0, strTempPrice.length() -1);
 		
 		Assert.assertEquals(totalPrice, Float.parseFloat(strOrderPrice));
@@ -243,7 +245,14 @@ public class OrderFunctions extends OrderPage {
 			if(iPrice < price) {
 				CommonFunctions.pause(1);
 				js.executeScript("document.querySelectorAll('.product-price a .current-price')[" + i +  "].click();");
-				System.out.println("1");
+				//
+				boolean isPopup = isPopupTopping(driver);			
+				if(isPopup == true) {
+					CommonFunctions.pause(1);			
+					selectTopping(driver);				
+					js.executeScript("document.querySelector('.topping-item-modal-footer a').click();");
+				}	
+				//
 				return iPrice; 
 			} else continue;
 		}
@@ -522,9 +531,10 @@ public class OrderFunctions extends OrderPage {
 
 	public void checkPopupOrderInfo(WebDriver driver) {
 		// check title popup
+		CommonFunctions.pause(2);
 		List<WebElement> listTitleName = driver.findElements(By.xpath(".//*[@class='checkout-steps']/div"));
 		for (int i = 1; i < listTitleName.size() + 1; i++) {	
-			CommonFunctions.pause(2); 
+			 
 			switch(i) {
 			case 1: 				
 				String strAddress = driver.findElement(By.xpath(".//*[@class='checkout-steps']/div/div["+ i +"]")).getText();
@@ -745,15 +755,15 @@ public class OrderFunctions extends OrderPage {
 		String c = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[3]/span[2]")).getText();
 		//Shipping fee discount
 		String d = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[4]/span")).getText();
-		// Confirm Fee:
-		String e = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[7]/span")).getText();
 		//Total
-		String f = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[8]/span")).getText();
+		String e = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[7]/span")).getText();
+		// Confirm Fee:
+		//String f = driver.findElement(By.xpath(".//*[@ng-switch-when='2' and @class='ng-scope']/div/div[1]/div[2]/p[8]/span")).getText();
 
 		System.out.println("C:" + c);
 		System.out.println("D:" + d);
 		System.out.println("E:" + e);
-		System.out.println("F:" + f);
+		
 
 		// fee ship
 		String g = driver.findElement(By.xpath("//span[@ng-show='!detailCtrl.hasMilestoneFee']")).getText();
