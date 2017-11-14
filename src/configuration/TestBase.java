@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -57,20 +59,17 @@ public class TestBase {
     @AfterMethod
     public void takeScreenShotIfFailure(ITestResult testResult) throws IOException {
         String screenShotFile;
-        //Date date = new Date();
-
-        //Create format date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-
+        String tc_name = testResult.getMethod().getConstructorOrMethod().getName();
+        String dateFormat = new SimpleDateFormat("ddMMyyyy_hhmmss").format(Calendar.getInstance().getTime());
         //Create the file name with date time format then grant to "screenShotFile"
-        screenShotFile =System.getProperty("user.dir")+"/images/"+ "TestScreenShot"+ dateFormat + ".png";
+        screenShotFile = System.getProperty("user.dir") + "/images/" + "ScreenShot_" + tc_name + "_" + dateFormat + ".png";
 
-        if (testResult.getStatus() == ITestResult.FAILURE){
-            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        if (testResult.getStatus() == ITestResult.FAILURE) {
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(scrFile, new File(screenShotFile));
         }
-    }
-
+    }       
+    
     @AfterTest
     public void tearDown(){   
     	CommonFunctions.pause(2);
