@@ -81,7 +81,7 @@ public class OrderTest_1 {
 
 	
 	//@Test 
-	/*public void order016_CancelOrderBelowPrice() {
+	public void order016_CancelOrderBelowPrice() {
 		//TestBase.driver.navigate().back();
 		// click 1 food, return price of food
 		int ibelowPrice = order.addOneOrderBelowPrice(TestBase.driver, defaultPrice);
@@ -100,7 +100,13 @@ public class OrderTest_1 {
 		} else Assert.assertEquals(0, 1); // miss order
 	}
 	
-	public void order018_OrderBelowPrice() {
+	
+	public void order018_AFC() {
+		TestBase.driver.findElement(By.xpath("//input[@ng-model='detailCtrl.deliveredDate']")).click();
+		
+	}
+	
+	/*public void order018_OrderBelowPrice() {
 		order.clickButtonOrder(TestBase.driver); 
 		if(order.countCarItems(TestBase.driver) > 0) {
 			order.clickButtonOrder(TestBase.driver); 
