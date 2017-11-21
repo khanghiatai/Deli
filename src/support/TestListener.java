@@ -258,7 +258,7 @@ public class TestListener implements ITestListener {
 	    	   firstRow++;
 	       }
 	         
-	        try (FileOutputStream outputStream = new FileOutputStream(System.getProperty("user.dir")+"/src/reports/"+fileName)) {
+	        try (FileOutputStream outputStream = new FileOutputStream(System.getProperty("user.dir") + "/src/reports/" + fileName)) {
 	            workbook.write(outputStream);
 	        } catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

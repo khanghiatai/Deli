@@ -70,7 +70,7 @@ public class OrderTest_1 {
 	//@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
-		order.clickNameFood1(TestBase.driver);		
+		order.clickNameFood(TestBase.driver);		
 		
 		// check price		
 		order.checkPrice(TestBase.driver);
