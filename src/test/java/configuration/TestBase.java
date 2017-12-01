@@ -34,7 +34,7 @@ public class TestBase {
     @Parameters({"url"})
     @BeforeMethod
     public static void setUp(String url){
-        //CommonFunctions.visit(driver, url);      
+        CommonFunctions.visit(driver, url);
     }
     
     @DataProvider(name = "ssodata")
