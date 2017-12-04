@@ -7,21 +7,17 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 public class CommonFunctions {
 
@@ -483,5 +479,61 @@ public class CommonFunctions {
 	        } catch (Exception e) {
 	           
 	        }
+	}
+
+	/***
+	 * Convert Tieng Viet to url
+	 * @param str
+	 * @return string-string2-string3
+	 */
+	public static String covertStringToURL(String str) {
+		try {
+			String temp = Normalizer.normalize(str, Normalizer.Form.NFD);
+			Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+			return pattern.matcher(temp).replaceAll("").toLowerCase().replaceAll(" ", "-").replaceAll("đ", "d");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return "";
+	}
+
+	/***
+	 * Wait text of element appear
+	 * @param driver
+	 * @param xpath
+	 * @param text
+	 * @param seconds
+	 * @return true/ false
+	 */
+	public static boolean fluentWait(WebDriver driver, String strXpath, String text, int seconds) {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(seconds, TimeUnit.SECONDS)
+				.pollingEvery(255, TimeUnit.MILLISECONDS)
+				.ignoring(NoSuchElementException.class);
+
+		WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				WebElement ele = driver.findElement(By.xpath(strXpath));
+				String value = ele.getAttribute("innerHTML");
+				if(value.equalsIgnoreCase(text)) {
+					return ele;
+				}
+				else {
+					return null;
+				}
+			}
+		});
+		if (element != null) return true;
+		else return false;
+	}
+
+	public static boolean explicitWait(WebDriver driver, String strXpath, int seconds) {
+		WebDriverWait wait = new WebDriverWait(driver, seconds);
+		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(strXpath)));
+		boolean status = element.isDisplayed();
+		if(status)
+			return true;
+		else
+			return false;
 	}
 }
