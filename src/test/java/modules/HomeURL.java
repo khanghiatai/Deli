@@ -16,7 +16,8 @@ public class HomeURL extends TestBase {
 
     @Test
     private void checkFoodMenu(){
-        homeUrl.checkMenuFood(driver);
+        //homeUrl.checkMenuFood(driver);
+        homeUrl.checkCity(driver);
     }
 
 

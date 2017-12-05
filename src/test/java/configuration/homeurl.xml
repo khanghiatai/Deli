@@ -5,7 +5,7 @@
         <!-- <listener class-name="support.ExcelReport"/> -->
     </listeners>
     <parameter name="browserName" value="chrome"/>
-    <parameter name="url" value="sandbox.deliverynow.vn:8081"/>
+    <parameter name="url" value="sandbox.deliverynow.vn:8081/"/> <!-- https://www.deliverynow.vn/-->
     <parameter name="timeout" value="60"/>
     <test name="Test">
         <classes>
