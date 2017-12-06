@@ -51,7 +51,7 @@ public class ResourceHasMap {
 		hm.put("contentsuccess", "Cảm ơn bạn đã sử dụng dịch vụ của deliveryNow.vn! Đơn hàng của bạn đang được chúng tôi xử lý.");
 		hm.put("historyorder", "Lịch sử đặt món");
 		hm.put("waitconfirm", "Chờ xác nhận");
-
+		hm.put("tphcm", "TP.HCM");
 	}
 	
 	private void dayOffWeek(){

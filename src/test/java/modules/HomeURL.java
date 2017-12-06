@@ -4,6 +4,7 @@ import configuration.TestBase;
 import libraries.HomeUrlFunctions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import support.CommonFunctions;
 
@@ -16,6 +17,9 @@ public class HomeURL extends TestBase {
 
     @Test
     private void checkFoodMenu(){
+        CommonFunctions.pause(1);
+        driver.findElement(By.linkText("OK")).click(); //delete
+        CommonFunctions.pause(1);
         //homeUrl.checkMenuFood(driver);
         homeUrl.checkCity(driver);
     }
