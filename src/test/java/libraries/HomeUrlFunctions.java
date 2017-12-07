@@ -27,19 +27,21 @@ public class HomeUrlFunctions {
                 driver.findElement(By.xpath("//*[@class='top-cate']/a[" + i +"]")).click();
             } else {
                 Assert.assertEquals(1, 0);
-                System.out.println("not found xpath: //*[@class='top-cate']/a[1]");
             }
             String sURL = driver.getCurrentUrl();
             int indexStr = sURL.indexOf("/danh");
             sURL = sURL.substring(indexStr + 1, sURL.length());
             if(i <= 1){
+                CommonFunctions.pause(1);
                 Assert.assertEquals(sURL, "danh-sach-dia-diem-giao-tan-noi");
             } if( i > 1) {
+                CommonFunctions.pause(1);
                 String sUrl = driver.findElement(By.xpath("//*[@class='top-cate']/a[" + i +"]")).getText();
                 String _url = CommonFunctions.covertStringToURL(sUrl);
                 _url = strURL + _url + strURL1;
                 Assert.assertEquals(sURL, _url);
             }
+            CommonFunctions.pause(1);
             i++;
         }
     }

@@ -15,13 +15,16 @@ import java.util.regex.Pattern;
 public class HomeURL extends TestBase {
     HomeUrlFunctions homeUrl = new HomeUrlFunctions();
 
-    @Test
-    private void checkFoodMenu(){
+    @Test  // check city and check food menu
+    private void home01_checkFoodMenu(){
         CommonFunctions.pause(1);
-        driver.findElement(By.linkText("OK")).click(); //delete
+        driver.findElement(By.linkText("OK")).click();
         CommonFunctions.pause(1);
-        //homeUrl.checkMenuFood(driver);
         homeUrl.checkCity(driver);
+    }
+
+    public void home02_checkRestaurantName(){
+
     }
 
 
