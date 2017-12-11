@@ -23,7 +23,11 @@ public class HomeURL extends TestBase {
         homeUrl.checkCity(driver);
     }
 
+    @Test
     public void home02_checkRestaurantName(){
+        // Chose HCM city
+        driver.findElement(By.xpath("//*[@data-activates='location-select']")).click();
+        driver.findElement(By.xpath("//*[@id='location-select']/li/a[1]")).click();
 
     }
 

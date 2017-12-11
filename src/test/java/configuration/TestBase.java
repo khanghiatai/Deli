@@ -71,8 +71,7 @@ public class TestBase {
     }       
     
     @AfterTest
-    public void tearDown(){   
-    	CommonFunctions.pause(2);
-        driver.quit();
+    public void tearDown(){
+        //driver.quit();
     }
 }

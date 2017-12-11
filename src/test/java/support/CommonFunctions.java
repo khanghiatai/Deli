@@ -6,6 +6,7 @@ import java.net.URL;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -535,5 +536,17 @@ public class CommonFunctions {
 			return true;
 		else
 			return false;
+	}
+
+	public static int random(int min, int max) {
+		try {
+			Random rn = new Random();
+			int range = max - min + 1;
+			int randomNum = min + rn.nextInt(range);
+			return randomNum;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 }
