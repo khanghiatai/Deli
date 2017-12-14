@@ -91,12 +91,39 @@ public class HomeUrlFunctions {
         }
     }
 
-    public int getRandomRestaurant(WebDriver driver) {
+    public void checkInfoRestaurant(WebDriver driver){
+        int indexItems = getRandomRestaurant(driver);
+        String resName = getResNameOnHome(driver, indexItems);
+        String address = getAdressOnHome(driver, indexItems);
+        // move to microsite
+        driver.findElement(By.xpath("//div[@class='list-widget-hot-restaurant']/div["+ indexItems +"]/div/a")).click();
+        CommonFunctions.switchToTab(driver, 1);
+        String resNameMsite = getResNameOnMicrosite(driver);
+        String addressMsite = getAddressOnMicrosite(driver);
+        String cityName = getCityOnHome(driver);
+        Assert.assertEquals(resName,resNameMsite);
+        address = address + ", " + cityName;
+        Assert.assertEquals(address, addressMsite);
+    }
+
+    public void checkBreadcrum(WebDriver driver){
+        String sBreadCrumb = driver.findElement(By.xpath("//*[@class='breadcrum-microsite']")).getText();
+        String cityName = getCityOnHome(driver);
+        String sResName = getResNameOnMicrosite(driver);
+        String _breadCrumb = strResource.getResource("trangchu") + " » " + cityName+ " » " + sResName;
+        Assert.assertEquals(_breadCrumb.toLowerCase(), sBreadCrumb.toLowerCase());
+    }
+
+    public void checkMenuLogin(WebDriver driver){
+
+    }
+
+    /*** private functions **********************************/
+    private int getRandomRestaurant(WebDriver driver) {
         List<WebElement> eImg = driver.findElements(By.xpath("//div[@class='img-hot-restaurant']/img"));
         int iSize = eImg.size();
-        int indexItem = CommonFunctions.random(0, iSize);
+        int indexItem = CommonFunctions.random(1, iSize);
         return indexItem;
-        //WebElement eImgItem = driver.findElement(By.xpath("//div[@class='list-widget-hot-restaurant']/div[" + indexItem + "]//img"));
     }
 
     private String getResNameOnHome(WebDriver driver, int indexItem) {
@@ -110,15 +137,21 @@ public class HomeUrlFunctions {
     }
 
     private String getResNameOnMicrosite(WebDriver driver){
-        String sName = driver.findElement(By.className("")).getText();
+        String sName = driver.findElement(By.xpath("//*[@class='name-hot-restaurant']")).getText();
         sName = CommonFunctions.chuanHoa(sName);
         return sName;
     }
 
     private String getAddressOnMicrosite(WebDriver driver){
-        String sAddress = driver.findElement(By.xpath("//p[@itemprop='description']")).getText();
+        String sAddress = driver.findElement(By.xpath("//*[@itemprop='description']")).getText();
         sAddress = CommonFunctions.chuanHoa(sAddress);
         return sAddress;
     }
 
+    private String getCityOnHome(WebDriver driver){
+        String cityName = driver.findElement(By.xpath("//*[@data-activates='location-select']")).getText();
+        cityName = CommonFunctions.chuanHoa(cityName);
+        cityName = CommonFunctions.chuanHoa(cityName.substring(0, cityName.length()-1));
+        return cityName;
+    }
 }

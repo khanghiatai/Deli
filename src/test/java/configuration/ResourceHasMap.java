@@ -23,10 +23,6 @@ public class ResourceHasMap {
 		hm.put("usernote", "Lầu 8, đem đủ ống hút");
 	}
 	
-	/*private void searchResource(){
-		hm.put("banhcanhsieungon", "Bánh canh siêu ngon");		
-	}*/
-	
 	private void orderResource(){
 		hm.put("setVi", "phần");
 		hm.put("peopleVi", "người");
@@ -52,6 +48,7 @@ public class ResourceHasMap {
 		hm.put("historyorder", "Lịch sử đặt món");
 		hm.put("waitconfirm", "Chờ xác nhận");
 		hm.put("tphcm", "TP.HCM");
+		hm.put("trangchu", "Trang chủ");
 	}
 	
 	private void dayOffWeek(){
