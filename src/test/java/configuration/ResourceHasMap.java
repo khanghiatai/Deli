@@ -2,17 +2,13 @@ package configuration;
 
 import java.util.HashMap;
 
-//import java.awt.List;
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.Map;
-
 public class ResourceHasMap {
 	private HashMap<String, String> hm = new HashMap<String, String>();
 
 	public ResourceHasMap() {
 		userResource();
-		orderResource();		
+		orderResource();
+		getNavigationText();
 		dayOffWeek();
 	}
 
@@ -49,6 +45,14 @@ public class ResourceHasMap {
 		hm.put("waitconfirm", "Chờ xác nhận");
 		hm.put("tphcm", "TP.HCM");
 		hm.put("trangchu", "Trang chủ");
+	}
+
+	private void getNavigationText(){
+		hm.put("1","Quản lý đơn hàng");
+		hm.put("2","Corporate");
+		hm.put("3","Lịch sử đặt món");
+		hm.put("4","Cập nhật tài khoản");
+		hm.put("5","Đăng xuất");
 	}
 	
 	private void dayOffWeek(){

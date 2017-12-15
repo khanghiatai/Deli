@@ -96,7 +96,7 @@ public class HomeUrlFunctions {
         String resName = getResNameOnHome(driver, indexItems);
         String address = getAdressOnHome(driver, indexItems);
         // move to microsite
-        driver.findElement(By.xpath("//div[@class='list-widget-hot-restaurant']/div["+ indexItems +"]/div/a")).click();
+        driver.findElement(By.xpath("//*[@class='top-res-order']/div[@class='widget-hot-restaurant']["+ indexItems +"]/div/div/a")).click();
         CommonFunctions.switchToTab(driver, 1);
         String resNameMsite = getResNameOnMicrosite(driver);
         String addressMsite = getAddressOnMicrosite(driver);
@@ -115,7 +115,22 @@ public class HomeUrlFunctions {
     }
 
     public void checkMenuLogin(WebDriver driver){
-
+        List<WebElement> listNav = driver.findElements(By.xpath("//div[@id='login-status']/div/a/span[@class='text']"));
+        Boolean isNav = false;
+        for (WebElement el:listNav) {
+            String sNav = el.getText();
+            String _nav = "";
+            for (int j=1; j<=5; j++){ // total rows int nav = 5 in resource
+                String sIndex = Integer.toString(j);
+                _nav = strResource.getResource(sIndex);
+                if(sNav.equals(_nav)){
+                    Assert.assertEquals(sNav, _nav);
+                    isNav = true;
+                    j = 5;
+                }
+            }
+            Assert.assertEquals(java.util.Optional.of(true), isNav);
+        }
     }
 
     /*** private functions **********************************/
@@ -127,12 +142,12 @@ public class HomeUrlFunctions {
     }
 
     private String getResNameOnHome(WebDriver driver, int indexItem) {
-        String sResName = driver.findElement(By.xpath("//div[@class='list-widget-hot-restaurant']/div[" + indexItem + "]//h4")).getText();
+        String sResName = driver.findElement(By.xpath("//div[@class='widget-hot-restaurant'][" + indexItem + "]//h4/a")).getText();
         return sResName;
     }
 
     private String getAdressOnHome(WebDriver driver, int indexItem) {
-        String sAddress = driver.findElement(By.xpath("//div[@class='list-widget-hot-restaurant']/div[" + indexItem + "]//div[@class='home-res-address']")).getText();
+        String sAddress = driver.findElement(By.xpath("//div[@class='widget-hot-restaurant'][" + indexItem + "]//div[@class='home-res-address']")).getText();
         return sAddress;
     }
 

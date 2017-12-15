@@ -24,7 +24,7 @@ public class HomeURL extends TestBase {
         CommonFunctions.pause(1);
         driver.findElement(By.linkText("OK")).click();
         CommonFunctions.pause(1);
-        //homeUrl.checkCity(driver);
+        homeUrl.checkCity(driver);
     }
 
     @Test
@@ -46,6 +46,7 @@ public class HomeURL extends TestBase {
         Assert.assertEquals(driver.getTitle(), "Login");
         sso.loginSSO(SSOPage.USERNAME,SSOPage.PASSWORD);
         // check menu login
-
+        driver.findElement(By.xpath("//div[@id='login-status']/a")).click();
+        homeUrl.checkMenuLogin(driver);
     }
 }
