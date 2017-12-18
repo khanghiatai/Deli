@@ -102,7 +102,7 @@ public class HomeUrlFunctions {
         String addressMsite = getAddressOnMicrosite(driver);
         String cityName = getCityOnHome(driver);
         Assert.assertEquals(resName,resNameMsite);
-        address = address + ", " + cityName;
+        //address = address + ", " + cityName;
         Assert.assertEquals(address, addressMsite);
     }
 
@@ -135,7 +135,7 @@ public class HomeUrlFunctions {
 
     /*** private functions **********************************/
     private int getRandomRestaurant(WebDriver driver) {
-        List<WebElement> eImg = driver.findElements(By.xpath("//div[@class='img-hot-restaurant']/img"));
+        List<WebElement> eImg = driver.findElements(By.xpath("//div[@class='widget-hot-restaurant']//img"));
         int iSize = eImg.size();
         int indexItem = CommonFunctions.random(1, iSize);
         return indexItem;
