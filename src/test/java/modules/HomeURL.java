@@ -19,8 +19,9 @@ import java.util.regex.Pattern;
 public class HomeURL extends TestBase {
     HomeUrlFunctions homeUrl = new HomeUrlFunctions();
 
-    @Test  // check city and check food menu
-    private void home01_checkFoodMenu(){
+    // check city and check food menu
+    @Test
+    private void home001_checkFoodMenu(){
         CommonFunctions.pause(1);
         driver.findElement(By.linkText("OK")).click();
         CommonFunctions.pause(1);
@@ -28,7 +29,7 @@ public class HomeURL extends TestBase {
     }
 
     @Test
-    private void home02_checkRestaurantName(){
+    private void home002_checkRestaurantName(){
         // Chose HCM city
         driver.findElement(By.xpath("//*[@data-activates='location-select']")).click();
         driver.findElement(By.xpath("//*[@id='location-select']/li/a[1]")).click();
@@ -38,7 +39,7 @@ public class HomeURL extends TestBase {
     }
 
     @Test
-    private void home03_CheckMenuLogin(){
+    private void home003_CheckMenuLogin(){
         // login
         SSOFunctions sso = new SSOFunctions(driver);
         driver.findElement(By.className("btn-login")).click();
@@ -48,5 +49,7 @@ public class HomeURL extends TestBase {
         // check menu login
         driver.findElement(By.xpath("//div[@id='login-status']/a")).click();
         homeUrl.checkMenuLogin(driver);
+        driver.findElement(By.xpath("//div[@id='login-status']/a")).click();
     }
+
 }

@@ -20,12 +20,12 @@ public class Main {
 //		try {Thread.sleep(3);} catch (InterruptedException e) {e.printStackTrace();}
 //		driver.findElement(By.xpath("//*[@id='menu-item-15']/a")).click();
 //		System.out.print("clicked");
-		float von = 1010;
+		float von = 1020;
 		float tiendu = 0;
 		float reinvest = 0;
 		float loinhuan = 0;
 		float ti_le = (float) 1.0;
-		for(int i = 1; i <= 360 ; i++){
+		for(int i = 1; i <= 300 ; i++){
 			if (i == 300) {
 				von += 1010;
 			}

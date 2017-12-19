@@ -74,16 +74,22 @@ public class HomeUrlFunctions {
                         Assert.assertEquals("http://sandbox.deliverynow.vn/", strURL);
                     }
                 }
-                System.out.println(newUrl);
-            } else if (strURL.equals("https://www.")) {
+            } else if (subStr.equals("https://www.")) {
                 int startIndex = strURL.indexOf("n/");
                 int endIndex = strURL.indexOf("/danh");
                 if (endIndex > 0) {
                     newUrl = strURL.substring(startIndex + 2, endIndex);
+                    if (!newUrl.equals("ho-chi-minh")) {
+                        cityName = CommonFunctions.covertStringToURL(cityName);
+                        cityName = cityName.substring(0, cityName.length() - 2);
+                        Assert.assertEquals(cityName, newUrl);
+                    }
                 } else {
                     newUrl = strURL.substring(startIndex + 2, strURL.length());
+                    if (cityName.equals(strResource.getResource("tphcm"))) {
+                        Assert.assertEquals("http://sandbox.deliverynow.vn/", strURL);
+                    }
                 }
-                System.out.println(newUrl);
             }
             driver.findElement(By.xpath("//ul[@id='location-select']/li[" + i + "]")).click();
             checkMenuFood(driver);
@@ -93,6 +99,7 @@ public class HomeUrlFunctions {
 
     public void checkInfoRestaurant(WebDriver driver){
         int indexItems = getRandomRestaurant(driver);
+        CommonFunctions.pause(1);
         String resName = getResNameOnHome(driver, indexItems);
         String address = getAdressOnHome(driver, indexItems);
         // move to microsite
@@ -100,9 +107,7 @@ public class HomeUrlFunctions {
         CommonFunctions.switchToTab(driver, 1);
         String resNameMsite = getResNameOnMicrosite(driver);
         String addressMsite = getAddressOnMicrosite(driver);
-        String cityName = getCityOnHome(driver);
         Assert.assertEquals(resName,resNameMsite);
-        //address = address + ", " + cityName;
         Assert.assertEquals(address, addressMsite);
     }
 
@@ -116,8 +121,8 @@ public class HomeUrlFunctions {
 
     public void checkMenuLogin(WebDriver driver){
         List<WebElement> listNav = driver.findElements(By.xpath("//div[@id='login-status']/div/a/span[@class='text']"));
-        Boolean isNav = false;
         for (WebElement el:listNav) {
+            String isNav = "false";
             String sNav = el.getText();
             String _nav = "";
             for (int j=1; j<=5; j++){ // total rows int nav = 5 in resource
@@ -125,11 +130,11 @@ public class HomeUrlFunctions {
                 _nav = strResource.getResource(sIndex);
                 if(sNav.equals(_nav)){
                     Assert.assertEquals(sNav, _nav);
-                    isNav = true;
+                    isNav = "true";
                     j = 5;
                 }
             }
-            Assert.assertEquals(java.util.Optional.of(true), isNav);
+            Assert.assertEquals("true", isNav);
         }
     }
 
@@ -142,11 +147,17 @@ public class HomeUrlFunctions {
     }
 
     private String getResNameOnHome(WebDriver driver, int indexItem) {
+        if(indexItem == 0){
+            ++indexItem;
+        }
         String sResName = driver.findElement(By.xpath("//div[@class='widget-hot-restaurant'][" + indexItem + "]//h4/a")).getText();
         return sResName;
     }
 
     private String getAdressOnHome(WebDriver driver, int indexItem) {
+        if(indexItem == 0){
+            ++indexItem;
+        }
         String sAddress = driver.findElement(By.xpath("//div[@class='widget-hot-restaurant'][" + indexItem + "]//div[@class='home-res-address']")).getText();
         return sAddress;
     }
