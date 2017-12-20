@@ -33,7 +33,7 @@ public class HomeURL extends TestBase {
         // Chose HCM city
         driver.findElement(By.xpath("//*[@data-activates='location-select']")).click();
         driver.findElement(By.xpath("//*[@id='location-select']/li/a[1]")).click();
-        // check random
+        // Check random
         homeUrl.checkInfoRestaurant(driver);
         homeUrl.checkBreadcrum(driver);
     }

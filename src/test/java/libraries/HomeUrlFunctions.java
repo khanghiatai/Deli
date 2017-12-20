@@ -99,7 +99,6 @@ public class HomeUrlFunctions {
 
     public void checkInfoRestaurant(WebDriver driver){
         int indexItems = getRandomRestaurant(driver);
-        CommonFunctions.pause(1);
         String resName = getResNameOnHome(driver, indexItems);
         String address = getAdressOnHome(driver, indexItems);
         // move to microsite
@@ -164,6 +163,15 @@ public class HomeUrlFunctions {
 
     private String getResNameOnMicrosite(WebDriver driver){
         String sName = driver.findElement(By.xpath("//*[@class='name-hot-restaurant']")).getText();
+        boolean isString = false;
+        while (isString == false){
+            if(sName.equals("")){
+                sName = driver.findElement(By.xpath("//*[@class='name-hot-restaurant']")).getText();
+            } else {
+                isString = true;
+                break;
+            }
+        }
         sName = CommonFunctions.chuanHoa(sName);
         return sName;
     }
