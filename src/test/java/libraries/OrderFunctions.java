@@ -143,16 +143,18 @@ public class OrderFunctions extends OrderPage {
 	public void clickNameFood(WebDriver driver) {		
 		int i = 0;
 		CommonFunctions.pause(1);
-		List<WebElement> listFoods = driver.findElements(By.xpath(".//*[@class='scrollspy']//a[@class='title-name-food']"));
+		List<WebElement> listFoods = driver.findElements(By.xpath("//a[@class='title-name-food']/h3"));
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		
-		for (WebElement webElement : listFoods) {
+		for (int j = 0; j < listFoods.size(); j++) {
 			float toppingPrice = 0; 
-			String foodName = webElement.getText();
-			List<WebElement> listMenuPrice = driver.findElements(By.xpath(".//div[@class='product-price']/a/p"));
-			String foodPrice = listMenuPrice.get(i).getText().replace(" ", "");
+			String foodName = js.executeScript("return document.querySelectorAll('.name-food-detail.pull-left > span:nth-child(2) a>h3')[" + j + "].innerText").toString();
+			foodName = CommonFunctions.chuanHoa(foodName);
+			//List<WebElement> listMenuPrice = driver.findElements(By.xpath(".//div[@class='adding-food-cart']//span[@class='btn-adding']"));
+			String foodPrice = js.executeScript("return document.querySelectorAll('.ng-hide p.current-price >span:first-child')[" + j + "].innerText").toString();
+
 			CommonFunctions.pause(1);
-			js.executeScript("document.querySelectorAll('.scrollspy .title-name-food')["+ i +"].click();"); 
+			js.executeScript("return document.querySelectorAll('.name-food-detail.pull-left > span:nth-child(2) a>h3')[" + j + "].click()");
 						
 			/******/
 			boolean isPopup = isPopupTopping(driver);			
@@ -165,8 +167,8 @@ public class OrderFunctions extends OrderPage {
 			/*****/
 			
 			CommonFunctions.pause(1);	
-			List<WebElement> listOrder = driver.findElements(By.xpath(".//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
-			List<WebElement> listPrice = driver.findElements(By.xpath(".//input[@ng-model='item.Note']/following-sibling::span"));
+			List<WebElement> listOrder = driver.findElements(By.xpath("//*[@ng-show='item.group_by_CHANGED']/following-sibling::p/span[4]"));
+			List<WebElement> listPrice = driver.findElements(By.xpath("//input[@ng-model='item.Note']/following-sibling::span"));
 			
 			String name = listOrder.get(i).getText();
 			String price = listPrice.get(i).getText();
@@ -271,7 +273,7 @@ public class OrderFunctions extends OrderPage {
 	public void checkPopupBelowPrice(WebDriver driver, int defaultPrice, int belowPrice) {
 		CommonFunctions.pause(1);
 		JavascriptExecutor js = (JavascriptExecutor)driver;
-		String titlePopup = js.executeScript("return document.querySelector('#alert-modal >p').innerText").toString();		
+		String titlePopup = js.executeScript("return document.querySelector('#alert-modal >p').innerText").toString();
 		Assert.assertEquals(titlePopup, resource.getResource("popupTitle"));
 		List<WebElement> tempPrice = driver.findElements(By.xpath(".//p[@id='alert-msg']/i"));
 		for (int i = 0; i < tempPrice.size(); i++) {
@@ -287,7 +289,7 @@ public class OrderFunctions extends OrderPage {
 				strDefaulPrice = strDefaulPrice.substring(0, strDefaulPrice.length() -2).replace(",", "");
 				int iDefaulPrice = Integer.parseInt(strDefaulPrice);
 				Assert.assertEquals(iDefaulPrice, defaultPrice);
-			}				
+			}
 		}
 		String strContinueOrder = driver.findElement(By.xpath(".//label[@for='continute-rad']")).getText();
 		strContinueOrder = CommonFunctions.chuanHoa(strContinueOrder);
@@ -670,6 +672,8 @@ public class OrderFunctions extends OrderPage {
 				String strString = js.executeScript("return document.querySelectorAll('.topping-item-modal-list-item-container-name')[0].innerText").toString();
 				int num = CommonFunctions.getNumberOfString(strString);				
 				if (num == 0) {
+					// here
+					// here
 					js.executeScript("document.querySelector('.topping-item-modal-footer a').click();");
 					return false;
 				} else return true;

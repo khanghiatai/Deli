@@ -74,7 +74,7 @@ public class OrderTest {
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
 	}		
 
-	@Test
+	/*@Test
 	public void order006_CheckNote(){
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 	}			
@@ -205,6 +205,6 @@ public class OrderTest {
 	@Test
 	public void order022_Incomming() {
 		order015_CheckIncomming();
-	}
+	}*/
 	
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import support.CommonFunctions;
 
 import java.net.MalformedURLException;
+import java.text.DecimalFormat;
 
 public class Main {
 
@@ -20,16 +21,20 @@ public class Main {
 //		try {Thread.sleep(3);} catch (InterruptedException e) {e.printStackTrace();}
 //		driver.findElement(By.xpath("//*[@id='menu-item-15']/a")).click();
 //		System.out.print("clicked");
-		float von = 210; //
+		float von = 2200; //
 		float tiendu = 0;
 		float reinvest = 0;
 		float loinhuan = 0;
-		float ti_le = (float) 0.8;
+		float ti_le = (float) 1.0;
+		DecimalFormat formatter = new DecimalFormat("###,###,###.00");
 		for(int i = 1; i <= 300 ; i++){
 			// run if i = n
-			if (i == 30) {
-				von += 200;
-			}
+//			if (i == 60) {
+//				von += 1100;
+//			} if (i == 120) {
+//				von += 1100;
+//			}
+
 			float temp = (von * ti_le)/100;
 			tiendu = tiendu + temp;
 			loinhuan = tiendu;
@@ -39,11 +44,12 @@ public class Main {
 				tiendu = tiendu - reinvest;
 			}
 			von = von + reinvest;
-			System.out.print("- Day: " + i);
-			System.out.print(" - von: " + von);
-			System.out.print(" - loi nhuan: " +loinhuan);
-			System.out.print(" - reinvest: " + reinvest);
-			System.out.println(" - tiendu: " + tiendu);
+
+			System.out.print("Day: " + i);
+			System.out.print(" - Von: " + von);
+			System.out.print(" - Loi nhuan: " + formatter.format(loinhuan));
+			System.out.print(" - Reinvest: " + reinvest);
+			System.out.println(" - Tien du: " + formatter.format(tiendu));
 		}
 	}
 }
