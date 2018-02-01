@@ -71,13 +71,14 @@ public class OrderTest {
 		order.checkPrice(TestBase.driver);
 		String countOrder = order.countNumberOrder(TestBase.driver);
 		String countPerson = "1";
-		order.checkCartInfo(TestBase.driver, countOrder, countPerson);		
+		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
 	}		
 
-	/*@Test
+	@Test
 	public void order006_CheckNote(){
 		order.checkNote(TestBase.driver, resource.getResource("orderNoted"));
 	}			
+
 
 	@Test
 	public void order007_AddCart(){
@@ -102,7 +103,8 @@ public class OrderTest {
 		String countPerson = "0";
 		order.checkCartInfo(TestBase.driver, countOrder, countPerson);
 	}		
-	
+
+
 	@Test 
 	public void order010_AddMenuAfterReset(){		
 		order.clickNameFood(TestBase.driver); 
@@ -115,8 +117,9 @@ public class OrderTest {
 		strResName = order.getRestaurantName(TestBase.driver);
 		strAddress = order.getRestaurantAddress(TestBase.driver);
 		order.clickButtonOrder(TestBase.driver); 
-		order.checkPopupConfirmOrder(TestBase.driver, strResName, strAddress);		
-	}	
+		order.checkPopupConfirmOrder(TestBase.driver, strResName, strAddress);
+	}
+
 
 	@Test
 	public void order012_ConfirmOrder() {
@@ -154,18 +157,20 @@ public class OrderTest {
 		order.checkIncomming(TestBase.driver, strResName, strAddress); 
 		// ******* Chua xong 
 	}
-	
-	@Test 
+
+
+	/*
+	@Test
 	public void order016_CancelOrderBelowPrice() {
-		TestBase.driver.navigate().back();
+		//TestBase.driver.navigate().back();
 		// click 1 food, return price of food
 		int ibelowPrice = order.addOneOrderBelowPrice(TestBase.driver, defaultPrice);
-		order.clickButtonOrder(TestBase.driver); 
-		order.checkPopupBelowPrice(TestBase.driver, defaultPrice, ibelowPrice);	
-		order.clickCancelOrderBelowPrice(TestBase.driver);		
+		//order.clickIconClose(TestBase.driver);
+		//order.checkPopupBelowPrice(TestBase.driver, defaultPrice, ibelowPrice);
+		//order.clickCancelOrderBelowPrice(TestBase.driver);
 		TestBase.driver.navigate().refresh();
 	}
-	
+
 	@Test
 	public void order017_ContinueOrderBelowPrice() {
 		order.clickButtonOrder(TestBase.driver); 
@@ -205,6 +210,6 @@ public class OrderTest {
 	@Test
 	public void order022_Incomming() {
 		order015_CheckIncomming();
-	}*/
-	
+	}
+	*/
 }

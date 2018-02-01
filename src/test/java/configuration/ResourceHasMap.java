@@ -22,7 +22,7 @@ public class ResourceHasMap {
 	private void orderResource(){
 		hm.put("setVi", "phần");
 		hm.put("peopleVi", "người");
-		hm.put("titleMesg", "DeliveryNow thông báo");
+		hm.put("titleMesg", "Now thông báo");
 		hm.put("contentMesg", "Bạn vui lòng chọn món ăn sẽ gọi.");
 		hm.put("buttonName", "Đồng ý");
 		hm.put("orderNoted", "Giao hàng đúng giờ!");
