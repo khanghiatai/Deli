@@ -99,7 +99,7 @@ public class OrderFunctions extends OrderPage {
 	}
 
 	public void checkPopup(WebDriver driver, String title, String message, String nameButton) {
-		CommonFunctions.pause(1);
+		CommonFunctions.pause(2);
 		Assert.assertEquals(driver.findElement(By.xpath(lbl_PopupTitle)).getText(), title);
 		Assert.assertEquals(driver.findElement(By.id(lbl_PopupMessage)).getText(), message);
 		Assert.assertEquals(driver.findElement(By.xpath(btn_Oke)).getText(), nameButton.toUpperCase());
@@ -153,7 +153,7 @@ public class OrderFunctions extends OrderPage {
 
 			String foodPrice = js.executeScript("return document.querySelectorAll('.ng-hide p.current-price >span:first-child')[" + j + "].innerText").toString();
 
-			CommonFunctions.pause(1);
+
 			js.executeScript("return document.querySelectorAll('.name-food-detail.pull-left > span:nth-child(2) a>h3')[" + j + "].click()");
 						
 			/******/
@@ -644,8 +644,9 @@ public class OrderFunctions extends OrderPage {
 	}
 	
 	public void clickContinueOrder(WebDriver driver) {
-		driver.findElement(By.xpath(".//*[@class='modal-footer']/a[@ng-click='detailCtrl.incrementStep()'][1]")).click();
-	}	
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("document.querySelectorAll('#confirminfo .modal-footer > a')[0].click();");
+	}
 	
 	private void checkInfoPopupToping(WebDriver driver, String foodName, String foodPrice) {		
 		try {
