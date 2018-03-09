@@ -63,7 +63,7 @@ public class OrderTest {
 		}		
 	}
 
-	@Test
+	/*@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
 		order.clickNameFood(TestBase.driver);
@@ -115,29 +115,34 @@ public class OrderTest {
 		strResName = order.getRestaurantName(TestBase.driver);
 		strAddress = order.getRestaurantAddress(TestBase.driver);
 		order.clickButtonOrder(TestBase.driver);
-	}
+	}*/
 
 	@Test
-	public void order012_ConfirmOrder() {
-		boolean bAddress = order.isHasAddressUser(TestBase.driver);
-		if(bAddress == false) {
-			order.insertAddress(TestBase.driver, resource.getResource("username"),  
-								resource.getResource("useraddress"),  resource.getResource("userphone"),  resource.getResource("usernote"));
-			order.clickContinueOrder(TestBase.driver);	
-			order.checkPopupOrderInfo(TestBase.driver);
-		} else {
-			order.clickContinueOrder(TestBase.driver);
-			//order.checkPopupOrderInfo(TestBase.driver);
-		}
+	public void order012_ClosePopupConfirm() {
+		order.clickCancelOrder(TestBase.driver);
 	}
 
-	@Test
-	public void order013_checkBackPrevious() { 
-		order.clickBackPreviosPopup(TestBase.driver);
-		CommonFunctions.selectedByIndex(TestBase.driver, "xpath", "//*[@ng-model='detailCtrl.deliveryHour']", 0); 
-		order.clickContinueOrder(TestBase.driver);			
-		order.checkPopupOrderInfo(TestBase.driver);
-	}	
+//	@Test
+//	public void order012_ConfirmOrder() {
+//		boolean bAddress = order.isHasAddressUser(TestBase.driver);
+//		if(bAddress == false) {
+//			order.insertAddress(TestBase.driver, resource.getResource("username"),
+//					resource.getResource("useraddress"),  resource.getResource("userphone"),  resource.getResource("usernote"));
+//			order.clickContinueOrder(TestBase.driver);
+//			order.checkPopupOrderInfo(TestBase.driver);
+//		} else {
+//			order.clickContinueOrder(TestBase.driver);
+//			//order.checkPopupOrderInfo(TestBase.driver);
+//		}
+//	}
+
+//	@Test
+//	public void order013_checkBackPrevious() {
+//		order.clickBackPreviosPopup(TestBase.driver);
+//		CommonFunctions.selectedByIndex(TestBase.driver, "xpath", "//*[@ng-model='detailCtrl.deliveryHour']", 0);
+//		order.clickContinueOrder(TestBase.driver);
+//		order.checkPopupOrderInfo(TestBase.driver);
+//	}
 
 	/*
 	@Test

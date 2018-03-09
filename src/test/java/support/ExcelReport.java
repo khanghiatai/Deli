@@ -43,7 +43,6 @@ public class ExcelReport implements ITestListener {
 
     }
 
-
     public void onTestFailure(ITestResult result) {
         long tcduration =result.getEndMillis()-result.getStartMillis();
         numberFailedTests ++;
@@ -57,23 +56,19 @@ public class ExcelReport implements ITestListener {
         suiteResult.put(getTestMethodName(result), testResult);
     }
 
-
     public void onTestSkipped(ITestResult result) {
         System.out.println("test method " + getTestMethodName(result) + " skipped");
         numberSkipTest++;
     }
-
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 
         System.out.println("test failed but within success % " + getTestMethodName(result));
     }
 
-
     public void onStart(ITestContext context) {
         System.out.println("on start of test " + context.getName());
     }
-
 
     public void onFinish(ITestContext context) {
         String time=new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());

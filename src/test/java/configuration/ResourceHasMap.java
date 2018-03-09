@@ -45,6 +45,7 @@ public class ResourceHasMap {
 		hm.put("waitconfirm", "Chờ xác nhận");
 		hm.put("tphcm", "TP.HCM");
 		hm.put("trangchu", "Trang chủ");
+		hm.put("titlePopupConfirm", "Chi tiết đơn hàng");
 	}
 
 	private void getNavigationText(){
