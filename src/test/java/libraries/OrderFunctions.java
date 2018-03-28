@@ -93,9 +93,9 @@ public class OrderFunctions extends OrderPage {
 	}
 
 	public void clickButtonOrder(WebDriver driver) {
-		CommonFunctions.pause(1);		
+		CommonFunctions.pause(1);
 		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("document.querySelectorAll('.btn-book-first')[1].click();");
+		js.executeScript("return document.querySelectorAll('.btn-book-first')[1].click();");
 	}
 
 	public void checkPopup(WebDriver driver, String title, String message, String nameButton) {
@@ -530,10 +530,11 @@ public class OrderFunctions extends OrderPage {
 	}
 
 	public void clickCancelOrder(WebDriver driver){
+		CommonFunctions.pause(1);
 		String _titlePopup = driver.findElement(By.cssSelector(".right-popup-order p")).getText();
 		Assert.assertEquals(_titlePopup, resource.getResource("titlePopupConfirm"));
-		System.out.print(_titlePopup);
-		driver.findElement(By.cssSelector("#confirminfo > div > a")).click();
+		//System.out.print(_titlePopup);
+		driver.findElement(By.xpath("//div[@id='confirminfo']/div[1]/div[1]/a")).click();
 	}
 	
 	public void clickFinishOrder(WebDriver driver) {

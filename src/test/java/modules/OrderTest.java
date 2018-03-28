@@ -30,7 +30,7 @@ public class OrderTest {
 	@Test
 	public void order002_OrderNoLogin(){		
 		order.clickButtonOrder(TestBase.driver);		
-		order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName")); 
+		//order.checkPopup(TestBase.driver, resource.getResource("titleMesg"), resource.getResource("contentMesg"), resource.getResource("buttonName"));
 	}
 	
 	@Test 
@@ -63,7 +63,7 @@ public class OrderTest {
 		}		
 	}
 
-	/*@Test
+	@Test
 	public void order005_AddMenuAfterLogin(){	
 		// add food		
 		order.clickNameFood(TestBase.driver);
@@ -115,11 +115,16 @@ public class OrderTest {
 		strResName = order.getRestaurantName(TestBase.driver);
 		strAddress = order.getRestaurantAddress(TestBase.driver);
 		order.clickButtonOrder(TestBase.driver);
-	}*/
+	}
 
 	@Test
 	public void order012_ClosePopupConfirm() {
 		order.clickCancelOrder(TestBase.driver);
+	}
+
+	@Test
+	public void order013_ConfirmOrder(){
+		//boolean bAddress = order.isHasAddressUser(TestBase.driver);
 	}
 
 //	@Test
